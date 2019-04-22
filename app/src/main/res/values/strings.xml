@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">Runners calculator</string>
+    <string name="author">By @skidrupert</string>
     <string name="calculate">Calculate</string>
-    <string name="convert_pace_to_speed_metric">Convert min/km to km/tim</string>
-    <string name="pace_hint">0:00</string>
+    <string name="convert_xx_to_xx">Convert %s to %s</string>
+    <string name="pace_to_speed_results"> %s = %s %s </string>
+    <string name="pace_zero">0:00</string>
     <string name="pace_metric">min/km</string>
-    <string name="speed_hint">0,0</string>
-    <string name="speed_metric">km/tim</string>
+    <string name="pace_imperial">min/mi</string>
+    <string name="speed_zero">0,0</string>
+    <string name="speed_metric">km/h</string>
+    <string name="speed_imperial">mi/h</string>
+
+    <string name="paceFormatError">Check the format of given pace.</string>
 </resources>
