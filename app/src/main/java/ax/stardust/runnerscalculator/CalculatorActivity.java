@@ -8,10 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.stream.Stream;
+
 public class CalculatorActivity extends AppCompatActivity {
 
     private Measurement measurement = Measurement.METRIC;
-    private DataModel model = new DataModel();
+    private Model model = new Model();
 
     // TextViews
     private TextView convertPaceToSpeedTextView;
@@ -52,8 +54,8 @@ public class CalculatorActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                model.setPaceToSpeedNew(charSequence.toString());
-                calculateButton.setEnabled(model.hasChanged());
+                model.setPropertyValue(Model.Properties.PACE_TO_SPEED, charSequence.toString());
+                calculateButton.setEnabled(model.changed());
             }
 
             @Override
@@ -62,7 +64,8 @@ public class CalculatorActivity extends AppCompatActivity {
         });
 
         calculateButton.setOnClickListener(view -> {
-            String result = CalculatorUtils.convertPaceToSpeed(measurement, paceToSpeedEditText.getText().toString());
+            Stream.of(Model.Properties.values()).
+            String result = Calculator.convertPaceToSpeed(paceToSpeedEditText.getText().toString());
             String pace = getStringFromResource(Measurement.METRIC.equals(measurement) ? R.string.pace_metric : R.string.pace_imperial);
             String speed = getStringFromResource(Measurement.METRIC.equals(measurement) ? R.string.speed_metric : R.string.speed_imperial);
             paceToSpeedResultsTextView.setText(String.format(getStringFromResource(R.string.pace_to_speed_results), pace, result, speed));
