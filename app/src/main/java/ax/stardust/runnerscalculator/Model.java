@@ -1,14 +1,25 @@
 package ax.stardust.runnerscalculator;
 
 import java.util.HashMap;
+import java.util.function.Consumer;
 
 public class Model {
-    enum Properties {
-        PACE_TO_SPEED,
-        SPEED_TO_PACE
+    enum Property {
+        PACE_TO_SPEED(Calculator::convertPaceToSpeed),
+        SPEED_TO_PACE(Calculator::convertSpeedToPace);
+
+        private final Consumer calculatorFunction;
+
+        Property(Consumer<String> calculatorFunction) {
+            this.calculatorFunction = calculatorFunction;
+        }
+
+        public Consumer getCalculatorFunction() {
+            return calculatorFunction;
+        }
     }
 
-    private HashMap<Properties, Values> data = new HashMap();
+    private HashMap<Property, Values> data = new HashMap();
 
     public boolean changed() {
         return data.values().stream().anyMatch(values -> values.changed());
@@ -18,11 +29,19 @@ public class Model {
         data.values().forEach(values -> values.commit());
     }
 
-    public String getPropertyValue(Properties property) {
+    public boolean isPropertyChanged(Property property) {
+        return data.getOrDefault(property, new Values()).changed();
+    }
+
+    public String getExistingPropertyValue(Property property) {
         return data.getOrDefault(property, new Values()).getExistingVal();
     }
 
-    public void setPropertyValue(Properties property, String value) {
+    public String getNewPropertyValue(Property property) {
+        return data.getOrDefault(property, new Values()).getNewVal();
+    }
+
+    public void setPropertyValue(Property property, String value) {
         Values values = data.getOrDefault(property, new Values());
         values.setNewVal(value);
         data.put(property, values);
@@ -34,6 +53,10 @@ public class Model {
 
         public String getExistingVal() {
             return existingVal;
+        }
+
+        public String getNewVal() {
+            return newVal;
         }
 
         public void setNewVal(String newVal) {
