@@ -20,6 +20,18 @@ public class Calculator {
         return Speed.parse(speed).asPace();
     }
 
+    public static String calculatePace(String s) {
+        return "";
+    }
+
+    public static String calculateTime(String s) {
+        return "";
+    }
+
+    public static String calculateDistance(String s) {
+        return "";
+    }
+
     private static class Speed {
         private double speed;
 

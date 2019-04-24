@@ -1,20 +1,23 @@
 package ax.stardust.runnerscalculator;
 
 import java.util.HashMap;
-import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class Model {
     enum Property {
-        PACE_TO_SPEED(Calculator::convertPaceToSpeed),
-        SPEED_TO_PACE(Calculator::convertSpeedToPace);
+        CONVERT_PACE_TO_SPEED(Calculator::convertPaceToSpeed),
+        CONVERT_SPEED_TO_PACE(Calculator::convertSpeedToPace),
+        CALCULATE_PACE(Calculator::calculatePace),
+        CALCULATE_TIME(Calculator::calculateTime),
+        CALCULATE_DISTANCE(Calculator::calculateDistance);
 
-        private final Consumer calculatorFunction;
+        private final Function<String, String> calculatorFunction;
 
-        Property(Consumer<String> calculatorFunction) {
+        Property(Function<String, String> calculatorFunction) {
             this.calculatorFunction = calculatorFunction;
         }
 
-        public Consumer getCalculatorFunction() {
+        public Function<String, String> getCalculatorFunction() {
             return calculatorFunction;
         }
     }
@@ -29,49 +32,45 @@ public class Model {
         data.values().forEach(values -> values.commit());
     }
 
+    public void commitProperty(Property property) {
+        data.getOrDefault(property, new Values()).commit();
+    }
+
     public boolean isPropertyChanged(Property property) {
         return data.getOrDefault(property, new Values()).changed();
     }
 
-    public String getExistingPropertyValue(Property property) {
-        return data.getOrDefault(property, new Values()).getExistingVal();
-    }
-
-    public String getNewPropertyValue(Property property) {
-        return data.getOrDefault(property, new Values()).getNewVal();
+    public String getPropertyValue(Property property) {
+        return data.getOrDefault(property, new Values()).getVal();
     }
 
     public void setPropertyValue(Property property, String value) {
         Values values = data.getOrDefault(property, new Values());
-        values.setNewVal(value);
+        values.setVal(value);
         data.put(property, values);
     }
 
     private static class Values {
         private String existingVal = "";
-        private String newVal = "";
+        private String val = "";
 
-        public String getExistingVal() {
-            return existingVal;
+        public String getVal() {
+            return val;
         }
 
-        public String getNewVal() {
-            return newVal;
-        }
-
-        public void setNewVal(String newVal) {
-            this.newVal = newVal;
+        public void setVal(String val) {
+            this.val = val;
         }
 
         public void commit() {
-            existingVal = newVal;
+            existingVal = val;
         }
 
         private boolean changed() {
             if (existingVal == null) {
-                return newVal == null;
+                return val == null;
             }
-            return existingVal.equals(newVal);
+            return existingVal.equals(val);
         }
     }
 }

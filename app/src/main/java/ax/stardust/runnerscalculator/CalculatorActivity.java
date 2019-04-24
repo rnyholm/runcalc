@@ -10,13 +10,17 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
+
+import static ax.stardust.runnerscalculator.Model.Property.*;
 
 public class CalculatorActivity extends AppCompatActivity {
-    private Measurement measurement = Measurement.METRIC;
-    private Model model = new Model();
+    private static Measurement measurement;
+    private static String pace;
+    private static String speed;
+    private static String distance;
 
     private List<PropertyBoundUIComponents> propertyBoundUIComponents = new ArrayList<>();
+    private Model model = new Model();
 
     // TextViews
     private TextView convertPaceToSpeedTextView;
@@ -33,9 +37,15 @@ public class CalculatorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
 
+        setMeasurement(Measurement.METRIC);
         findViews();
-        setTextsAccordingToMeasurement();
+        setGlobalTexts();
+        setTexts();
         setListeners();
+    }
+
+    private void setMeasurement(Measurement measurement) {
+        CalculatorActivity.measurement = measurement;
     }
 
     private void findViews() {
@@ -43,16 +53,30 @@ public class CalculatorActivity extends AppCompatActivity {
 
         paceToSpeedEditText = findViewById(R.id.pace_to_speed_et);
         paceToSpeedResultsTextView = findViewById(R.id.pace_to_speed_results_tv);
-        propertyBoundUIComponents.add(PropertyBoundUIComponents.create(Model.Property.PACE_TO_SPEED, paceToSpeedEditText, paceToSpeedResultsTextView));
+        propertyBoundUIComponents.add(PropertyBoundUIComponents.create(CONVERT_PACE_TO_SPEED, paceToSpeedEditText, paceToSpeedResultsTextView, R.string.pace_to_speed_results));
 
         calculateButton = findViewById(R.id.calculate_button);
         calculateButton.setEnabled(false);
     }
 
+    private void setGlobalTexts() {
+        CalculatorActivity.pace = getString(Measurement.METRIC.equals(CalculatorActivity.measurement) ? R.string.unit_pace_metric : R.string.unit_pace_imperial);
+        CalculatorActivity.speed = getString(Measurement.METRIC.equals(CalculatorActivity.measurement) ? R.string.unit_speed_metric : R.string.unit_speed_imperial);
+        CalculatorActivity.distance = getString(Measurement.METRIC.equals(CalculatorActivity.measurement) ? R.string.unit_distance_metric : R.string.unit_distance_imperial);
+    }
+
+    private void setTexts() {
+        propertyBoundUIComponents.forEach(boundUIComponents -> {
+            boundUIComponents.setDefaultResultText();
+        });
+
+        convertPaceToSpeedTextView.setText(String.format(getStringFromResource(R.string.convert_xx_to_xx), pace, speed));
+    }
+
     private void setListeners() {
-        propertyBoundUIComponents.forEach(o -> {
-            Model.Property property = o.getProperty();
-            EditText editText = o.getEditText();
+        propertyBoundUIComponents.forEach(boundUIComponents -> {
+            Model.Property property = boundUIComponents.getProperty();
+            EditText editText = boundUIComponents.getEditText();
             editText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -73,52 +97,38 @@ public class CalculatorActivity extends AppCompatActivity {
         });
 
         calculateButton.setOnClickListener(view -> {
-            propertyBoundUIComponents.forEach(o -> {
-                Model.Property property = o.getProperty();
-                TextView textView = o.getTextView();
+            propertyBoundUIComponents.forEach(boundUIComponents -> {
+                Model.Property property = boundUIComponents.getProperty();
                 if (model.isPropertyChanged(property)) {
-                   property.getCalculatorFunction().
+                    try {
+                        String result = property.getCalculatorFunction().apply(model.getPropertyValue(property));
+                        boundUIComponents.setResultText(result);
+                        model.commitProperty(property);
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), R.string.invalid_input_error, Toast.LENGTH_LONG).show();
+                    }
                 }
             });
-            propertyBoundEditText.entrySet().forEach(entry -> {
-                Model.Property property = entry.getKey();
-                EditText editText = entry.getValue();
-                editText.setText();
-            });
-            Stream.of(Model.Property.values()).
-            String result = Calculator.convertPaceToSpeed(paceToSpeedEditText.getText().toString());
-            String pace = getStringFromResource(Measurement.METRIC.equals(measurement) ? R.string.pace_metric : R.string.pace_imperial);
-            String speed = getStringFromResource(Measurement.METRIC.equals(measurement) ? R.string.speed_metric : R.string.speed_imperial);
-            paceToSpeedResultsTextView.setText(String.format(getStringFromResource(R.string.pace_to_speed_results), pace, result, speed));
+
+            calculateButton.setEnabled(model.changed());
         });
-    }
-
-    private void setTextsAccordingToMeasurement() {
-        String pace = getStringFromResource(Measurement.METRIC.equals(measurement) ? R.string.pace_metric : R.string.pace_imperial);
-        String speed = getStringFromResource(Measurement.METRIC.equals(measurement) ? R.string.speed_metric : R.string.speed_imperial);
-        String speedZero = getStringFromResource(R.string.speed_zero);
-
-        convertPaceToSpeedTextView.setText(String.format(getStringFromResource(R.string.convert_xx_to_xx), pace, speed));
-        paceToSpeedResultsTextView.setText(String.format(getStringFromResource(R.string.pace_to_speed_results), pace, speedZero, speed));
-    }
-
-    private String getStringFromResource(int id) {
-        return getApplicationContext().getResources().getString(id);
     }
 
     private static class PropertyBoundUIComponents {
         private final Model.Property property;
         private final EditText editText;
         private final TextView textView;
+        private final int textID;
 
-        private PropertyBoundUIComponents(Model.Property property, EditText editText, TextView textView) {
+        private PropertyBoundUIComponents(Model.Property property, EditText editText, TextView textView, int textID) {
             this.property = property;
             this.editText = editText;
             this.textView = textView;
+            this.textID = textID;
         }
 
-        public static PropertyBoundUIComponents create(Model.Property property, EditText editText, TextView textView) {
-            return new PropertyBoundUIComponents(property, editText, textView);
+        public static PropertyBoundUIComponents create(Model.Property property, EditText editText, TextView textView, int textID) {
+            return new PropertyBoundUIComponents(property, editText, textView, textID);
         }
 
         public Model.Property getProperty() {
@@ -129,8 +139,28 @@ public class CalculatorActivity extends AppCompatActivity {
             return editText;
         }
 
-        public TextView getTextView() {
-            return textView;
+        public void setDefaultResultText() {
+            switch Model.Property {
+                case CONVERT_PACE_TO_SPEED:
+                    setResultText(getString(R.string.default_speed));
+                case CONVERT_SPEED_TO_PACE:
+                    setResultText(getString(R.string.default_pace));
+                case CALCULATE_PACE:
+                    setResultText(getString(R.string.default_pace));
+                case CALCULATE_TIME:
+                    setResultText(getString(R.string.default_time));
+                case CALCULATE_DISTANCE:
+                    setResultText(getString(R.string.default_speed));
+            }
+        }
+
+        public void setResultText(String result) {
+            String text = getString(textID);
+            text = text.replace("{pace}", CalculatorActivity.pace);
+            text = text.replace("{speed}", CalculatorActivity.speed);
+            text = text.replace("{distance}", CalculatorActivity.distance);
+            text = text.replace("{result}", result);
+            textView.setText(text);
         }
     }
 }

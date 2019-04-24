@@ -3,13 +3,16 @@
     <string name="author">By @skidrupert</string>
     <string name="calculate">Calculate</string>
     <string name="convert_xx_to_xx">Convert %s to %s</string>
-    <string name="pace_to_speed_results"> %s = %s %s </string>
-    <string name="pace_zero">0:00</string>
-    <string name="pace_metric">min/km</string>
-    <string name="pace_imperial">min/mi</string>
-    <string name="speed_zero">0,0</string>
-    <string name="speed_metric">km/h</string>
-    <string name="speed_imperial">mi/h</string>
+    <string name="pace_to_speed_results"> {pace} = {speed} {result}</string>
+    <string name="default_pace">0:00</string>
+    <string name="default_speed">0,0</string>
+    <string name="default_time">00:00:00</string>
+    <string name="unit_distance_metric">km</string>
+    <string name="unit_distance_imperial">mi</string>
+    <string name="unit_pace_metric">min/km</string>
+    <string name="unit_pace_imperial">min/mi</string>
+    <string name="unit_speed_metric">km/h</string>
+    <string name="unit_speed_imperial">mi/h</string>
 
-    <string name="paceFormatError">Check the format of given pace.</string>
+    <string name="invalid_input_error">Whooops, seems like somethings wrong the numbers you gave :)</string>
 </resources>
