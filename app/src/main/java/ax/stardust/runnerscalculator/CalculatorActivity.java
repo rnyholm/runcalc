@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
         paceToSpeedEditText = findViewById(R.id.pace_to_speed_et);
         paceToSpeedResultsTextView = findViewById(R.id.pace_to_speed_results_tv);
-        propertyBoundUIComponents.add(PropertyBoundUIComponents.create(CONVERT_PACE_TO_SPEED, paceToSpeedEditText, paceToSpeedResultsTextView, R.string.pace_to_speed_results));
+        propertyBoundUIComponents.add(new PropertyBoundUIComponents(CONVERT_PACE_TO_SPEED, paceToSpeedEditText, paceToSpeedResultsTextView, R.string.pace_to_speed_results));
 
         calculateButton = findViewById(R.id.calculate_button);
         calculateButton.setEnabled(false);
@@ -70,7 +71,7 @@ public class CalculatorActivity extends AppCompatActivity {
             boundUIComponents.setDefaultResultText();
         });
 
-        convertPaceToSpeedTextView.setText(String.format(getStringFromResource(R.string.convert_xx_to_xx), pace, speed));
+        convertPaceToSpeedTextView.setText(String.format(getString(R.string.convert_xx_to_xx), pace, speed));
     }
 
     private void setListeners() {
@@ -114,33 +115,33 @@ public class CalculatorActivity extends AppCompatActivity {
         });
     }
 
-    private static class PropertyBoundUIComponents {
+    private class PropertyBoundUIComponents {
         private final Model.Property property;
         private final EditText editText;
         private final TextView textView;
         private final int textID;
 
-        private PropertyBoundUIComponents(Model.Property property, EditText editText, TextView textView, int textID) {
+        PropertyBoundUIComponents(Model.Property property, EditText editText, TextView textView, int textID) {
             this.property = property;
             this.editText = editText;
             this.textView = textView;
             this.textID = textID;
         }
 
-        public static PropertyBoundUIComponents create(Model.Property property, EditText editText, TextView textView, int textID) {
-            return new PropertyBoundUIComponents(property, editText, textView, textID);
-        }
+//        PropertyBoundUIComponents create(Model.Property property, EditText editText, TextView textView, int textID) {
+//            return new PropertyBoundUIComponents(property, editText, textView, textID);
+//        }
 
-        public Model.Property getProperty() {
+        Model.Property getProperty() {
             return property;
         }
 
-        public EditText getEditText() {
+        EditText getEditText() {
             return editText;
         }
 
-        public void setDefaultResultText() {
-            switch Model.Property {
+        void setDefaultResultText() {
+            switch (property) {
                 case CONVERT_PACE_TO_SPEED:
                     setResultText(getString(R.string.default_speed));
                 case CONVERT_SPEED_TO_PACE:
@@ -154,7 +155,7 @@ public class CalculatorActivity extends AppCompatActivity {
             }
         }
 
-        public void setResultText(String result) {
+        void setResultText(String result) {
             String text = getString(textID);
             text = text.replace("{pace}", CalculatorActivity.pace);
             text = text.replace("{speed}", CalculatorActivity.speed);

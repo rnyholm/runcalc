@@ -70,7 +70,7 @@ public class Model {
             if (existingVal == null) {
                 return val == null;
             }
-            return existingVal.equals(val);
+            return !existingVal.equals(val);
         }
     }
 }

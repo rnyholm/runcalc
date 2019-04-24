@@ -42,8 +42,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="@string/pace_zero"
-                    android:inputType="time"
+                    android:hint="@string/default_pace"
+                    android:inputType="text"
                     android:selectAllOnFocus="true"
                     android:singleLine="true" />
 

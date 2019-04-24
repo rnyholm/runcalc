@@ -14,5 +14,5 @@
     <string name="unit_speed_metric">km/h</string>
     <string name="unit_speed_imperial">mi/h</string>
 
-    <string name="invalid_input_error">Whooops, seems like somethings wrong the numbers you gave :)</string>
+    <string name="invalid_input_error">Whooops, seems like somethings wrong with the numbers you gave :)</string>
 </resources>
