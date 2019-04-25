@@ -1,6 +1,5 @@
 package ax.stardust.runnerscalculator;
 
-import java.text.DecimalFormat;
 import java.util.Locale;
 
 public class Calculator {
@@ -10,8 +9,9 @@ public class Calculator {
     private static final double KM_IN_MILES = 0.621371192;
 
     private static final String PACE_PATTERN = "^[0-9]*$|^[0-9]*:[0-9]*$";
-    private static final String SPEED_PATTERN = "^[0-9]*$|^[0-9]*\\.[0-9]*$";
+    private static final String SPEED_DISTANCE_PATTERN = "^[0-9]*$|^[0-9]*\\.[0-9]*$";
     private static final String TIME_PATTERN = "^[0-9]{1,2}:[0-9]{1,2}$|^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$";
+    private static final String COMBINED_STRING_PATTERN = "^.*\\|.*$";
 
     public static String convertPaceToSpeed(String pace) {
         return Pace.parse(pace).asSpeed();
@@ -21,7 +21,13 @@ public class Calculator {
         return Speed.parse(speed).asPace();
     }
 
-    public static String calculatePace(String s) {
+    public static String calculatePace(String distanceAndTime) {
+        throwExceptionIfMalformedStringPattern(distanceAndTime);
+        String[] split = distanceAndTime.split("\\|");
+
+        Distance distance = Distance.parse(split[0]);
+        Time time = Time.parse(split[1]);
+
         return "";
     }
 
@@ -33,35 +39,69 @@ public class Calculator {
         return "";
     }
 
-    private static class Speed {
-        private double speed;
+    private static void throwExceptionIfMalformedStringPattern(String combined) {
+        if (combined == null || combined.isEmpty() || !combined.matches(COMBINED_STRING_PATTERN)) {
+            throw new IllegalArgumentException();
+        }
+    }
 
-        private Speed(double speed) {
-            this.speed = speed;
+    private static class MatchedDouble {
+        private double value;
+
+        private MatchedDouble(double value) {
+            this.value = value;
         }
 
-        static Speed parse(String speed) {
-            if (speed != null) {
-                if (speed.isEmpty()) {
-                    return new Speed(Double.parseDouble("0"));
+        static MatchedDouble parse(String str) {
+            if (str != null) {
+                if (str.isEmpty()) {
+                    return new MatchedDouble(Double.parseDouble("0"));
                 }
-                if (speed.matches(SPEED_PATTERN)) {
-                    return new Speed(Double.parseDouble(speed));
+                if (str.matches(SPEED_DISTANCE_PATTERN)) {
+                    return new MatchedDouble(Double.parseDouble(str));
                 }
             }
 
             throw new IllegalArgumentException();
         }
 
+        public double getValue() {
+            return value;
+        }
+    }
+
+    private static class Speed {
+        private MatchedDouble speed;
+
+        private Speed(MatchedDouble speed) {
+            this.speed = speed;
+        }
+
+        static Speed parse(String speed) {
+            return new Speed(MatchedDouble.parse(speed));
+        }
+
         String asPace() {
             int minutes = 0;
             int seconds = 0;
-            if (speed != 0) {
-                double remainder =  SECONDS_IN_HOUR / speed;
+            if (speed.getValue() != 0) {
+                double remainder = SECONDS_IN_HOUR / speed.getValue();
                 minutes = (int) remainder / 60;
                 seconds = (int) Math.round(remainder - minutes * 60);
             }
             return String.format(Locale.ENGLISH, "%d:%02d", minutes, seconds);
+        }
+    }
+
+    private static class Distance {
+        private MatchedDouble distance;
+
+        private Distance(MatchedDouble distance) {
+            this.distance = distance;
+        }
+
+        static Distance parse(String distance) {
+            return new Distance(MatchedDouble.parse(distance));
         }
     }
 
@@ -80,21 +120,19 @@ public class Calculator {
                     return new Pace(0, 0);
                 }
                 if (pace.matches(PACE_PATTERN)) {
-                    String minutesString;
-                    String secondsString = "00";
+                    int minutes;
+                    int seconds = 0;
 
                     if (pace.contains(":")) { // mm:ss
                         String[] split = pace.split(":");
-                        minutesString = split[0];
+                        minutes = Integer.parseInt(split[0]);
                         if (split.length > 1) {
-                            secondsString = split[1];
+                            seconds = Integer.parseInt(split[1]);
                         }
                     } else { // mm
-                        minutesString = pace;
+                        minutes = Integer.parseInt(pace);
                     }
 
-                    int minutes = Integer.parseInt(minutesString);
-                    int seconds = Integer.parseInt(secondsString);
                     if (seconds > 59) {
                         throw new IllegalArgumentException();
                     }
@@ -116,6 +154,49 @@ public class Calculator {
                 speed = 60 / inMinutes();
             }
             return String.format(Locale.ENGLISH, "%.2f", speed);
+        }
+    }
+
+    private static class Time {
+        private int hours;
+        private int minutes;
+        private int seconds;
+
+        private Time(int hours, int minutes, int seconds) {
+            this.hours = hours;
+            this.minutes = minutes;
+            this.seconds = seconds;
+        }
+
+        static Time parse(String time) {
+            if (time != null) {
+                if (time.isEmpty()) {
+                    return new Time(0, 0, 0);
+                }
+
+                int hours = 0;
+                int minutes;
+                int seconds;
+
+                if (time.matches(TIME_PATTERN)) {
+                    String[] split = time.split(":");
+                    int i = 0;
+                    if (split.length > 2) { // hh:mm:ss
+                        hours = Integer.parseInt(split[i]);
+                    } // mm:ss
+
+                    minutes = Integer.parseInt(split[i++]);
+                    seconds = Integer.parseInt(split[i++]);
+
+                    if (hours > 23 || minutes > 59 || seconds > 59) {
+                        throw new IllegalArgumentException();
+                    }
+
+                    return new Time(hours, minutes, seconds);
+                }
+            }
+
+            throw new IllegalArgumentException();
         }
     }
 }

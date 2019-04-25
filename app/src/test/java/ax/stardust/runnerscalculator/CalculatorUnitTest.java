@@ -88,6 +88,32 @@ public class CalculatorUnitTest {
     }
 
     @Test
+    public void testCalculatePace() {
+        Calculator.calculatePace("5.0|23:05");
+    }
+
+    @Test
+    public void testCalculatePaceExceptions() {
+        int exceptionCounter = 0;
+
+        try {
+            Calculator.calculatePace("5.023:05");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculatePace("5.0||23:05");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        assertEquals(2, exceptionCounter);
+    }
+
+    @Test
     public void testConvertSpeedToPaceExceptions() {
         int exceptionCounter = 0;
 
