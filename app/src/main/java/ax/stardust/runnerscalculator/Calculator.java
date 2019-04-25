@@ -1,5 +1,6 @@
 package ax.stardust.runnerscalculator;
 
+import java.text.DecimalFormat;
 import java.util.Locale;
 
 public class Calculator {
@@ -9,7 +10,7 @@ public class Calculator {
     private static final double KM_IN_MILES = 0.621371192;
 
     private static final String PACE_PATTERN = "^[0-9]*$|^[0-9]*:[0-9]*$";
-    private static final String SPEED_PATTERN = "^[0-9]*$|^[0-9]*.[0-9]*$";
+    private static final String SPEED_PATTERN = "^[0-9]*$|^[0-9]*\\.[0-9]*$";
     private static final String TIME_PATTERN = "^[0-9]{1,2}:[0-9]{1,2}$|^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$";
 
     public static String convertPaceToSpeed(String pace) {
@@ -40,7 +41,10 @@ public class Calculator {
         }
 
         static Speed parse(String speed) {
-            if (speed != null && !speed.isEmpty()) {
+            if (speed != null) {
+                if (speed.isEmpty()) {
+                    return new Speed(Double.parseDouble("0"));
+                }
                 if (speed.matches(SPEED_PATTERN)) {
                     return new Speed(Double.parseDouble(speed));
                 }
@@ -50,9 +54,13 @@ public class Calculator {
         }
 
         String asPace() {
-            double remainder =  SECONDS_IN_HOUR / speed;
-            int minutes = (int) remainder / 60;
-            int seconds = (int) Math.round(remainder - minutes * 60);
+            int minutes = 0;
+            int seconds = 0;
+            if (speed != 0) {
+                double remainder =  SECONDS_IN_HOUR / speed;
+                minutes = (int) remainder / 60;
+                seconds = (int) Math.round(remainder - minutes * 60);
+            }
             return String.format(Locale.ENGLISH, "%d:%02d", minutes, seconds);
         }
     }
@@ -67,7 +75,10 @@ public class Calculator {
         }
 
         static Pace parse(String pace) {
-            if (pace != null && !pace.isEmpty()) {
+            if (pace != null) {
+                if (pace.isEmpty()) {
+                    return new Pace(0, 0);
+                }
                 if (pace.matches(PACE_PATTERN)) {
                     String minutesString;
                     String secondsString = "00";
@@ -100,7 +111,10 @@ public class Calculator {
         }
 
         String asSpeed() {
-            double speed = 60 / inMinutes();
+            double speed = 0.0;
+            if (inMinutes() > 0) {
+                speed = 60 / inMinutes();
+            }
             return String.format(Locale.ENGLISH, "%.2f", speed);
         }
     }

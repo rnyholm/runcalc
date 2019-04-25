@@ -6,6 +6,10 @@ import static org.junit.Assert.*;
 
 
 public class CalculatorUnitTest {
+    private final String PACE_EMPTY = "";
+    private final String PACE_0 = "0";
+    private final String PACE_0_0 = "0:0";
+    private final String PACE_0_00 = "0:00";
     private final String PACE_0_18 = "0:18";
     private final String PACE_3_14 = "3:14";
     private final String PACE_03_14 = "03:14";
@@ -24,6 +28,10 @@ public class CalculatorUnitTest {
     private final String PACE_66_40 = "66:40";
     private final String PACE_600_00 = "600:00";
 
+    private final String SPEED_EMPTY = "";
+    private final String SPEED_0 = "0";
+    private final String SPEED_0_0 = "0.0";
+    private final String SPEED_0_00 = "0.00";
     private final String SPEED_0_1 = "0.1";
     private final String SPEED__9 = ".9";
     private final String SPEED_0_10 = "0.10";
@@ -42,6 +50,10 @@ public class CalculatorUnitTest {
 
     @Test
     public void testConvertSpeedToPace() {
+        assertEquals(PACE_0_00, Calculator.convertSpeedToPace(SPEED_EMPTY));
+        assertEquals(PACE_0_00, Calculator.convertSpeedToPace(SPEED_0));
+        assertEquals(PACE_0_00, Calculator.convertSpeedToPace(SPEED_0_0));
+        assertEquals(PACE_0_00, Calculator.convertSpeedToPace(SPEED_0_00));
         assertEquals(PACE_600_00, Calculator.convertSpeedToPace(SPEED_0_1));
         assertEquals(PACE_66_40, Calculator.convertSpeedToPace(SPEED__9));
         assertEquals(PACE_60_00, Calculator.convertSpeedToPace(SPEED_1));
@@ -58,6 +70,10 @@ public class CalculatorUnitTest {
 
     @Test
     public void testConvertPaceToSpeed() {
+        assertEquals(SPEED_0_00, Calculator.convertPaceToSpeed(PACE_EMPTY));
+        assertEquals(SPEED_0_00, Calculator.convertPaceToSpeed(PACE_0));
+        assertEquals(SPEED_0_00, Calculator.convertPaceToSpeed(PACE_0_0));
+        assertEquals(SPEED_0_00, Calculator.convertPaceToSpeed(PACE_0_00));
         assertEquals(SPEED_200_00, Calculator.convertPaceToSpeed(PACE_0_18));
         assertEquals(SPEED_18_56, Calculator.convertPaceToSpeed(PACE_03_14));
         assertEquals(SPEED_12_00, Calculator.convertPaceToSpeed(PACE_5));
@@ -132,6 +148,13 @@ public class CalculatorUnitTest {
         int exceptionCounter = 0;
 
         try {
+            Calculator.convertPaceToSpeed("-10:0");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
             Calculator.convertPaceToSpeed(":10");
             fail();
         } catch (Exception e) {
@@ -187,6 +210,6 @@ public class CalculatorUnitTest {
             exceptionCounter++;
         }
 
-        assertEquals(8, exceptionCounter);
+        assertEquals(9, exceptionCounter);
     }
 }
