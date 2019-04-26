@@ -11,7 +11,7 @@ public class Calculator {
     private static final String PACE_PATTERN = "^[0-9]*$|^[0-9]*:[0-9]*$";
     private static final String SPEED_DISTANCE_PATTERN = "^[0-9]*$|^[0-9]*\\.[0-9]*$";
     private static final String TIME_PATTERN = "^[0-9]{1,2}:[0-9]{1,2}$|^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$";
-    private static final String COMBINED_STRING_PATTERN = "^.*\\|.*$";
+    private static final String COMBINED_STRING_PATTERN = "^[^\\|]+\\|[^\\|]+$";
 
     public static String convertPaceToSpeed(String pace) {
         return Pace.parse(pace).asSpeed();
@@ -28,7 +28,12 @@ public class Calculator {
         Distance distance = Distance.parse(split[0]);
         Time time = Time.parse(split[1]);
 
-        return "";
+        int paceInSeconds = 0;
+        if (!distance.isZero() && !time.isZero()) {
+            paceInSeconds = (int) Math.round(time.inSeconds() / distance.getDistance());
+        }
+
+        return Time.asPace(paceInSeconds);
     }
 
     public static String calculateTime(String s) {
@@ -65,8 +70,12 @@ public class Calculator {
             throw new IllegalArgumentException();
         }
 
-        public double getValue() {
+        double getValue() {
             return value;
+        }
+
+        boolean isZero() {
+            return value == 0;
         }
     }
 
@@ -102,6 +111,14 @@ public class Calculator {
 
         static Distance parse(String distance) {
             return new Distance(MatchedDouble.parse(distance));
+        }
+
+        double getDistance() {
+            return distance.getValue();
+        }
+
+        boolean isZero() {
+            return distance.isZero();
         }
     }
 
@@ -182,7 +199,7 @@ public class Calculator {
                     String[] split = time.split(":");
                     int i = 0;
                     if (split.length > 2) { // hh:mm:ss
-                        hours = Integer.parseInt(split[i]);
+                        hours = Integer.parseInt(split[i++]);
                     } // mm:ss
 
                     minutes = Integer.parseInt(split[i++]);
@@ -197,6 +214,37 @@ public class Calculator {
             }
 
             throw new IllegalArgumentException();
+        }
+
+        int inSeconds() {
+            return (hours * 60 * 60) + (minutes * 60) + seconds;
+        }
+
+        static String asPace(int seconds) {
+            int minutes = 0;
+            if (seconds != 0) {
+                minutes = seconds / 60;
+                seconds = seconds - (minutes * 60);
+            }
+
+            return String.format(Locale.ENGLISH, "%d:%02d", minutes, seconds);
+        }
+
+        boolean isZero() {
+            return hours == 0 && minutes == 0 && seconds == 0;
+        }
+
+        static String asPace1(double seconds) {
+            int hours = 0;
+            int minutes = 0;
+
+            if (seconds != 0) {
+                hours = (int) seconds / SECONDS_IN_HOUR;
+                minutes = (int) (seconds - hours * 3600) / 60;
+                seconds = (int) Math.round((seconds - hours * 3600) - minutes * 60);
+            }
+
+            return String.format(Locale.ENGLISH, "%02d:%02d:%02d", hours, minutes, (int) seconds);
         }
     }
 }

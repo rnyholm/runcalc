@@ -5,16 +5,22 @@ import java.util.function.Function;
 
 public class Model {
     enum Property {
-        CONVERT_PACE_TO_SPEED(Calculator::convertPaceToSpeed),
-        CONVERT_SPEED_TO_PACE(Calculator::convertSpeedToPace),
-        CALCULATE_PACE(Calculator::calculatePace),
-        CALCULATE_TIME(Calculator::calculateTime),
-        CALCULATE_DISTANCE(Calculator::calculateDistance);
+        CONVERT_PACE_TO_SPEED(false, Calculator::convertPaceToSpeed),
+        CONVERT_SPEED_TO_PACE(false, Calculator::convertSpeedToPace),
+        CALCULATE_PACE(true, Calculator::calculatePace),
+        CALCULATE_TIME(true, Calculator::calculateTime),
+        CALCULATE_DISTANCE(true, Calculator::calculateDistance);
 
+        private final boolean pairedInput;
         private final Function<String, String> calculatorFunction;
 
-        Property(Function<String, String> calculatorFunction) {
+        Property(boolean pairedInput, Function<String, String> calculatorFunction) {
+            this.pairedInput = pairedInput;
             this.calculatorFunction = calculatorFunction;
+        }
+
+        public boolean isPairedInput() {
+            return pairedInput;
         }
 
         public Function<String, String> getCalculatorFunction() {
@@ -22,55 +28,91 @@ public class Model {
         }
     }
 
-    private HashMap<Property, Values> data = new HashMap();
+    enum ValueSelection {
+        FIRST,SECOND
+    }
 
-    public boolean changed() {
-        return data.values().stream().anyMatch(values -> values.changed());
+    private HashMap<Property, PairedValue> data = new HashMap();
+
+    boolean changed() {
+        return data.entrySet().stream().anyMatch(entry -> entry.getValue().changed(entry.getKey()));
     }
 
     public void commit() {
-        data.values().forEach(values -> values.commit());
+        data.values().forEach(pairedValue -> pairedValue.commit());
     }
 
-    public void commitProperty(Property property) {
-        data.getOrDefault(property, new Values()).commit();
+    void commitProperty(Property property) {
+        data.getOrDefault(property, new PairedValue()).commit();
     }
 
-    public boolean isPropertyChanged(Property property) {
-        return data.getOrDefault(property, new Values()).changed();
+    boolean isPropertyChanged(Property property) {
+        return data.getOrDefault(property, new PairedValue()).changed(property);
     }
 
-    public String getPropertyValue(Property property) {
-        return data.getOrDefault(property, new Values()).getVal();
+    String getPropertyValue(Property property, ValueSelection selection) {
+        return data.getOrDefault(property, new PairedValue()).getValue(selection);
     }
 
-    public void setPropertyValue(Property property, String value) {
-        Values values = data.getOrDefault(property, new Values());
-        values.setVal(value);
-        data.put(property, values);
+    void setPropertyValue(Property property, ValueSelection selection, String value) {
+        PairedValue pairedValue = data.getOrDefault(property, new PairedValue());
+        pairedValue.setValue(selection, value);
+        data.put(property, pairedValue);
     }
 
-    private static class Values {
-        private String existingVal = "";
-        private String val = "";
+    private static class PairedValue {
+        private Value firstValue = new Value();
+        private Value secondValue = new Value();
 
-        public String getVal() {
-            return val;
-        }
-
-        public void setVal(String val) {
-            this.val = val;
-        }
-
-        public void commit() {
-            existingVal = val;
-        }
-
-        private boolean changed() {
-            if (existingVal == null) {
-                return val == null;
+        String getValue(ValueSelection selection) {
+            if (ValueSelection.FIRST.equals(selection)) {
+                return firstValue.getValue();
             }
-            return !existingVal.equals(val);
+            return secondValue.getValue();
+        }
+
+        void setValue(ValueSelection selection, String value) {
+            if (ValueSelection.FIRST.equals(selection)) {
+                firstValue.setValue(value);
+            } else {
+                secondValue.setValue(value);
+            }
+        }
+
+        void commit() {
+            firstValue.commit();
+            secondValue.commit();
+        }
+
+        boolean changed(Property property) {
+            if (property.isPairedInput()) {
+                return firstValue.changed() && secondValue.changed();
+            }
+            return firstValue.changed();
+        }
+
+        private static class Value {
+            private String existingValue = "";
+            private String value = "";
+
+            public String getValue() {
+                return value;
+            }
+
+            public void setValue(String value) {
+                this.value = value;
+            }
+
+            public void commit() {
+                existingValue = value;
+            }
+
+            boolean changed() {
+                if (existingValue == null) {
+                    return value == null;
+                }
+                return !existingValue.equals(value);
+            }
         }
     }
 }

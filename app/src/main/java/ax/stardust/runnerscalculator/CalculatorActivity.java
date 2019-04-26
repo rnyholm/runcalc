@@ -25,10 +25,13 @@ public class CalculatorActivity extends AppCompatActivity {
 
     // TextViews
     private TextView convertPaceToSpeedTextView;
+    private TextView convertSpeedToPaceTextView;
     private TextView paceToSpeedResultsTextView;
+    private TextView speedToPaceResultsTextView;
 
     // EditTexts
     private EditText paceToSpeedEditText;
+    private EditText speedToPaceEditText;
 
     // Button
     private Button calculateButton;
@@ -51,10 +54,15 @@ public class CalculatorActivity extends AppCompatActivity {
 
     private void findViews() {
         convertPaceToSpeedTextView = findViewById(R.id.pace_to_speed_tv);
+        convertSpeedToPaceTextView = findViewById(R.id.speed_to_pace_tv);
 
         paceToSpeedEditText = findViewById(R.id.pace_to_speed_et);
         paceToSpeedResultsTextView = findViewById(R.id.pace_to_speed_results_tv);
         propertyBoundUIComponents.add(new PropertyBoundUIComponents(CONVERT_PACE_TO_SPEED, paceToSpeedEditText, paceToSpeedResultsTextView, R.string.pace_to_speed_results));
+
+        speedToPaceEditText = findViewById(R.id.speed_to_pace_et);
+        speedToPaceResultsTextView = findViewById(R.id.speed_to_pace_results_tv);
+        propertyBoundUIComponents.add(new PropertyBoundUIComponents(CONVERT_SPEED_TO_PACE, speedToPaceEditText, speedToPaceResultsTextView, R.string.pace_to_speed_results));
 
         calculateButton = findViewById(R.id.calculate_button);
         calculateButton.setEnabled(false);
@@ -72,29 +80,19 @@ public class CalculatorActivity extends AppCompatActivity {
         });
 
         convertPaceToSpeedTextView.setText(String.format(getString(R.string.convert_xx_to_xx), pace, speed));
+        convertSpeedToPaceTextView.setText(String.format(getString(R.string.convert_xx_to_xx), speed, pace));
     }
 
     private void setListeners() {
         propertyBoundUIComponents.forEach(boundUIComponents -> {
             Model.Property property = boundUIComponents.getProperty();
-            EditText editText = boundUIComponents.getEditText();
-            editText.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    // Do nothing...
-                }
+            EditText firstEditText = boundUIComponents.getFirstEditText();
+            firstEditText.addTextChangedListener(new PropertyBoundTextWatcher(property, Model.ValueSelection.FIRST));
 
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    model.setPropertyValue(property, charSequence.toString());
-                    calculateButton.setEnabled(model.changed());
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    // Do nothing...
-                }
-            });
+            if (property.isPairedInput()) {
+                EditText secondEditText = boundUIComponents.getSecondEditText();
+                secondEditText.addTextChangedListener(new PropertyBoundTextWatcher(property, Model.ValueSelection.SECOND));
+            }
         });
 
         calculateButton.setOnClickListener(view -> {
@@ -117,27 +115,40 @@ public class CalculatorActivity extends AppCompatActivity {
 
     private class PropertyBoundUIComponents {
         private final Model.Property property;
-        private final EditText editText;
+        private final EditText firstEditText;
+        private final EditText secondEditText;
         private final TextView textView;
         private final int textID;
 
-        PropertyBoundUIComponents(Model.Property property, EditText editText, TextView textView, int textID) {
+        PropertyBoundUIComponents(Model.Property property, EditText firstEditText, EditText secondEditText, TextView textView, int textID) {
+            if (property.isPairedInput() && secondEditText == null) {
+                throw new IllegalArgumentException(PropertyBoundUIComponents.class.getSimpleName() + " cannot be created with secondEditText set to null when property expecting paired input is bound to this object")
+            }
             this.property = property;
-            this.editText = editText;
+            this.firstEditText = firstEditText;
+            this.secondEditText = secondEditText;
             this.textView = textView;
             this.textID = textID;
         }
 
-//        PropertyBoundUIComponents create(Model.Property property, EditText editText, TextView textView, int textID) {
-//            return new PropertyBoundUIComponents(property, editText, textView, textID);
+        PropertyBoundUIComponents(Model.Property property, EditText firstEditText, TextView textView, int textID) {
+            this(property, firstEditText, null, textView, textID);
+        }
+
+//        PropertyBoundUIComponents create(Model.Property property, EditText firstEditText, TextView textView, int textID) {
+//            return new PropertyBoundUIComponents(property, firstEditText, textView, textID);
 //        }
 
         Model.Property getProperty() {
             return property;
         }
 
-        EditText getEditText() {
-            return editText;
+        EditText getFirstEditText() {
+            return firstEditText;
+        }
+
+        EditText getSecondEditText() {
+            return secondEditText;
         }
 
         void setDefaultResultText() {
@@ -162,6 +173,32 @@ public class CalculatorActivity extends AppCompatActivity {
             text = text.replace("{distance}", CalculatorActivity.distance);
             text = text.replace("{result}", result);
             textView.setText(text);
+        }
+    }
+
+    private class PropertyBoundTextWatcher implements TextWatcher {
+        private Model.Property property;
+        private Model.ValueSelection selection;
+
+        public PropertyBoundTextWatcher(Model.Property property, Model.ValueSelection selection) {
+            this.property = property;
+            this.selection = selection;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            // Do nothing...
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            model.setPropertyValue(property, selection, charSequence.toString());
+            calculateButton.setEnabled(model.changed());
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            // Do nothing...
         }
     }
 }
