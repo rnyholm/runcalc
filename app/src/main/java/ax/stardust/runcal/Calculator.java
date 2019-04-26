@@ -1,4 +1,4 @@
-package ax.stardust.runnerscalculator;
+package ax.stardust.runcal;
 
 import java.util.Locale;
 
@@ -203,7 +203,7 @@ public class Calculator {
                     } // mm:ss
 
                     minutes = Integer.parseInt(split[i++]);
-                    seconds = Integer.parseInt(split[i++]);
+                    seconds = Integer.parseInt(split[i]);
 
                     if (hours > 23 || minutes > 59 || seconds > 59) {
                         throw new IllegalArgumentException();
@@ -232,19 +232,6 @@ public class Calculator {
 
         boolean isZero() {
             return hours == 0 && minutes == 0 && seconds == 0;
-        }
-
-        static String asPace1(double seconds) {
-            int hours = 0;
-            int minutes = 0;
-
-            if (seconds != 0) {
-                hours = (int) seconds / SECONDS_IN_HOUR;
-                minutes = (int) (seconds - hours * 3600) / 60;
-                seconds = (int) Math.round((seconds - hours * 3600) - minutes * 60);
-            }
-
-            return String.format(Locale.ENGLISH, "%02d:%02d:%02d", hours, minutes, (int) seconds);
         }
     }
 }

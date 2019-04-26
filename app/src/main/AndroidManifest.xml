@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ax.stardust.runnerscalculator">
+    package="ax.stardust.runcal">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CalculatorActivity"
+        <activity android:name="ax.stardust.runcal.RunnersCalculator"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>

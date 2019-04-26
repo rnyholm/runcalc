@@ -1,4 +1,4 @@
-package ax.stardust.runnerscalculator;
+package ax.stardust.runcal;
 
 import java.util.HashMap;
 import java.util.function.Function;
@@ -38,10 +38,6 @@ public class Model {
         return data.entrySet().stream().anyMatch(entry -> entry.getValue().changed(entry.getKey()));
     }
 
-    public void commit() {
-        data.values().forEach(pairedValue -> pairedValue.commit());
-    }
-
     void commitProperty(Property property) {
         data.getOrDefault(property, new PairedValue()).commit();
     }
@@ -50,8 +46,8 @@ public class Model {
         return data.getOrDefault(property, new PairedValue()).changed(property);
     }
 
-    String getPropertyValue(Property property, ValueSelection selection) {
-        return data.getOrDefault(property, new PairedValue()).getValue(selection);
+    String getPropertyValue(Property property) {
+        return data.getOrDefault(property, new PairedValue()).getValue(property);
     }
 
     void setPropertyValue(Property property, ValueSelection selection, String value) {
@@ -64,11 +60,11 @@ public class Model {
         private Value firstValue = new Value();
         private Value secondValue = new Value();
 
-        String getValue(ValueSelection selection) {
-            if (ValueSelection.FIRST.equals(selection)) {
-                return firstValue.getValue();
+        String getValue(Property property) {
+            if (property.isPairedInput()) {
+                return firstValue.getValue() + "|" + secondValue.getValue();
             }
-            return secondValue.getValue();
+            return firstValue.getValue();
         }
 
         void setValue(ValueSelection selection, String value) {
@@ -86,7 +82,10 @@ public class Model {
 
         boolean changed(Property property) {
             if (property.isPairedInput()) {
-                return firstValue.changed() && secondValue.changed();
+                if (!firstValue.isCommitted() && !secondValue.isCommitted()) {
+                    return firstValue.changed() && secondValue.changed();
+                }
+                return firstValue.changed() || secondValue.changed();
             }
             return firstValue.changed();
         }
@@ -103,15 +102,20 @@ public class Model {
                 this.value = value;
             }
 
-            public void commit() {
+            void commit() {
                 existingValue = value;
+            }
+
+            boolean isCommitted() {
+                return existingValue != null && !existingValue.isEmpty();
             }
 
             boolean changed() {
                 if (existingValue == null) {
                     return value == null;
                 }
-                return !existingValue.equals(value);
+
+                return !value.isEmpty() && !existingValue.equals(value);
             }
         }
     }
