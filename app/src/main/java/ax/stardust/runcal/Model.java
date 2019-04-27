@@ -32,7 +32,7 @@ public class Model {
         FIRST,SECOND
     }
 
-    private HashMap<Property, PairedValue> data = new HashMap();
+    private final HashMap<Property, PairedValue> data = new HashMap();
 
     boolean changed() {
         return data.entrySet().stream().anyMatch(entry -> entry.getValue().changed(entry.getKey()));
@@ -57,8 +57,8 @@ public class Model {
     }
 
     private static class PairedValue {
-        private Value firstValue = new Value();
-        private Value secondValue = new Value();
+        private final Value firstValue = new Value();
+        private final Value secondValue = new Value();
 
         String getValue(Property property) {
             if (property.isPairedInput()) {
@@ -94,11 +94,11 @@ public class Model {
             private String existingValue = "";
             private String value = "";
 
-            public String getValue() {
+            String getValue() {
                 return value;
             }
 
-            public void setValue(String value) {
+            void setValue(String value) {
                 this.value = value;
             }
 

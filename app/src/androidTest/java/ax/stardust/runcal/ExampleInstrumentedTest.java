@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("ax.stardust.runnerscalculator", appContext.getPackageName());
+        assertEquals("ax.stardust.runcal", appContext.getPackageName());
     }
 }

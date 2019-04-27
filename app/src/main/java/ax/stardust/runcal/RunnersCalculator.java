@@ -21,8 +21,8 @@ public class RunnersCalculator extends AppCompatActivity {
     private static String speed;
     private static String distance;
 
-    private List<PropertyBoundUIComponents> propertyBoundUIComponents = new ArrayList<>();
-    private Model model = new Model();
+    private final List<PropertyBoundUIComponents> propertyBoundUIComponents = new ArrayList<>();
+    private final Model model = new Model();
 
     // TextViews
     private TextView convertPaceToSpeedTextView;
@@ -39,7 +39,6 @@ public class RunnersCalculator extends AppCompatActivity {
     private EditText paceToSpeedEditText;
     private EditText speedToPaceEditText;
     private EditText calculatePaceDistanceEditText;
-    private EditText calculatePaceTimeEditText;
 
     // Button
     private Button calculateButton;
@@ -76,7 +75,7 @@ public class RunnersCalculator extends AppCompatActivity {
         calculatePaceTimeHintTextView = findViewById(R.id.calculate_pace_time_hint_tv);
         calculatePaceResultHintTextView = findViewById(R.id.calculate_pace_result_hint_tv);
         calculatePaceDistanceEditText = findViewById(R.id.calculate_pace_distance_et);
-        calculatePaceTimeEditText = findViewById(R.id.calculate_pace_time_et);
+        EditText calculatePaceTimeEditText = findViewById(R.id.calculate_pace_time_et);
         calculatePaceResultsTextView = findViewById(R.id.calculate_pace_results_tv);
         propertyBoundUIComponents.add(new PropertyBoundUIComponents(CALCULATE_PACE, calculatePaceDistanceEditText, calculatePaceTimeEditText, calculatePaceResultsTextView, R.string.calculate_pace_results));
 
@@ -196,8 +195,8 @@ public class RunnersCalculator extends AppCompatActivity {
     }
 
     private class PropertyBoundTextWatcher implements TextWatcher {
-        private Model.Property property;
-        private Model.ValueSelection selection;
+        private final Model.Property property;
+        private final Model.ValueSelection selection;
 
         PropertyBoundTextWatcher(Model.Property property, Model.ValueSelection selection) {
             this.property = property;

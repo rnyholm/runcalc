@@ -2,7 +2,7 @@ package ax.stardust.runcal;
 
 import java.util.Locale;
 
-public class Calculator {
+class Calculator {
     private static final int SECONDS_IN_HOUR = 3600;
 
     private static final double SECOND_IN_MINUTE = 0.0166666667;
@@ -13,15 +13,15 @@ public class Calculator {
     private static final String TIME_PATTERN = "^[0-9]{1,2}:[0-9]{1,2}$|^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$";
     private static final String COMBINED_STRING_PATTERN = "^[^\\|]+\\|[^\\|]+$";
 
-    public static String convertPaceToSpeed(String pace) {
+    static String convertPaceToSpeed(String pace) {
         return Pace.parse(pace).asSpeed();
     }
 
-    public static String convertSpeedToPace(String speed) {
+    static String convertSpeedToPace(String speed) {
         return Speed.parse(speed).asPace();
     }
 
-    public static String calculatePace(String distanceAndTime) {
+    static String calculatePace(String distanceAndTime) {
         throwExceptionIfMalformedStringPattern(distanceAndTime);
         String[] split = distanceAndTime.split("\\|");
 
@@ -36,11 +36,11 @@ public class Calculator {
         return Time.asPace(paceInSeconds);
     }
 
-    public static String calculateTime(String s) {
+    static String calculateTime(String s) {
         return "";
     }
 
-    public static String calculateDistance(String s) {
+    static String calculateDistance(String s) {
         return "";
     }
 
@@ -51,7 +51,7 @@ public class Calculator {
     }
 
     private static class MatchedDouble {
-        private double value;
+        private final double value;
 
         private MatchedDouble(double value) {
             this.value = value;
@@ -80,7 +80,7 @@ public class Calculator {
     }
 
     private static class Speed {
-        private MatchedDouble speed;
+        private final MatchedDouble speed;
 
         private Speed(MatchedDouble speed) {
             this.speed = speed;
@@ -103,7 +103,7 @@ public class Calculator {
     }
 
     private static class Distance {
-        private MatchedDouble distance;
+        private final MatchedDouble distance;
 
         private Distance(MatchedDouble distance) {
             this.distance = distance;
@@ -123,8 +123,8 @@ public class Calculator {
     }
 
     private static class Pace {
-        private int minutes;
-        private int seconds;
+        private final int minutes;
+        private final int seconds;
 
         private Pace(int minutes, int seconds) {
             this.minutes = minutes;
@@ -175,9 +175,9 @@ public class Calculator {
     }
 
     private static class Time {
-        private int hours;
-        private int minutes;
-        private int seconds;
+        private final int hours;
+        private final int minutes;
+        private final int seconds;
 
         private Time(int hours, int minutes, int seconds) {
             this.hours = hours;
