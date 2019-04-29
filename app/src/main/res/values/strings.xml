@@ -25,5 +25,21 @@
     <string name="hint_time">Time(%s)</string>
     <string name="hint_pace">Pace(%s)</string>
 
+    <string name="keyboard_0">1</string>
+    <string name="keyboard_1">1</string>
+    <string name="keyboard_2">2</string>
+    <string name="keyboard_3">3</string>
+    <string name="keyboard_4">4</string>
+    <string name="keyboard_5">5</string>
+    <string name="keyboard_6">6</string>
+    <string name="keyboard_7">7</string>
+    <string name="keyboard_8">8</string>
+    <string name="keyboard_9">9</string>
+    <string name="keyboard_colon">:</string>
+    <string name="keyboard_dot">.</string>
+    <string name="keyboard_del">D</string>
+
+    <string name="keyboard_key_content_descriptor">Custom keyboard key for the runners calculator</string>
+
     <string name="invalid_input_error">Whooops, seems like somethings wrong with the numbers you gave :)</string>
 </resources>
