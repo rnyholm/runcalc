@@ -11,7 +11,7 @@ class Calculator {
     private static final String PACE_PATTERN = "^[0-9]*$|^[0-9]*:[0-9]*$";
     private static final String SPEED_DISTANCE_PATTERN = "^[0-9]*$|^[0-9]*\\.[0-9]*$";
     private static final String TIME_PATTERN = "^[0-9]{1,2}:[0-9]{1,2}$|^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$";
-    private static final String COMBINED_STRING_PATTERN = "^[^\\|]+\\|[^\\|]+$";
+    private static final String COMBINED_STRING_PATTERN = "^[^|]+\\|[^|]+$";
 
     static String convertPaceToSpeed(String pace) {
         return Pace.parse(pace).asSpeed();
