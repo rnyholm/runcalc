@@ -25,7 +25,7 @@
     <string name="hint_time">Time(%s)</string>
     <string name="hint_pace">Pace(%s)</string>
 
-    <string name="keyboard_0">1</string>
+    <string name="keyboard_0">0</string>
     <string name="keyboard_1">1</string>
     <string name="keyboard_2">2</string>
     <string name="keyboard_3">3</string>
