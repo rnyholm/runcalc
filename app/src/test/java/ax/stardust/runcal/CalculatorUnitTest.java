@@ -6,6 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
+@SuppressWarnings("Duplicates")
 public class CalculatorUnitTest {
     private final String PACE_EMPTY = "";
     private final String PACE_0 = "0";
@@ -50,16 +51,19 @@ public class CalculatorUnitTest {
     private final String SPEED_DISTANCE_200_00 = "200.00";
 
     private final String TIME_00_00_00 = "00:00:00";
+    private final String TIME_00_03_29 = "00:03:29";
+    private final String TIME_00_26_23 = "00:26:23";
     private final String TIME_00_30_59 = "00:30:59";
+    private final String TIME_00_42_10 = "00:42:10";
     private final String TIME_00_59_58 = "00:59:58";
+    private final String TIME_00_59_59 = "00:59:59";
     private final String TIME_01_00_00 = "01:00:00";
-    private final String TIME_1_0_0 = "1:0:0";
     private final String TIME_00_00 = "00:00";
+    private final String TIME_1_0_0 = "1:0:0";
     private final String TIME_3_29 = "3:29";
     private final String TIME_26_23 = "26:23";
     private final String TIME_42_10 = "42:10";
     private final String TIME_59_59 = "59:59";
-
 
     private int exceptionCounter = 0;
 
@@ -122,6 +126,24 @@ public class CalculatorUnitTest {
         assertEquals(PACE_60_00, Calculator.calculatePace(combineStrings(SPEED_DISTANCE_1, TIME_01_00_00)));
         assertEquals(PACE_600_00, Calculator.calculatePace(combineStrings(SPEED_DISTANCE_0_1, TIME_01_00_00)));
         assertEquals(PACE_5_00, Calculator.calculatePace(combineStrings(SPEED_DISTANCE_12, TIME_01_00_00)));
+    }
+
+    @Test
+    public void testCalculateTime() {
+        assertEquals(TIME_00_00_00, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_0_0, PACE_0)));
+        assertEquals(TIME_00_00_00, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_0_0, PACE_0_0)));
+        assertEquals(TIME_00_00_00, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_7_21, PACE_0_0)));
+        assertEquals(TIME_00_00_00, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_0_0, PACE_0_00)));
+        assertEquals(TIME_00_03_29, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_11_61, PACE_0_18)));
+        assertEquals(TIME_00_00_00, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_0, PACE_3_14)));
+        assertEquals(TIME_00_26_23, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_8_16, PACE_3_14)));
+        assertEquals(TIME_01_00_00, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_12, PACE_5_00)));
+        assertEquals(TIME_00_42_10, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_8_16, PACE_5_10)));
+        assertEquals(TIME_01_00_00, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_10_00, PACE_6_00)));
+        assertEquals(TIME_00_59_59, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_8_16, PACE_7_21)));
+        assertEquals(TIME_00_59_58, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_7_21, PACE_8_19)));
+        assertEquals(TIME_01_00_00, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_1, PACE_60_00)));
+        assertEquals(TIME_01_00_00, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_0_1, PACE_600_00)));
     }
 
     @Test
@@ -211,6 +233,81 @@ public class CalculatorUnitTest {
         }
 
         assertEquals(12, exceptionCounter);
+    }
+
+    @Test
+    public void testCalculateTimeExceptions() {
+        try {
+            Calculator.calculateTime("5.023:05");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateTime("5.0||5:19");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateTime("|04:1");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateTime("7.0|");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateTime("4.2|-2");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateTime("6.5|00:06:23");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateTime("8.2|0d:-1");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateTime("19.3|g:-2");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateTime("7.9|5:60");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateTime("5.4|-1:-2");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        assertEquals(10, exceptionCounter);
     }
 
     @Test

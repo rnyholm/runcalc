@@ -21,6 +21,14 @@ class Calculator {
         return Speed.parse(speed).asPace();
     }
 
+    /**
+     * To calculate pace from distance and time, which are <br />
+     * combined in the string parameter in following pattern: <br />
+     * 5.6|00:23:46
+     *
+     * @param distanceAndTime Combined value of distance and time
+     * @return Calculated pace
+     */
     static String calculatePace(String distanceAndTime) {
         throwExceptionIfMalformedStringPattern(distanceAndTime);
         String[] split = distanceAndTime.split("\\|");
@@ -29,19 +37,38 @@ class Calculator {
         Time time = Time.parse(split[1]);
 
         int paceInSeconds = 0;
-        if (!distance.isZero() && !time.isZero()) {
+        if (distance.hasValue() && time.hasValue()) {
             paceInSeconds = (int) Math.round(time.inSeconds() / distance.getDistance());
         }
 
         return Time.asPace(paceInSeconds);
     }
 
-    static String calculateTime(String s) {
-        return "";
+    /**
+     * To calculate time from distance and pace, which are <br />
+     * combined in the string parameter in following pattern: <br />
+     * 5.6|5:10
+     *
+     * @param distanceAndPace Combined value of distance and pace
+     * @return Calculated time
+     */
+    static String calculateTime(String distanceAndPace) {
+        throwExceptionIfMalformedStringPattern(distanceAndPace);
+        String[] split = distanceAndPace.split("\\|");
+
+        Distance distance = Distance.parse(split[0]);
+        Pace pace = Pace.parse(split[1]);
+
+        int timeInSeconds = 0;
+        if (distance.hasValue() && pace.hasValue()) {
+            timeInSeconds = (int) Math.round(distance.getDistance() * pace.inSeconds());
+        }
+
+        return Time.asTime(timeInSeconds);
     }
 
     static String calculateDistance(String s) {
-        return "";
+        return s;
     }
 
     private static void throwExceptionIfMalformedStringPattern(String combined) {
@@ -74,8 +101,8 @@ class Calculator {
             return value;
         }
 
-        boolean isZero() {
-            return value == 0;
+        boolean hasValue() {
+            return value > 0;
         }
     }
 
@@ -117,8 +144,8 @@ class Calculator {
             return distance.getValue();
         }
 
-        boolean isZero() {
-            return distance.isZero();
+        boolean hasValue() {
+            return distance.hasValue();
         }
     }
 
@@ -165,12 +192,21 @@ class Calculator {
             return (seconds * SECOND_IN_MINUTE) + minutes;
         }
 
+        int inSeconds() {
+            return (minutes * 60) + seconds;
+        }
+
         String asSpeed() {
             double speed = 0.0;
             if (inMinutes() > 0) {
                 speed = 60 / inMinutes();
             }
             return String.format(Locale.ENGLISH, "%.2f", speed);
+        }
+
+        boolean hasValue() {
+            return (minutes > -1 && seconds > -1) &&
+                    (minutes > 0 || seconds > 0);
         }
     }
 
@@ -222,16 +258,35 @@ class Calculator {
 
         static String asPace(int seconds) {
             int minutes = 0;
-            if (seconds != 0) {
+
+            if (seconds > 0) {
                 minutes = seconds / 60;
                 seconds = seconds - (minutes * 60);
+            } else {
+                seconds = 0;
             }
 
             return String.format(Locale.ENGLISH, "%d:%02d", minutes, seconds);
         }
 
-        boolean isZero() {
-            return hours == 0 && minutes == 0 && seconds == 0;
+        static String asTime(int seconds) {
+            int hours = 0;
+            int minutes = 0;
+
+            if (seconds > 0) {
+                hours = seconds / SECONDS_IN_HOUR;
+                minutes = (seconds - hours * SECONDS_IN_HOUR) / 60;
+                seconds = Math.round((seconds - hours * SECONDS_IN_HOUR) - minutes * 60);
+            } else {
+                seconds = 0;
+            }
+
+            return String.format(Locale.ENGLISH, "%02d:%02d:%02d", hours, minutes, seconds);
+        }
+
+        boolean hasValue() {
+            return (hours > -1 && minutes > -1 && seconds > -1) &&
+                    (hours > 0 || minutes > 0 || seconds > 0);
         }
     }
 }
