@@ -8,40 +8,29 @@ import static org.junit.Assert.*;
 
 @SuppressWarnings("Duplicates")
 public class CalculatorUnitTest {
-    private final String PACE_EMPTY = "";
     private final String PACE_0 = "0";
     private final String PACE_0_0 = "0:0";
     private final String PACE_0_00 = "0:00";
     private final String PACE_0_18 = "0:18";
     private final String PACE_3_14 = "3:14";
-    private final String PACE_03_14 = "03:14";
-    private final String PACE_5 = "5";
-    private final String PACE_5_ = "5:";
     private final String PACE_5_10 = "5:10";
     private final String PACE_5_00 = "5:00";
-    private final String PACE_6 = "6";
     private final String PACE_6_00 = "6:00";
     private final String PACE_7_21 = "7:21";
-    private final String PACE_07_21 = "07:21";
-    private final String PACE_7_30 = "7:30";
     private final String PACE_8_19 = "8:19";
     private final String PACE_10_00 = "10:00";
     private final String PACE_60_00 = "60:00";
-    private final String PACE_66_40 = "66:40";
     private final String PACE_600_00 = "600:00";
 
-    private final String SPEED_DISTANCE_EMPTY = "";
     private final String SPEED_DISTANCE_0 = "0";
     private final String SPEED_DISTANCE_0_0 = "0.0";
     private final String SPEED_DISTANCE_0_00 = "0.00";
     private final String SPEED_DISTANCE_0_1 = "0.1";
-    private final String SPEED_DISTANCE__9 = ".9";
     private final String SPEED_DISTANCE_0_10 = "0.10";
     private final String SPEED_DISTANCE_1 = "1";
     private final String SPEED_DISTANCE_1_00 = "1.00";
     private final String SPEED_DISTANCE_6_00 = "6.00";
     private final String SPEED_DISTANCE_7_21 = "7.21";
-    private final String SPEED_DISTANCE_8_ = "8.";
     private final String SPEED_DISTANCE_8_16 = "8.16";
     private final String SPEED_DISTANCE_10_00 = "10.00";
     private final String SPEED_DISTANCE_11_61 = "11.61";
@@ -53,17 +42,11 @@ public class CalculatorUnitTest {
     private final String TIME_00_00_00 = "00:00:00";
     private final String TIME_00_03_29 = "00:03:29";
     private final String TIME_00_26_23 = "00:26:23";
-    private final String TIME_00_30_59 = "00:30:59";
     private final String TIME_00_42_10 = "00:42:10";
     private final String TIME_00_59_58 = "00:59:58";
     private final String TIME_00_59_59 = "00:59:59";
     private final String TIME_01_00_00 = "01:00:00";
     private final String TIME_00_00 = "00:00";
-    private final String TIME_1_0_0 = "1:0:0";
-    private final String TIME_3_29 = "3:29";
-    private final String TIME_26_23 = "26:23";
-    private final String TIME_42_10 = "42:10";
-    private final String TIME_59_59 = "59:59";
 
     private int exceptionCounter = 0;
 
@@ -74,6 +57,12 @@ public class CalculatorUnitTest {
 
     @Test
     public void testConvertSpeedToPace() {
+        String SPEED_DISTANCE_EMPTY = "";
+        String PACE_66_40 = "66:40";
+        String SPEED_DISTANCE__9 = ".9";
+        String PACE_7_30 = "7:30";
+        String SPEED_DISTANCE_8_ = "8.";
+
         assertEquals(PACE_0_00, Calculator.convertSpeedToPace(SPEED_DISTANCE_EMPTY));
         assertEquals(PACE_0_00, Calculator.convertSpeedToPace(SPEED_DISTANCE_0));
         assertEquals(PACE_0_00, Calculator.convertSpeedToPace(SPEED_DISTANCE_0_0));
@@ -94,6 +83,13 @@ public class CalculatorUnitTest {
 
     @Test
     public void testConvertPaceToSpeed() {
+        String PACE_EMPTY = "";
+        String PACE_03_14 = "03:14";
+        String PACE_5 = "5";
+        String PACE_5_ = "5:";
+        String PACE_6 = "6";
+        String PACE_07_21 = "07:21";
+
         assertEquals(SPEED_DISTANCE_0_00, Calculator.convertPaceToSpeed(PACE_EMPTY));
         assertEquals(SPEED_DISTANCE_0_00, Calculator.convertPaceToSpeed(PACE_0));
         assertEquals(SPEED_DISTANCE_0_00, Calculator.convertPaceToSpeed(PACE_0_0));
@@ -113,6 +109,13 @@ public class CalculatorUnitTest {
 
     @Test
     public void testCalculatePace() {
+        String TIME_3_29 = "3:29";
+        String TIME_26_23 = "26:23";
+        String TIME_00_30_59 = "00:30:59";
+        String TIME_42_10 = "42:10";
+        String TIME_59_59 = "59:59";
+        String TIME_1_0_0 = "1:0:0";
+
         assertEquals(PACE_0_00, Calculator.calculatePace(combineStrings(SPEED_DISTANCE_0_0, TIME_00_00)));
         assertEquals(PACE_0_00, Calculator.calculatePace(combineStrings(SPEED_DISTANCE_1, TIME_00_00_00)));
         assertEquals(PACE_0_18, Calculator.calculatePace(combineStrings(SPEED_DISTANCE_11_61, TIME_3_29)));
@@ -144,6 +147,145 @@ public class CalculatorUnitTest {
         assertEquals(TIME_00_59_58, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_7_21, PACE_8_19)));
         assertEquals(TIME_01_00_00, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_1, PACE_60_00)));
         assertEquals(TIME_01_00_00, Calculator.calculateTime(combineStrings(SPEED_DISTANCE_0_1, PACE_600_00)));
+    }
+
+    @Test
+    public void testCalculateDistance() {
+        assertEquals(SPEED_DISTANCE_0_00, Calculator.calculateDistance(combineStrings(TIME_00_00, PACE_0)));
+        assertEquals(SPEED_DISTANCE_0_00, Calculator.calculateDistance(combineStrings(TIME_00_03_29, PACE_0_0)));
+        assertEquals(SPEED_DISTANCE_0_00, Calculator.calculateDistance(combineStrings(TIME_00_00_00, PACE_0_00)));
+        assertEquals(SPEED_DISTANCE_11_61, Calculator.calculateDistance(combineStrings(TIME_00_03_29, PACE_0_18)));
+        assertEquals(SPEED_DISTANCE_0_00, Calculator.calculateDistance(combineStrings(TIME_00_00_00, PACE_3_14)));
+        assertEquals(SPEED_DISTANCE_8_16, Calculator.calculateDistance(combineStrings(TIME_00_26_23, PACE_3_14)));
+        assertEquals(SPEED_DISTANCE_12_00, Calculator.calculateDistance(combineStrings(TIME_01_00_00, PACE_5_00)));
+        assertEquals(SPEED_DISTANCE_8_16, Calculator.calculateDistance(combineStrings(TIME_00_42_10, PACE_5_10)));
+        assertEquals(SPEED_DISTANCE_10_00, Calculator.calculateDistance(combineStrings(TIME_01_00_00, PACE_6_00)));
+        assertEquals(SPEED_DISTANCE_8_16, Calculator.calculateDistance(combineStrings(TIME_00_59_59, PACE_7_21)));
+        assertEquals(SPEED_DISTANCE_7_21, Calculator.calculateDistance(combineStrings(TIME_00_59_58, PACE_8_19)));
+        assertEquals(SPEED_DISTANCE_1_00, Calculator.calculateDistance(combineStrings(TIME_01_00_00, PACE_60_00)));
+        assertEquals(SPEED_DISTANCE_0_10, Calculator.calculateDistance(combineStrings(TIME_01_00_00, PACE_600_00)));
+    }
+
+    @Test
+    public void testConvertPaceToSpeedExceptions() {
+        try {
+            Calculator.convertPaceToSpeed("-10:0");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.convertPaceToSpeed(":10");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.convertPaceToSpeed(":");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.convertPaceToSpeed("5:60");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.convertPaceToSpeed("XX:YY");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.convertPaceToSpeed("5:-1");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.convertPaceToSpeed("3f:-1");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.convertPaceToSpeed("l-:01");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.convertPaceToSpeed("100:75");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        assertEquals(9, exceptionCounter);
+    }
+
+    @Test
+    public void testConvertSpeedToPaceExceptions() {
+        try {
+            Calculator.convertSpeedToPace("f.9");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.convertSpeedToPace("-10.9");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.convertSpeedToPace("10,9");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.convertSpeedToPace("10:00");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.convertSpeedToPace("5.-9");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.convertSpeedToPace("6.kl");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.convertSpeedToPace("xx.yy");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        assertEquals(7, exceptionCounter);
     }
 
     @Test
@@ -311,125 +453,92 @@ public class CalculatorUnitTest {
     }
 
     @Test
-    public void testConvertSpeedToPaceExceptions() {
+    public void testCalculateDistanceExceptions() {
         try {
-            Calculator.convertSpeedToPace("f.9");
+            Calculator.calculateDistance("23:055:0");
             fail();
         } catch (Exception e) {
             exceptionCounter++;
         }
 
         try {
-            Calculator.convertSpeedToPace("-10.9");
+            Calculator.calculateDistance("23:05||5:19");
             fail();
         } catch (Exception e) {
             exceptionCounter++;
         }
 
         try {
-            Calculator.convertSpeedToPace("10,9");
+            Calculator.calculateDistance("|4:1");
             fail();
         } catch (Exception e) {
             exceptionCounter++;
         }
 
         try {
-            Calculator.convertSpeedToPace("10:00");
+            Calculator.calculateDistance("01:09:10|");
             fail();
         } catch (Exception e) {
             exceptionCounter++;
         }
 
         try {
-            Calculator.convertSpeedToPace("5.-9");
+            Calculator.calculateDistance("10:54|-2:5");
             fail();
         } catch (Exception e) {
             exceptionCounter++;
         }
 
         try {
-            Calculator.convertSpeedToPace("6.kl");
+            Calculator.calculateDistance("00:06:23|6.5");
             fail();
         } catch (Exception e) {
             exceptionCounter++;
         }
 
         try {
-            Calculator.convertSpeedToPace("xx.yy");
-            fail();
-        } catch (Exception e) {
-            exceptionCounter++;
-        }
-
-        assertEquals(7, exceptionCounter);
-    }
-
-    @Test
-    public void testConvertPaceToSpeedExceptions() {
-        try {
-            Calculator.convertPaceToSpeed("-10:0");
+            Calculator.calculateDistance("0h:-6|8:13");
             fail();
         } catch (Exception e) {
             exceptionCounter++;
         }
 
         try {
-            Calculator.convertPaceToSpeed(":10");
+            Calculator.calculateDistance("00:00:60|5:13");
             fail();
         } catch (Exception e) {
             exceptionCounter++;
         }
 
         try {
-            Calculator.convertPaceToSpeed(":");
+            Calculator.calculateDistance("00:60:00|5:45");
             fail();
         } catch (Exception e) {
             exceptionCounter++;
         }
 
         try {
-            Calculator.convertPaceToSpeed("5:60");
+            Calculator.calculateDistance("24:00:00|4:44");
             fail();
         } catch (Exception e) {
             exceptionCounter++;
         }
 
         try {
-            Calculator.convertPaceToSpeed("XX:YY");
+            Calculator.calculateDistance("23:05:59|6:-45");
             fail();
         } catch (Exception e) {
             exceptionCounter++;
         }
 
         try {
-            Calculator.convertPaceToSpeed("5:-1");
+            Calculator.calculateDistance("23:05:59|-7:34");
             fail();
         } catch (Exception e) {
             exceptionCounter++;
         }
 
-        try {
-            Calculator.convertPaceToSpeed("3f:-1");
-            fail();
-        } catch (Exception e) {
-            exceptionCounter++;
-        }
-
-        try {
-            Calculator.convertPaceToSpeed("l-:01");
-            fail();
-        } catch (Exception e) {
-            exceptionCounter++;
-        }
-
-        try {
-            Calculator.convertPaceToSpeed("100:75");
-            fail();
-        } catch (Exception e) {
-            exceptionCounter++;
-        }
-
-        assertEquals(9, exceptionCounter);
+        assertEquals(12, exceptionCounter);
     }
 
     private String combineStrings(String s1, String s2) {

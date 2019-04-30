@@ -6,7 +6,7 @@ class Calculator {
     private static final int SECONDS_IN_HOUR = 3600;
 
     private static final double SECOND_IN_MINUTE = 0.0166666667;
-    private static final double KM_IN_MILES = 0.621371192;
+//    private static final double KM_IN_MILES = 0.621371192;
 
     private static final String PACE_PATTERN = "^[0-9]*$|^[0-9]*:[0-9]*$";
     private static final String SPEED_DISTANCE_PATTERN = "^[0-9]*$|^[0-9]*\\.[0-9]*$";
@@ -41,7 +41,7 @@ class Calculator {
             paceInSeconds = (int) Math.round(time.inSeconds() / distance.getDistance());
         }
 
-        return Time.asPace(paceInSeconds);
+        return Pace.parseSeconds(paceInSeconds);
     }
 
     /**
@@ -64,46 +64,30 @@ class Calculator {
             timeInSeconds = (int) Math.round(distance.getDistance() * pace.inSeconds());
         }
 
-        return Time.asTime(timeInSeconds);
+        return Time.parseSeconds(timeInSeconds);
     }
 
-    static String calculateDistance(String s) {
-        return s;
-    }
+    /**
+     * To calculate distance from time and pace, which are <br />
+     * combined in the string parameter in following pattern: <br />
+     * 00:23:14|5:10
+     *
+     * @param timeAndPace Combined value of time and pace
+     * @return Calculated distance
+     */
+    static String calculateDistance(String timeAndPace) {
+        throwExceptionIfMalformedStringPattern(timeAndPace);
+        String[] split = timeAndPace.split("\\|");
 
-    private static void throwExceptionIfMalformedStringPattern(String combined) {
-        if (combined == null || combined.isEmpty() || !combined.matches(COMBINED_STRING_PATTERN)) {
-            throw new IllegalArgumentException();
-        }
-    }
+        Time time = Time.parse(split[0]);
+        Pace pace = Pace.parse(split[1]);
 
-    private static class MatchedDouble {
-        private final double value;
-
-        private MatchedDouble(double value) {
-            this.value = value;
-        }
-
-        static MatchedDouble parse(String str) {
-            if (str != null) {
-                if (str.isEmpty()) {
-                    return new MatchedDouble(Double.parseDouble("0"));
-                }
-                if (str.matches(SPEED_DISTANCE_PATTERN)) {
-                    return new MatchedDouble(Double.parseDouble(str));
-                }
-            }
-
-            throw new IllegalArgumentException();
+        double distance = 0;
+        if (time.hasValue() && pace.hasValue()) {
+            distance = ((double) time.inSeconds()) / pace.inSeconds();
         }
 
-        double getValue() {
-            return value;
-        }
-
-        boolean hasValue() {
-            return value > 0;
-        }
+        return String.format(Locale.ENGLISH, "%.2f", distance);
     }
 
     private static class Speed {
@@ -188,12 +172,17 @@ class Calculator {
             throw new IllegalArgumentException();
         }
 
-        double inMinutes() {
-            return (seconds * SECOND_IN_MINUTE) + minutes;
-        }
+        static String parseSeconds(int seconds) {
+            int minutes = 0;
 
-        int inSeconds() {
-            return (minutes * 60) + seconds;
+            if (seconds > 0) {
+                minutes = seconds / 60;
+                seconds = seconds - (minutes * 60);
+            } else {
+                seconds = 0;
+            }
+
+            return String.format(Locale.ENGLISH, "%d:%02d", minutes, seconds);
         }
 
         String asSpeed() {
@@ -202,6 +191,14 @@ class Calculator {
                 speed = 60 / inMinutes();
             }
             return String.format(Locale.ENGLISH, "%.2f", speed);
+        }
+
+        double inMinutes() {
+            return (seconds * SECOND_IN_MINUTE) + minutes;
+        }
+
+        int inSeconds() {
+            return (minutes * 60) + seconds;
         }
 
         boolean hasValue() {
@@ -252,24 +249,7 @@ class Calculator {
             throw new IllegalArgumentException();
         }
 
-        int inSeconds() {
-            return (hours * 60 * 60) + (minutes * 60) + seconds;
-        }
-
-        static String asPace(int seconds) {
-            int minutes = 0;
-
-            if (seconds > 0) {
-                minutes = seconds / 60;
-                seconds = seconds - (minutes * 60);
-            } else {
-                seconds = 0;
-            }
-
-            return String.format(Locale.ENGLISH, "%d:%02d", minutes, seconds);
-        }
-
-        static String asTime(int seconds) {
+        static String parseSeconds(int seconds) {
             int hours = 0;
             int minutes = 0;
 
@@ -284,9 +264,48 @@ class Calculator {
             return String.format(Locale.ENGLISH, "%02d:%02d:%02d", hours, minutes, seconds);
         }
 
+        int inSeconds() {
+            return (hours * 60 * 60) + (minutes * 60) + seconds;
+        }
+
         boolean hasValue() {
             return (hours > -1 && minutes > -1 && seconds > -1) &&
                     (hours > 0 || minutes > 0 || seconds > 0);
+        }
+    }
+
+    private static class MatchedDouble {
+        private final double value;
+
+        private MatchedDouble(double value) {
+            this.value = value;
+        }
+
+        static MatchedDouble parse(String str) {
+            if (str != null) {
+                if (str.isEmpty()) {
+                    return new MatchedDouble(Double.parseDouble("0"));
+                }
+                if (str.matches(SPEED_DISTANCE_PATTERN)) {
+                    return new MatchedDouble(Double.parseDouble(str));
+                }
+            }
+
+            throw new IllegalArgumentException();
+        }
+
+        double getValue() {
+            return value;
+        }
+
+        boolean hasValue() {
+            return value > 0;
+        }
+    }
+
+    private static void throwExceptionIfMalformedStringPattern(String combined) {
+        if (combined == null || combined.isEmpty() || !combined.matches(COMBINED_STRING_PATTERN)) {
+            throw new IllegalArgumentException();
         }
     }
 }
