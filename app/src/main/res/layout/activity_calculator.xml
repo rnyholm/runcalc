@@ -3,23 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RunnersCalculator">
+    tools:context=".activity.RunnersCalculator">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:fillViewport="true">
 
         <LinearLayout
             android:id="@+id/options_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="top"
             android:orientation="vertical"
-            android:paddingBottom="5dp"
             android:paddingLeft="5dp"
+            android:paddingTop="5dp"
             android:paddingRight="5dp"
-            android:paddingTop="5dp">
+            android:paddingBottom="5dp">
 
             <TextView
                 android:id="@+id/pace_to_speed_tv"
@@ -33,11 +38,11 @@
             <LinearLayout
                 android:id="@+id/pace_to_speed_ll"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <EditText
+                <ax.stardust.runcal.component.KeyboardlessEditText
                     android:id="@+id/pace_to_speed_et"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
@@ -68,22 +73,22 @@
                 android:textStyle="bold" />
 
             <LinearLayout
-                    android:id="@+id/speed_to_pace_ll"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                android:id="@+id/speed_to_pace_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <EditText
-                        android:id="@+id/speed_to_pace_et"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:hint="@string/default_speed_distance"
-                        android:inputType="text"
-                        android:selectAllOnFocus="true"
-                        android:singleLine="true" />
+                <ax.stardust.runcal.component.KeyboardlessEditText
+                    android:id="@+id/speed_to_pace_et"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/default_speed_distance"
+                    android:inputType="text"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true" />
 
                 <TextView
                     android:id="@+id/speed_to_pace_results_tv"
@@ -107,7 +112,7 @@
             <LinearLayout
                 android:id="@+id/calculate_pace_ll"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -148,7 +153,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <EditText
+                    <ax.stardust.runcal.component.KeyboardlessEditText
                         android:id="@+id/calculate_pace_distance_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -159,7 +164,7 @@
                         android:selectAllOnFocus="true"
                         android:singleLine="true" />
 
-                    <EditText
+                    <ax.stardust.runcal.component.KeyboardlessEditText
                         android:id="@+id/calculate_pace_time_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -181,30 +186,31 @@
                 </LinearLayout>
 
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="500dp" />
         </LinearLayout>
+
     </ScrollView>
 
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="123dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:gravity="bottom|fill_horizontal"
         android:orientation="vertical"
-        android:paddingBottom="5dp"
         android:paddingLeft="5dp"
+        android:paddingTop="5dp"
         android:paddingRight="5dp"
-        android:paddingTop="5dp">
+        android:paddingBottom="5dp">
 
         <Button
             android:id="@+id/calculate_button"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_selector"
-
             android:fontFamily="@font/montserrat"
             android:text="@string/calculate"
             android:textColor="@color/colorButtonText"
@@ -218,6 +224,14 @@
             android:gravity="center_horizontal"
             android:text="@string/author"
             android:textSize="8sp" />
+
+        <ax.stardust.runcal.component.RunnersKeyboard
+            android:id="@+id/soft_keyboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" />
+
     </LinearLayout>
 
 </RelativeLayout>

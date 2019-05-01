@@ -1,10 +1,13 @@
-package ax.stardust.runcal;
+package ax.stardust.runcal.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,7 +16,15 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ax.stardust.runcal.Model.Property.*;
+import ax.stardust.runcal.Measurement;
+import ax.stardust.runcal.Model;
+import ax.stardust.runcal.R;
+import ax.stardust.runcal.component.KeyboardlessEditText;
+import ax.stardust.runcal.component.RunnersKeyboard;
+
+import static ax.stardust.runcal.Model.Property.CALCULATE_PACE;
+import static ax.stardust.runcal.Model.Property.CONVERT_PACE_TO_SPEED;
+import static ax.stardust.runcal.Model.Property.CONVERT_SPEED_TO_PACE;
 
 public class RunnersCalculator extends AppCompatActivity {
     private static Measurement measurement;
@@ -23,6 +34,8 @@ public class RunnersCalculator extends AppCompatActivity {
 
     private final List<PropertyBoundUIComponents> propertyBoundUIComponents = new ArrayList<>();
     private final Model model = new Model();
+
+    private RunnersKeyboard runnersKeyboard;
 
     // TextViews
     private TextView convertPaceToSpeedTextView;
@@ -36,9 +49,9 @@ public class RunnersCalculator extends AppCompatActivity {
     private TextView calculatePaceResultsTextView;
 
     // EditTexts
-    private EditText paceToSpeedEditText;
-    private EditText speedToPaceEditText;
-    private EditText calculatePaceDistanceEditText;
+    private KeyboardlessEditText paceToSpeedEditText;
+    private KeyboardlessEditText speedToPaceEditText;
+    private KeyboardlessEditText calculatePaceDistanceEditText;
 
     // Button
     private Button calculateButton;
@@ -60,6 +73,8 @@ public class RunnersCalculator extends AppCompatActivity {
     }
 
     private void findViews() {
+        runnersKeyboard = findViewById(R.id.soft_keyboard);
+
         convertPaceToSpeedTextView = findViewById(R.id.pace_to_speed_tv);
         paceToSpeedEditText = findViewById(R.id.pace_to_speed_et);
         paceToSpeedResultsTextView = findViewById(R.id.pace_to_speed_results_tv);
@@ -75,7 +90,7 @@ public class RunnersCalculator extends AppCompatActivity {
         calculatePaceTimeHintTextView = findViewById(R.id.calculate_pace_time_hint_tv);
         calculatePaceResultHintTextView = findViewById(R.id.calculate_pace_result_hint_tv);
         calculatePaceDistanceEditText = findViewById(R.id.calculate_pace_distance_et);
-        EditText calculatePaceTimeEditText = findViewById(R.id.calculate_pace_time_et);
+        KeyboardlessEditText calculatePaceTimeEditText = findViewById(R.id.calculate_pace_time_et);
         calculatePaceResultsTextView = findViewById(R.id.calculate_pace_results_tv);
         propertyBoundUIComponents.add(new PropertyBoundUIComponents(CALCULATE_PACE, calculatePaceDistanceEditText, calculatePaceTimeEditText, calculatePaceResultsTextView, R.string.calculate_pace_results));
 
@@ -105,10 +120,12 @@ public class RunnersCalculator extends AppCompatActivity {
             Model.Property property = boundUIComponents.getProperty();
             EditText firstEditText = boundUIComponents.getFirstEditText();
             firstEditText.addTextChangedListener(new PropertyBoundTextWatcher(property, Model.ValueSelection.FIRST));
+            firstEditText.setOnFocusChangeListener(new BoundRunnersInputFocusWatcher(runnersKeyboard));
 
             if (property.isPairedInput()) {
                 EditText secondEditText = boundUIComponents.getSecondEditText();
                 secondEditText.addTextChangedListener(new PropertyBoundTextWatcher(property, Model.ValueSelection.SECOND));
+                secondEditText.setOnFocusChangeListener(new BoundRunnersInputFocusWatcher(runnersKeyboard));
             }
         });
 
@@ -126,7 +143,6 @@ public class RunnersCalculator extends AppCompatActivity {
                     }
                 }
             });
-
             calculateButton.setEnabled(model.changed());
         });
     }
@@ -217,6 +233,31 @@ public class RunnersCalculator extends AppCompatActivity {
         @Override
         public void afterTextChanged(Editable editable) {
             // Do nothing...
+        }
+    }
+
+    private class BoundRunnersInputFocusWatcher implements View.OnFocusChangeListener {
+
+        private final RunnersKeyboard runnersKeyboard;
+
+        public BoundRunnersInputFocusWatcher(RunnersKeyboard runnersKeyboard) {
+            this.runnersKeyboard = runnersKeyboard;
+        }
+
+        @Override
+        public void onFocusChange(View view, boolean hasFocus) {
+            if (KeyboardlessEditText.class.isAssignableFrom(view.getClass())) {
+                if (hasFocus) {
+                    Log.d(RunnersCalculator.class.getSimpleName(), view.getId() + " FOCUS GAINED");
+                    InputConnection ic = view.onCreateInputConnection(new EditorInfo());
+                    this.runnersKeyboard.setInputConnection(ic);
+
+                    runnersKeyboard.setVisibility(View.VISIBLE);
+                } else {
+                    Log.d(RunnersCalculator.class.getSimpleName(), view.getId() + " FOCUS LOST");
+                    runnersKeyboard.setVisibility(View.GONE);
+                }
+            }
         }
     }
 }

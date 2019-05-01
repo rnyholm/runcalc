@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.function.Function;
 
 public class Model {
-    enum Property {
+    public enum Property {
         CONVERT_PACE_TO_SPEED(false, Calculator::convertPaceToSpeed),
         CONVERT_SPEED_TO_PACE(false, Calculator::convertSpeedToPace),
         CALCULATE_PACE(true, Calculator::calculatePace),
@@ -28,29 +28,29 @@ public class Model {
         }
     }
 
-    enum ValueSelection {
+    public enum ValueSelection {
         FIRST,SECOND
     }
 
     private final HashMap<Property, PairedValue> data = new HashMap();
 
-    boolean changed() {
+    public boolean changed() {
         return data.entrySet().stream().anyMatch(entry -> entry.getValue().changed(entry.getKey()));
     }
 
-    void commitProperty(Property property) {
+    public void commitProperty(Property property) {
         data.getOrDefault(property, new PairedValue()).commit();
     }
 
-    boolean isPropertyChanged(Property property) {
+    public boolean isPropertyChanged(Property property) {
         return data.getOrDefault(property, new PairedValue()).changed(property);
     }
 
-    String getPropertyValue(Property property) {
+    public String getPropertyValue(Property property) {
         return data.getOrDefault(property, new PairedValue()).getValue(property);
     }
 
-    void setPropertyValue(Property property, ValueSelection selection, String value) {
+    public void setPropertyValue(Property property, ValueSelection selection, String value) {
         PairedValue pairedValue = data.getOrDefault(property, new PairedValue());
         pairedValue.setValue(selection, value);
         data.put(property, pairedValue);

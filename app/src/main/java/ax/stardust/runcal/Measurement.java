@@ -1,5 +1,5 @@
 package ax.stardust.runcal;
 
-enum Measurement {
+public enum Measurement {
     METRIC,IMPERIAL
 }
