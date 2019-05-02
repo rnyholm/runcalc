@@ -14,8 +14,18 @@ import android.widget.EditText;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * EditText which suppresses IME show up.
+ *
+ * This is the same as an native EditText, except that no soft keyboard
+ * will appear when user clicks on widget. This is modeled after the keyboard
+ * in the default Android KitKat dialer app.
+ * Proudly snatched from: https://github.com/danialgoodwin/android-simply-tone-generator/blob/master/app/src/main/java/net/simplyadvanced/simplytonegenerator/widget/KeyboardlessEditText.java
+ *
+ * As this stuff is copied and pasted(it was a pain to find any good stuff about this on stack overflow) I'm not 100%
+ * sure of what every little code snippet are doing. Therefore this is to be used with a bit caution.
+ */
 public class KeyboardlessEditText extends AppCompatEditText {
-
     private static final Method SHOW_SOFT_INPUT_ON_FOCUS = getMethod(EditText.class, "setShowSoftInputOnFocus", boolean.class);
 
     public KeyboardlessEditText(Context context) {
@@ -39,7 +49,7 @@ public class KeyboardlessEditText extends AppCompatEditText {
             setFocusableInTouchMode(true);
         }
 
-        // Needed to show cursor when user interacts with EditText so that the edit operations
+        // Need to show the cursor when user interacts with EditText so that the edit operations
         // still work. Without the cursor, the edit operations won't appear.
         setOnClickListener(onClickListener);
         setOnLongClickListener(onLongClickListener);
