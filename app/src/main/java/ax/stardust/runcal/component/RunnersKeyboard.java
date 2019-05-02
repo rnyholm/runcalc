@@ -95,13 +95,16 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
         keyValues.put(R.id.button_8, "8");
         keyValues.put(R.id.button_9, "9");
         keyValues.put(R.id.button_0, "0");
-        keyValues.put(R.id.button_del, "D");
-        // TODO: somehow change input between : and .
+        // Deafaults to ':' separator but it will be changed at runtime
         keyValues.put(R.id.button_separator, ":");
     }
 
     public void setInputConnection(InputConnection inputConnection) {
         this.inputConnection = inputConnection;
+    }
+
+    public void setSeparatorCharacter(char separator) {
+        keyValues.put(R.id.button_separator, separator);
     }
 
     @Override
@@ -122,4 +125,6 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
             }
         }
     }
+
+    private static class
 }

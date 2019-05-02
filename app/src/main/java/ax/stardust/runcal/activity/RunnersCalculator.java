@@ -78,12 +78,12 @@ public class RunnersCalculator extends AppCompatActivity {
         convertPaceToSpeedTextView = findViewById(R.id.pace_to_speed_tv);
         paceToSpeedEditText = findViewById(R.id.pace_to_speed_et);
         paceToSpeedResultsTextView = findViewById(R.id.pace_to_speed_results_tv);
-        propertyBoundUIComponents.add(new PropertyBoundUIComponents(CONVERT_PACE_TO_SPEED, paceToSpeedEditText, paceToSpeedResultsTextView, R.string.pace_to_speed_results));
+        propertyBoundUIComponents.add(new PropertyBoundUIComponents(CONVERT_PACE_TO_SPEED, new InputBoundEditText(paceToSpeedEditText, Model.Input.PACE), paceToSpeedResultsTextView, R.string.pace_to_speed_results));
 
         convertSpeedToPaceTextView = findViewById(R.id.speed_to_pace_tv);
         speedToPaceEditText = findViewById(R.id.speed_to_pace_et);
         speedToPaceResultsTextView = findViewById(R.id.speed_to_pace_results_tv);
-        propertyBoundUIComponents.add(new PropertyBoundUIComponents(CONVERT_SPEED_TO_PACE, speedToPaceEditText, speedToPaceResultsTextView, R.string.speed_to_pace_results));
+        propertyBoundUIComponents.add(new PropertyBoundUIComponents(CONVERT_SPEED_TO_PACE, new InputBoundEditText(speedToPaceEditText, Model.Input.SPEED), speedToPaceResultsTextView, R.string.speed_to_pace_results));
 
         calculatePaceTextView = findViewById(R.id.calculate_pace_tv);
         calculatePaceDistanceHintTextView = findViewById(R.id.calculate_pace_distance_hint_tv);
@@ -92,7 +92,7 @@ public class RunnersCalculator extends AppCompatActivity {
         calculatePaceDistanceEditText = findViewById(R.id.calculate_pace_distance_et);
         KeyboardlessEditText calculatePaceTimeEditText = findViewById(R.id.calculate_pace_time_et);
         calculatePaceResultsTextView = findViewById(R.id.calculate_pace_results_tv);
-        propertyBoundUIComponents.add(new PropertyBoundUIComponents(CALCULATE_PACE, calculatePaceDistanceEditText, calculatePaceTimeEditText, calculatePaceResultsTextView, R.string.calculate_pace_results));
+        propertyBoundUIComponents.add(new PropertyBoundUIComponents(CALCULATE_PACE, new InputBoundEditText(calculatePaceDistanceEditText, Model.Input.DISTANCE), new InputBoundEditText(calculatePaceTimeEditText, Model.Input.DISTANCE), calculatePaceResultsTextView, R.string.calculate_pace_results));
 
         calculateButton = findViewById(R.id.calculate_button);
         calculateButton.setEnabled(false);
@@ -118,14 +118,16 @@ public class RunnersCalculator extends AppCompatActivity {
     private void setListeners() {
         propertyBoundUIComponents.forEach(boundUIComponents -> {
             Model.Property property = boundUIComponents.getProperty();
-            EditText firstEditText = boundUIComponents.getFirstEditText();
+            InputBoundEditText firstInputBoundEditText = boundUIComponents.getFirstInputBoundEditText();
+            EditText firstEditText = firstInputBoundEditText.getEditText();
             firstEditText.addTextChangedListener(new PropertyBoundTextWatcher(property, Model.ValueSelection.FIRST));
-            firstEditText.setOnFocusChangeListener(new BoundRunnersInputFocusWatcher(runnersKeyboard));
+            firstEditText.setOnFocusChangeListener(new BoundRunnersInputFocusWatcher(firstInputBoundEditText.getInput(), runnersKeyboard));
 
             if (property.isPairedInput()) {
-                EditText secondEditText = boundUIComponents.getSecondEditText();
+                InputBoundEditText secondInputBoundEditText = boundUIComponents.getSecondInputBoundEditText();
+                EditText secondEditText = secondInputBoundEditText.getSecondEditText();
                 secondEditText.addTextChangedListener(new PropertyBoundTextWatcher(property, Model.ValueSelection.SECOND));
-                secondEditText.setOnFocusChangeListener(new BoundRunnersInputFocusWatcher(runnersKeyboard));
+                secondEditText.setOnFocusChangeListener(new BoundRunnersInputFocusWatcher(secondInputBoundEditText.getInput()runnersKeyboard));
             }
         });
 
@@ -149,36 +151,38 @@ public class RunnersCalculator extends AppCompatActivity {
 
     private class PropertyBoundUIComponents {
         private final Model.Property property;
-        private final EditText firstEditText;
-        private final EditText secondEditText;
+
+        private final InputBoundEditText firstInputBoundEditText;
+        private final InputBoundEditText secondInputBoundEditText;
+
         private final TextView textView;
         private final int textID;
 
-        PropertyBoundUIComponents(Model.Property property, EditText firstEditText, EditText secondEditText, TextView textView, int textID) {
-            if (property.isPairedInput() && secondEditText == null) {
-                throw new IllegalArgumentException(PropertyBoundUIComponents.class.getSimpleName() + " cannot be created with secondEditText set to null when property expecting paired input is bound to this object");
+        PropertyBoundUIComponents(Model.Property property, InputBoundEditText firstInputBoundEditText, InputBoundEditText secondInputBoundEditText, TextView textView, int textID) {
+            if (property.isPairedInput() && secondInputBoundEditText == null) {
+                throw new IllegalArgumentException(PropertyBoundUIComponents.class.getSimpleName() + " cannot be created with secondInputBoundEditText set to null when property expecting paired input is bound to this object");
             }
             this.property = property;
-            this.firstEditText = firstEditText;
-            this.secondEditText = secondEditText;
+            this.firstInputBoundEditText = firstInputBoundEditText;
+            this.secondInputBoundEditText = secondInputBoundEditText;
             this.textView = textView;
             this.textID = textID;
         }
 
-        PropertyBoundUIComponents(Model.Property property, EditText firstEditText, TextView textView, int textID) {
-            this(property, firstEditText, null, textView, textID);
+        PropertyBoundUIComponents(Model.Property property, InputBoundEditText firstInputBoundEditText, TextView textView, int textID) {
+            this(property, firstInputBoundEditText, null, textView, textID);
         }
 
         Model.Property getProperty() {
             return property;
         }
 
-        EditText getFirstEditText() {
-            return firstEditText;
+        public InputBoundEditText getFirstInputBoundEditText() {
+            return firstInputBoundEditText;
         }
 
-        EditText getSecondEditText() {
-            return secondEditText;
+        public InputBoundEditText getSecondInputBoundEditText() {
+            return secondInputBoundEditText;
         }
 
         void setDefaultResultText() {
@@ -210,6 +214,27 @@ public class RunnersCalculator extends AppCompatActivity {
         }
     }
 
+    private class InputBoundEditText {
+        private final EditText editText;
+        private final Model.Input input;
+
+        public InputBoundEditText(EditText editText, Model.Input input) {
+            if (editText == null || !Model.Input.NONE.equals(input)) {
+                throw new IllegalArgumentException(InputBoundEditText.class.getSimpleName() + " cannot be created with editText set to null or input NONE");
+            }
+            this.editText = editText;
+            this.input = input;
+        }
+
+        public EditText getEditText() {
+            return editText;
+        }
+
+        public Model.Input getInput() {
+            return input;
+        }
+    }
+
     private class PropertyBoundTextWatcher implements TextWatcher {
         private final Model.Property property;
         private final Model.ValueSelection selection;
@@ -238,9 +263,11 @@ public class RunnersCalculator extends AppCompatActivity {
 
     private class BoundRunnersInputFocusWatcher implements View.OnFocusChangeListener {
 
+        private final Model.Input input;
         private final RunnersKeyboard runnersKeyboard;
 
-        public BoundRunnersInputFocusWatcher(RunnersKeyboard runnersKeyboard) {
+        public BoundRunnersInputFocusWatcher(Model.Input input, RunnersKeyboard runnersKeyboard) {
+            this.input = input;
             this.runnersKeyboard = runnersKeyboard;
         }
 
@@ -250,12 +277,13 @@ public class RunnersCalculator extends AppCompatActivity {
                 if (hasFocus) {
                     Log.d(RunnersCalculator.class.getSimpleName(), view.getId() + " FOCUS GAINED");
                     InputConnection ic = view.onCreateInputConnection(new EditorInfo());
+                    this.runnersKeyboard.setSeparatorCharacter(input.getSeparator());
                     this.runnersKeyboard.setInputConnection(ic);
 
-                    runnersKeyboard.setVisibility(View.VISIBLE);
+                    this.runnersKeyboard.setVisibility(View.VISIBLE);
                 } else {
                     Log.d(RunnersCalculator.class.getSimpleName(), view.getId() + " FOCUS LOST");
-                    runnersKeyboard.setVisibility(View.GONE);
+                    this.runnersKeyboard.setVisibility(View.GONE);
                 }
             }
         }

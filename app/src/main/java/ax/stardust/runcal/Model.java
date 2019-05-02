@@ -5,26 +5,47 @@ import java.util.function.Function;
 
 public class Model {
     public enum Property {
-        CONVERT_PACE_TO_SPEED(false, Calculator::convertPaceToSpeed),
-        CONVERT_SPEED_TO_PACE(false, Calculator::convertSpeedToPace),
-        CALCULATE_PACE(true, Calculator::calculatePace),
-        CALCULATE_TIME(true, Calculator::calculateTime),
-        CALCULATE_DISTANCE(true, Calculator::calculateDistance);
+        CONVERT_PACE_TO_SPEED(Input.PACE, Input.NONE, Calculator::convertPaceToSpeed),
+        CONVERT_SPEED_TO_PACE(Input.SPEED, Input.NONE, Calculator::convertSpeedToPace),
+        CALCULATE_PACE(Input.DISTANCE, Input.TIME, Calculator::calculatePace),
+        CALCULATE_TIME(Input.DISTANCE, Input.PACE, Calculator::calculateTime),
+        CALCULATE_DISTANCE(Input.TIME, Input.PACE, Calculator::calculateDistance);
 
-        private final boolean pairedInput;
         private final Function<String, String> calculatorFunction;
 
-        Property(boolean pairedInput, Function<String, String> calculatorFunction) {
-            this.pairedInput = pairedInput;
+        private final Input firstInput;
+        private final Input secondInput;
+
+        Property(Input firstInput, Input secondInput, Function<String, String> calculatorFunction) {
+            this.firstInput = firstInput;
+            this.secondInput = secondInput;
             this.calculatorFunction = calculatorFunction;
         }
 
         public boolean isPairedInput() {
-            return pairedInput;
+            return !Input.NONE.equals(firstInput) && !Input.NONE.equals(secondInput);
         }
 
         public Function<String, String> getCalculatorFunction() {
             return calculatorFunction;
+        }
+    }
+
+    public enum Input {
+        PACE(':'),
+        SPEED('.'),
+        DISTANCE('.'),
+        TIME(':'),
+        NONE(' ');
+
+        private final char separator;
+
+        Input(char separator) {
+            this.separator = separator;
+        }
+
+        public char getSeparator() {
+            return separator;
         }
     }
 
