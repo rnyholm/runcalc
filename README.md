@@ -37,4 +37,4 @@ makes the input a lot faster and easier.
 
 ### One button
 One button, that's all it takes to make all calculations and conversions! The app knows when it's time to make some calculations
-and what kind of calculation that's possible to make depending on your input, therefore only one button is needed.
+and what kind of property that's possible to make depending on your input, therefore only one button is needed.

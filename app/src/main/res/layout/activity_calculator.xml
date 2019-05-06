@@ -51,6 +51,9 @@
                     android:hint="@string/default_pace"
                     android:inputType="text"
                     android:selectAllOnFocus="true"
+                    android:background="@drawable/input_default"
+                    android:gravity="center_horizontal"
+                    android:textCursorDrawable="@drawable/input_cursor_default"
                     android:singleLine="true" />
 
                 <TextView
@@ -88,6 +91,9 @@
                     android:hint="@string/default_speed_distance"
                     android:inputType="text"
                     android:selectAllOnFocus="true"
+                    android:background="@drawable/input_default"
+                    android:gravity="center_horizontal"
+                    android:textCursorDrawable="@drawable/input_cursor_default"
                     android:singleLine="true" />
 
                 <TextView
@@ -162,6 +168,9 @@
                         android:hint="@string/default_speed_distance"
                         android:inputType="text"
                         android:selectAllOnFocus="true"
+                        android:background="@drawable/input_default"
+                        android:gravity="center_horizontal"
+                        android:textCursorDrawable="@drawable/input_cursor_default"
                         android:singleLine="true" />
 
                     <ax.stardust.runcal.component.KeyboardlessEditText
@@ -173,6 +182,9 @@
                         android:hint="@string/default_time"
                         android:inputType="text"
                         android:selectAllOnFocus="true"
+                        android:background="@drawable/input_default"
+                        android:gravity="center_horizontal"
+                        android:textCursorDrawable="@drawable/input_cursor_default"
                         android:singleLine="true" />
 
                     <TextView
@@ -205,16 +217,6 @@
         android:paddingTop="5dp"
         android:paddingRight="5dp"
         android:paddingBottom="5dp">
-
-        <Button
-            android:id="@+id/calculate_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_selector"
-            android:fontFamily="@font/montserrat"
-            android:text="@string/calculate"
-            android:textColor="@color/colorButtonText"
-            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/author_tv"

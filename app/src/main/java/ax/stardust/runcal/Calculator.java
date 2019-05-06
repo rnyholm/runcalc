@@ -2,7 +2,7 @@ package ax.stardust.runcal;
 
 import java.util.Locale;
 
-class Calculator {
+public class Calculator {
     private static final int SECONDS_IN_HOUR = 3600;
 
     private static final double SECOND_IN_MINUTE = 0.0166666667;
@@ -90,14 +90,14 @@ class Calculator {
         return String.format(Locale.ENGLISH, "%.2f", distance);
     }
 
-    private static class Speed {
+    public static class Speed {
         private final MatchedDouble speed;
 
         private Speed(MatchedDouble speed) {
             this.speed = speed;
         }
 
-        static Speed parse(String speed) {
+        public static Speed parse(String speed) {
             return new Speed(MatchedDouble.parse(speed));
         }
 
@@ -113,14 +113,14 @@ class Calculator {
         }
     }
 
-    private static class Distance {
+    public static class Distance {
         private final MatchedDouble distance;
 
         private Distance(MatchedDouble distance) {
             this.distance = distance;
         }
 
-        static Distance parse(String distance) {
+        public static Distance parse(String distance) {
             return new Distance(MatchedDouble.parse(distance));
         }
 
@@ -133,7 +133,7 @@ class Calculator {
         }
     }
 
-    private static class Pace {
+    public static class Pace {
         private final int minutes;
         private final int seconds;
 
@@ -142,7 +142,7 @@ class Calculator {
             this.seconds = seconds;
         }
 
-        static Pace parse(String pace) {
+        public static Pace parse(String pace) {
             if (pace != null) {
                 if (pace.isEmpty()) {
                     return new Pace(0, 0);
@@ -207,7 +207,7 @@ class Calculator {
         }
     }
 
-    private static class Time {
+    public static class Time {
         private final int hours;
         private final int minutes;
         private final int seconds;
@@ -218,7 +218,7 @@ class Calculator {
             this.seconds = seconds;
         }
 
-        static Time parse(String time) {
+        public static Time parse(String time) {
             if (time != null) {
                 if (time.isEmpty()) {
                     return new Time(0, 0, 0);

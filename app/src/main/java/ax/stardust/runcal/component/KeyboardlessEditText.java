@@ -13,20 +13,27 @@ import android.widget.EditText;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Objects;
+import java.util.function.Function;
+
+import ax.stardust.runcal.Input;
 
 /**
- * EditText which suppresses IME show up.
- *
+ * EditText which suppresses IME show up and is bound to a specific @{@link Input} and validator-function for validating input of this EditText.
+ * <p>
  * This is the same as an native EditText, except that no soft keyboard
  * will appear when user clicks on widget. This is modeled after the keyboard
  * in the default Android KitKat dialer app.
  * Proudly snatched from: https://github.com/danialgoodwin/android-simply-tone-generator/blob/master/app/src/main/java/net/simplyadvanced/simplytonegenerator/widget/KeyboardlessEditText.java
- *
+ * <p>
  * As this stuff is copied and pasted(it was a pain to find any good stuff about this on stack overflow) I'm not 100%
  * sure of what every little code snippet are doing. Therefore this is to be used with a bit caution.
  */
 public class KeyboardlessEditText extends AppCompatEditText {
-    private static final Method SHOW_SOFT_INPUT_ON_FOCUS = getMethod(EditText.class, "setShowSoftInputOnFocus", boolean.class);
+    private static final Method SHOW_SOFT_INPUT_ON_FOCUS = getMethod(boolean.class);
+
+    private Function<String, Object> validatorFunction;
+    private Input input = Input.NONE;
 
     public KeyboardlessEditText(Context context) {
         super(context);
@@ -55,16 +62,32 @@ public class KeyboardlessEditText extends AppCompatEditText {
         setOnLongClickListener(onLongClickListener);
 
         setShowSoftInputOnFocus(false); // This is a hidden method in TextView.
-        reflexSetShowSoftInputOnFocus(false); // Workaround.
+        reflexSetShowSoftInputOnFocus(); // Workaround.
 
         // Ensure that cursor is at the end of the input box when initialized. Without this, the
         // cursor may be at index 0 when there is text added via layout XML.
-        setSelection(getText().length());
+        setSelection(Objects.requireNonNull(getText()).length());
     }
 
-    private OnClickListener onClickListener = v -> setCursorVisible(true);
+    public Input getInput() {
+        return input;
+    }
 
-    private OnLongClickListener onLongClickListener = v -> {
+    public void setInput(Input input) {
+        this.input = input;
+    }
+
+    public Function<String, Object> getValidatorFunction() {
+        return validatorFunction;
+    }
+
+    public void setValidatorFunction(Function<String, Object> validatorFunction) {
+        this.validatorFunction = validatorFunction;
+    }
+
+    private final OnClickListener onClickListener = v -> setCursorVisible(true);
+
+    private final OnLongClickListener onLongClickListener = v -> {
         setCursorVisible(true);
         return false;
     };
@@ -93,9 +116,9 @@ public class KeyboardlessEditText extends AppCompatEditText {
         }
     }
 
-    private void reflexSetShowSoftInputOnFocus(boolean show) {
+    private void reflexSetShowSoftInputOnFocus() {
         if (SHOW_SOFT_INPUT_ON_FOCUS != null) {
-            invokeMethod(SHOW_SOFT_INPUT_ON_FOCUS, this, show);
+            invokeMethod(this, false);
         } else {
             // Use fallback method. Not tested.
             hideKeyboard();
@@ -106,11 +129,13 @@ public class KeyboardlessEditText extends AppCompatEditText {
      * Returns method if available in class or superclass (recursively),
      * otherwise returns null.
      */
-    public static Method getMethod(Class<?> cls, String methodName, Class<?>... parametersType) {
-        Class<?> superClass = cls.getSuperclass();
+    @SuppressWarnings("SameParameterValue")
+    private static Method getMethod(Class<?>... parametersType) {
+        Class<?> superClass = ((Class<?>) EditText.class).getSuperclass();
         while (superClass != Object.class) {
             try {
-                return superClass.getDeclaredMethod(methodName, parametersType);
+                assert superClass != null;
+                return superClass.getDeclaredMethod("setShowSoftInputOnFocus", parametersType);
             } catch (NoSuchMethodException e) {
                 // Just super it again
             }
@@ -122,11 +147,13 @@ public class KeyboardlessEditText extends AppCompatEditText {
     /**
      * Returns results if available, otherwise returns null.
      */
-    public static Object invokeMethod(Method method, Object receiver, Object... args) {
+    @SuppressWarnings("SameParameterValue")
+    private static void invokeMethod(Object receiver, Object... args) {
         final String LOG_TAG = KeyboardlessEditText.class.getSimpleName();
 
         try {
-            return method.invoke(receiver, args);
+            assert KeyboardlessEditText.SHOW_SOFT_INPUT_ON_FOCUS != null;
+            KeyboardlessEditText.SHOW_SOFT_INPUT_ON_FOCUS.invoke(receiver, args);
         } catch (IllegalArgumentException e) {
             Log.e(LOG_TAG, "Safe invoke fail - Invalid args", e);
         } catch (IllegalAccessException e) {
@@ -135,6 +162,5 @@ public class KeyboardlessEditText extends AppCompatEditText {
             Log.e(LOG_TAG, "Safe invoke fail - Invalid target", e);
         }
 
-        return null;
     }
 }

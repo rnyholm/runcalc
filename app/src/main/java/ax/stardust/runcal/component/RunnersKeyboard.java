@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import ax.stardust.runcal.R;
 
 public class RunnersKeyboard extends LinearLayout implements View.OnClickListener {
-
     private Button button0;
     private Button button1;
     private Button button2;
@@ -27,7 +26,7 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
     private Button buttonSeparator;
     private Button buttonDelete;
 
-    private SparseArray<String> keyValues = new SparseArray<>();
+    private final SparseArray<String> keyValues = new SparseArray<>();
     private InputConnection inputConnection;
 
     public RunnersKeyboard(Context context) {
@@ -40,10 +39,10 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
 
     public RunnersKeyboard(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initializeKeyboard(context, attrs);
+        initializeKeyboard(context);
     }
 
-    private void initializeKeyboard(Context context, AttributeSet attrs) {
+    private void initializeKeyboard(Context context) {
         inflateLayout(context);
         findViews();
         setListeners();
@@ -95,7 +94,7 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
         keyValues.put(R.id.button_8, "8");
         keyValues.put(R.id.button_9, "9");
         keyValues.put(R.id.button_0, "0");
-        // Deafaults to ':' separator but it will be changed at runtime
+        // Defaults to ':' separator but it will be changed at runtime
         keyValues.put(R.id.button_separator, ":");
     }
 
@@ -103,28 +102,24 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
         this.inputConnection = inputConnection;
     }
 
-    public void setSeparatorCharacter(char separator) {
+    public void setSeparator(String separator) {
         keyValues.put(R.id.button_separator, separator);
     }
 
     @Override
     public void onClick(View view) {
         if (inputConnection != null) {
-            switch (view.getId()) {
-                case R.id.button_del:
-                    CharSequence selectedText = inputConnection.getSelectedText(0);
-                    if (TextUtils.isEmpty(selectedText)) {
-                        inputConnection.deleteSurroundingText(1, 0);
-                    } else {
-                        inputConnection.commitText("", 1);
-                    }
-                    break;
-                default:
-                    String keyValue = keyValues.get(view.getId());
-                    inputConnection.commitText(keyValue, 1);
+            if (R.id.button_del == view.getId()) {
+                CharSequence selectedText = inputConnection.getSelectedText(0);
+                if (TextUtils.isEmpty(selectedText)) {
+                    inputConnection.deleteSurroundingText(1, 0);
+                } else {
+                    inputConnection.commitText("", 1);
+                }
+            } else {
+                String keyValue = keyValues.get(view.getId());
+                inputConnection.commitText(keyValue, 1);
             }
         }
     }
-
-    private static class
 }
