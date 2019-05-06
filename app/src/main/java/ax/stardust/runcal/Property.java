@@ -15,7 +15,7 @@ public enum Property {
         this.calculatorFunction = calculatorFunction;
     }
 
-    public java.util.function.Function<String, String> getCalculatorFunction() {
+    public Function<String, String> getCalculatorFunction() {
         return calculatorFunction;
     }
 }

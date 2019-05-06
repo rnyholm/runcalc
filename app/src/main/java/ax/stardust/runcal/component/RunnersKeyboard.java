@@ -39,10 +39,10 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
 
     public RunnersKeyboard(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initializeKeyboard(context);
+        initialize(context);
     }
 
-    private void initializeKeyboard(Context context) {
+    private void initialize(Context context) {
         inflateLayout(context);
         findViews();
         setListeners();
@@ -104,6 +104,7 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
 
     public void setSeparator(String separator) {
         keyValues.put(R.id.button_separator, separator);
+        buttonSeparator.setText(separator);
     }
 
     @Override
