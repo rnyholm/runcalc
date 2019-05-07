@@ -50,6 +50,15 @@ public class RunnersCalculator extends AppCompatActivity {
         setListeners();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (runnersKeyboard.getVisibility() == View.VISIBLE) {
+            runnersKeyboard.setVisibility(View.GONE);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     private void setMeasurement(Measurement measurement) {
         RunnersCalculator.measurement = measurement;
     }
