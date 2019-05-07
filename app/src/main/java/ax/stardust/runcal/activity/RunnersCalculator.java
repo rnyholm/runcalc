@@ -180,11 +180,11 @@ public class RunnersCalculator extends AppCompatActivity {
         }
 
         void setListeners() {
-            firstInput.addTextChangedListener(new ReferencedTextWatcher(this, firstInput));
+            firstInput.addTextChangedListener(new ReferencedTextWatcher(this, firstInput, runnersKeyboard));
             firstInput.setOnFocusChangeListener(new KeyboardHandler(runnersKeyboard));
 
             if (secondInput != null) {
-                secondInput.addTextChangedListener(new ReferencedTextWatcher(this, secondInput));
+                secondInput.addTextChangedListener(new ReferencedTextWatcher(this, secondInput, runnersKeyboard));
                 secondInput.setOnFocusChangeListener(new KeyboardHandler(runnersKeyboard));
             }
         }
@@ -236,10 +236,12 @@ public class RunnersCalculator extends AppCompatActivity {
     private class ReferencedTextWatcher implements TextWatcher {
         private final InteractionContainer interactionContainer;
         private final KeyboardlessEditText input;
+        private final RunnersKeyboard runnersKeyboard;
 
-        ReferencedTextWatcher(InteractionContainer interactionContainer, KeyboardlessEditText input) {
+        ReferencedTextWatcher(InteractionContainer interactionContainer, KeyboardlessEditText input, RunnersKeyboard runnersKeyboard) {
             this.interactionContainer = interactionContainer;
             this.input = input;
+            this.runnersKeyboard = runnersKeyboard;
         }
 
         @Override
@@ -262,6 +264,7 @@ public class RunnersCalculator extends AppCompatActivity {
             } else { // empty input is okay, but nothing to calculate, set default result text
                 setDefaultResultTextAndBackgroundResource(R.drawable.input_default);
             }
+            runnersKeyboard.enableDeleteButton(!inputText.isEmpty());
         }
 
         @Override
@@ -287,8 +290,10 @@ public class RunnersCalculator extends AppCompatActivity {
             if (KeyboardlessEditText.class.isAssignableFrom(view.getClass())) {
                 KeyboardlessEditText keyboardlessEditText = (KeyboardlessEditText) view;
                 if (hasFocus) {
+                    Editable editable = keyboardlessEditText.getText();
                     InputConnection ic = view.onCreateInputConnection(new EditorInfo());
                     this.runnersKeyboard.setSeparator(keyboardlessEditText.getInput().getSeparator());
+                    this.runnersKeyboard.enableDeleteButton(editable != null && !editable.toString().isEmpty());
                     this.runnersKeyboard.setInputConnection(ic);
                     this.runnersKeyboard.setVisibility(View.VISIBLE);
                 } else {

@@ -107,6 +107,10 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
         buttonSeparator.setText(separator);
     }
 
+    public void enableDeleteButton(boolean enable) {
+        buttonDelete.setEnabled(enable);
+    }
+
     @Override
     public void onClick(View view) {
         if (inputConnection != null) {
