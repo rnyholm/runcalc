@@ -7,5 +7,9 @@
     <color name="colorErrorDark">#E55B5B</color>
     <color name="colorErrorAccent">#BF2626</color>
     <color name="colorDisabled">#E0E0E0</color>
+    <color name="colorCursor">#E0E0E0</color>
     <color name="colorButtonText">#FFFFFF</color>
+    <color name="colorHeadingText">#737373</color>
+    <color name="colorText">#737373</color>
+    <color name="colorInputText">#4A4A4A</color>
 </resources>
