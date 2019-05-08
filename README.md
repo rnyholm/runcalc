@@ -1,4 +1,4 @@
-# Runners Calculator
+# Runners Calculator [![Build Status](https://travis-ci.org/rnyholm/runcalc.svg?branch=master)](https://travis-ci.org/rnyholm/runcalc)
 
 ## In short
 A simple and minimalistic android app made by a runner for runners who often converts speeds, paces, calculates estimates and so on.
