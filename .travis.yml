@@ -39,7 +39,7 @@ before_install:
   - chmod +x gradlew
 
 script:
-  - "./gradlew clean build check"
+  - "./gradlew assembleRelease"
 
 deploy:
   provider: releases
