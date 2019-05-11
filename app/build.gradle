@@ -10,7 +10,7 @@ android {
         versionCode 1
         versionName "v1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        setProperty("archivesBaseName", "RunnersCalculator-$versionName")
+        setProperty("archivesBaseName", "$applicationId-$versionName")
     }
 
     signingConfigs {
