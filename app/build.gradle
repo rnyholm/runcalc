@@ -8,8 +8,9 @@ android {
         minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "v1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        setProperty("archivesBaseName", "RunnersCalculator-$versionName")
     }
 
     signingConfigs {
