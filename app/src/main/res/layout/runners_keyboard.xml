@@ -191,16 +191,14 @@
         <Button
             android:id="@+id/button_del"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginStart="35dp"
             android:layout_toEndOf="@+id/button_0"
-            android:background="@drawable/keyboard_button_selector"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorButtonText"
-            android:padding="16dp"
-            android:text="@string/keyboard_del"
-            android:textSize="35sp" />
+            android:background="@drawable/keyboard_button_backspace_selector"
+            android:padding="16dp" />
 
     </RelativeLayout>
+
 </LinearLayout>
