@@ -8,13 +8,17 @@ android {
         minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
-        versionName "v1.0"
+        versionName "v1.0-beta"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "$applicationId-$versionName")
     }
 
     signingConfigs {
         release
+    }
+
+    applicationVariants.all { variant ->
+        variant.resValue "string", "version_name", variant.versionName
     }
 
     buildTypes {
