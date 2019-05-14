@@ -53,7 +53,7 @@ public class RunnersCalculator extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (runnersKeyboard.getVisibility() == View.VISIBLE) {
-            runnersKeyboard.setVisibility(View.GONE);
+            runnersKeyboard.delayedHide();
         } else {
             super.onBackPressed();
         }
@@ -291,13 +291,13 @@ public class RunnersCalculator extends AppCompatActivity {
                 KeyboardlessEditText keyboardlessEditText = (KeyboardlessEditText) view;
                 if (hasFocus) {
                     Editable editable = keyboardlessEditText.getText();
-                    InputConnection ic = view.onCreateInputConnection(new EditorInfo());
+                    InputConnection inputConnection = view.onCreateInputConnection(new EditorInfo());
+                    this.runnersKeyboard.show();
                     this.runnersKeyboard.setSeparator(keyboardlessEditText.getInput().getSeparator());
                     this.runnersKeyboard.enableDeleteButton(editable != null && !editable.toString().isEmpty());
-                    this.runnersKeyboard.setInputConnection(ic);
-                    this.runnersKeyboard.setVisibility(View.VISIBLE);
+                    this.runnersKeyboard.setInputConnection(inputConnection);
                 } else {
-                    this.runnersKeyboard.setVisibility(View.GONE);
+                    this.runnersKeyboard.delayedHide();
                 }
             }
         }

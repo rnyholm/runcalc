@@ -1,6 +1,7 @@
 package ax.stardust.runcal.component;
 
 import android.content.Context;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.SparseArray;
@@ -27,6 +28,7 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
     private Button buttonDelete;
 
     private final SparseArray<String> keyValues = new SparseArray<>();
+    private final Handler hideDelayHandler = new Handler();
     private InputConnection inputConnection;
 
     public RunnersKeyboard(Context context) {
@@ -109,6 +111,19 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
 
     public void enableDeleteButton(boolean enable) {
         buttonDelete.setEnabled(enable);
+    }
+
+    public void show() {
+        hideDelayHandler.removeCallbacksAndMessages(null);
+        setVisibility(View.VISIBLE);
+    }
+
+    public void delayedHide() {
+        hideDelayHandler.postDelayed(this::hide, 25);
+    }
+
+    public void hide() {
+        setVisibility(View.GONE);
     }
 
     @Override
