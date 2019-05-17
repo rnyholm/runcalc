@@ -1,5 +1,6 @@
 package ax.stardust.runcal.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -117,6 +118,7 @@ public class RunnersCalculator extends AppCompatActivity {
         interactionContainers.forEach(InteractionContainer::setListeners);
     }
 
+
     private class InteractionContainer implements Comparable {
         private final Property property;
         private final KeyboardlessEditText firstInput;
@@ -137,13 +139,28 @@ public class RunnersCalculator extends AppCompatActivity {
         }
 
         void calculateIfPossible() {
-            if (!getFirstInputText().isEmpty()) { // criteria for all calculations
+            if (hasValidCalculationInput(firstInput)) { // criteria for all calculations
                 if (secondInput == null // single input
-                        || !getSecondInputText().isEmpty()) { // or double input
+                        || hasValidCalculationInput(secondInput)) { // or double input
                     String result = property.getCalculatorFunction().apply(getCombinedText());
                     setResultText(result);
                 }
             }
+        }
+
+        private boolean hasValidCalculationInput(KeyboardlessEditText input) {
+            if (input != null) {
+                String text = getTextOfInput(input);
+                if (!text.isEmpty()) {
+                    try {
+                        input.getValidatorFunction().apply(text);
+                        return true;
+                    } catch (Exception e) {
+                        // catch it and let it fall through
+                    }
+                }
+            }
+            return false;
         }
 
         Property getProperty() {
@@ -306,6 +323,7 @@ public class RunnersCalculator extends AppCompatActivity {
         }
 
         @Override
+        @SuppressLint("ClickableViewAccessibility")
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if (KeyboardlessEditText.class.isAssignableFrom(view.getClass())) {
                 if (runnersKeyboard.getVisibility() != View.VISIBLE) {
