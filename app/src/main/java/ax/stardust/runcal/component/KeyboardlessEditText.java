@@ -108,6 +108,11 @@ public class KeyboardlessEditText extends AppCompatEditText {
         return ret;
     }
 
+    @Override
+    public boolean performClick() {
+        return super.performClick();
+    }
+
     private void hideKeyboard() {
         // Hide system keyboard
         final InputMethodManager inputMethodManager = ((InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE));
