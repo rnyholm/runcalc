@@ -13,7 +13,10 @@ import android.widget.LinearLayout;
 
 import ax.stardust.runcal.R;
 
-public class RunnersKeyboard extends LinearLayout implements View.OnClickListener {
+public class RunnersKeyboard extends LinearLayout implements View.OnClickListener, View.OnLongClickListener {
+    private static final int HIDE_DELAY = 25;
+    private static final int CONTINUOUS_DELETE_DELAY = 60;
+
     private Button button0;
     private Button button1;
     private Button button2;
@@ -28,8 +31,17 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
     private Button buttonDelete;
 
     private final SparseArray<String> keyValues = new SparseArray<>();
-    private final Handler hideDelayHandler = new Handler();
     private InputConnection inputConnection;
+
+    private final Handler hideDelayHandler = new Handler();
+    private final Handler continuousDeleteHandler = new Handler();
+    private final Runnable continuousDeleteAction = new Runnable() {
+        @Override
+        public void run() {
+            actionDelete();
+            continuousDeleteHandler.postDelayed(continuousDeleteAction, CONTINUOUS_DELETE_DELAY);
+        }
+    };
 
     public RunnersKeyboard(Context context) {
         this(context, null, 0);
@@ -82,7 +94,9 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
         button8.setOnClickListener(this);
         button9.setOnClickListener(this);
         buttonSeparator.setOnClickListener(this);
+        // delete button needs this many listeners in order to handle long press delete
         buttonDelete.setOnClickListener(this);
+        buttonDelete.setOnLongClickListener(this);
     }
 
     private void setKeyValues() {
@@ -100,6 +114,31 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
         keyValues.put(R.id.button_separator, ":");
     }
 
+    @Override
+    public boolean onLongClick(View view) {
+        if (inputConnection != null) {
+            if (view != null) {
+                if (R.id.button_del == view.getId()) {
+                    continuousDeleteHandler.post(continuousDeleteAction);
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (inputConnection != null) {
+            if (R.id.button_del == view.getId()) {
+                continuousDeleteHandler.removeCallbacks(continuousDeleteAction);
+                actionDelete();
+            } else {
+                String keyValue = keyValues.get(view.getId());
+                inputConnection.commitText(keyValue, 1);
+            }
+        }
+    }
+
     public void setInputConnection(InputConnection inputConnection) {
         this.inputConnection = inputConnection;
     }
@@ -111,6 +150,8 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
 
     public void enableDeleteButton(boolean enable) {
         buttonDelete.setEnabled(enable);
+        // Nothing more to delete in field
+        continuousDeleteHandler.removeCallbacks(continuousDeleteAction);
     }
 
     public void show() {
@@ -119,27 +160,25 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
     }
 
     public void delayedHide() {
-        hideDelayHandler.postDelayed(this::hide, 25);
+        hideDelayHandler.postDelayed(this::hide, HIDE_DELAY);
     }
 
     public void hide() {
         setVisibility(View.GONE);
     }
 
-    @Override
-    public void onClick(View view) {
-        if (inputConnection != null) {
-            if (R.id.button_del == view.getId()) {
-                CharSequence selectedText = inputConnection.getSelectedText(0);
-                if (TextUtils.isEmpty(selectedText)) {
-                    inputConnection.deleteSurroundingText(1, 0);
-                } else {
-                    inputConnection.commitText("", 1);
-                }
-            } else {
-                String keyValue = keyValues.get(view.getId());
-                inputConnection.commitText(keyValue, 1);
-            }
+    /**
+     * DON'T EVER, EVER call this before you have checked that:
+     * - inputConnection is not null
+     * - calling method has a view that's not null
+     * - calling method has a view with id: R.id.button_del
+     */
+    private void actionDelete() {
+        CharSequence selectedText = inputConnection.getSelectedText(0);
+        if (TextUtils.isEmpty(selectedText)) {
+            inputConnection.deleteSurroundingText(1, 0);
+        } else {
+            inputConnection.commitText("", 1);
         }
     }
 }
