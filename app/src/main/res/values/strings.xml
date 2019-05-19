@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">Runners Calculator</string>
     <string name="author">By @skidrupert,</string>
-    <string name="calculate">Calculate</string>
     <string name="calculate_xx">Calculate %s</string>
     <string name="convert_xx_to_xx">Convert %s to %s</string>
     <string name="pace_to_speed_results"> {pace} = {result}{speed}</string>
     <string name="speed_to_pace_results"> {speed} = {result}{pace} </string>
     <string name="calculate_pace_results"> {result}{pace}</string>
     <string name="calculate_time_results"> {result}</string>
-    <string name="calculate_speed_results"> {result}{speed}</string>
+    <string name="calculate_distance_results"> {result}{distance}</string>
     <string name="default_pace">0:00</string>
     <string name="default_speed_distance">0.0</string>
     <string name="default_time">00:00:00</string>
@@ -19,8 +18,8 @@
     <string name="unit_speed_metric">km/h</string>
     <string name="unit_speed_imperial">mi/h</string>
     <string name="pace">pace</string>
-    <string name="speed">speed</string>
     <string name="distance">distance</string>
+    <string name="time">time</string>
     <string name="hint_distance">Distance(%s)</string>
     <string name="hint_time">Time(%s)</string>
     <string name="hint_pace">Pace(%s)</string>
@@ -35,13 +34,7 @@
     <string name="keyboard_7">7</string>
     <string name="keyboard_8">8</string>
     <string name="keyboard_9">9</string>
-    <string name="keyboard_colon">:</string>
-    <string name="keyboard_dot">.</string>
-    <string name="keyboard_del">D</string>
-
-    <string name="keyboard_key_content_descriptor">Custom keyboard key for the runners calculator</string>
+    <string name="keyboard_separator">:</string>
 
     <string name="filer_view_runners_calculator">View Runners Calculator</string>
-
-    <string name="invalid_input_error">Whooops, seems like somethings wrong with the numbers you gave :)</string>
 </resources>

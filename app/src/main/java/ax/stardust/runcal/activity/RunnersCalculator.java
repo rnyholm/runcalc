@@ -32,13 +32,20 @@ public class RunnersCalculator extends AppCompatActivity {
     private final Set<InteractionContainer> interactionContainers = new TreeSet<>();
     private RunnersKeyboard runnersKeyboard;
 
-    // TextViews
     private TextView convertPaceToSpeedTextView;
     private TextView convertSpeedToPaceTextView;
     private TextView calculatePaceTextView;
     private TextView calculatePaceDistanceHintTextView;
     private TextView calculatePaceTimeHintTextView;
     private TextView calculatePaceResultHintTextView;
+    private TextView calculateTimeTextView;
+    private TextView calculateTimeDistanceHintTextView;
+    private TextView calculateTimePaceHintTextView;
+    private TextView calculateTimeResultHintTextView;
+    private TextView calculateDistanceTextView;
+    private TextView calculateDistanceTimeHintTextView;
+    private TextView calculateDistancePaceHintTextView;
+    private TextView calculateDistanceResultHintTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +81,14 @@ public class RunnersCalculator extends AppCompatActivity {
         calculatePaceDistanceHintTextView = findViewById(R.id.calculate_pace_distance_hint_tv);
         calculatePaceTimeHintTextView = findViewById(R.id.calculate_pace_time_hint_tv);
         calculatePaceResultHintTextView = findViewById(R.id.calculate_pace_result_hint_tv);
+        calculateTimeTextView = findViewById(R.id.calculate_time_tv);
+        calculateTimeDistanceHintTextView = findViewById(R.id.calculate_time_distance_hint_tv);
+        calculateTimePaceHintTextView = findViewById(R.id.calculate_time_pace_hint_tv);
+        calculateTimeResultHintTextView = findViewById(R.id.calculate_time_result_hint_tv);
+        calculateDistanceTextView = findViewById(R.id.calculate_distance_tv);
+        calculateDistanceTimeHintTextView = findViewById(R.id.calculate_distance_time_hint_tv);
+        calculateDistancePaceHintTextView = findViewById(R.id.calculate_distance_pace_hint_tv);
+        calculateDistanceResultHintTextView = findViewById(R.id.calculate_distance_result_hint_tv);
 
         TextView paceToSpeedResultsTextView = findViewById(R.id.pace_to_speed_results_tv);
         KeyboardlessEditText paceToSpeedEditText = findViewById(R.id.pace_to_speed_et);
@@ -95,6 +110,24 @@ public class RunnersCalculator extends AppCompatActivity {
         calculatePaceTimeEditText.setInput(Input.TIME);
         calculatePaceTimeEditText.setValidatorFunction(Calculator.Time::parse);
         interactionContainers.add(new InteractionContainer(Property.CALCULATE_PACE, calculatePaceDistanceEditText, calculatePaceTimeEditText, calculatePaceResultsTextView, R.string.calculate_pace_results));
+
+        TextView calculateTimeResultsTextView = findViewById(R.id.calculate_time_results_tv);
+        KeyboardlessEditText calculateTimeDistanceEditText = findViewById(R.id.calculate_time_distance_et);
+        KeyboardlessEditText calculateTimePaceEditText = findViewById(R.id.calculate_time_pace_et);
+        calculateTimeDistanceEditText.setInput(Input.DISTANCE);
+        calculateTimeDistanceEditText.setValidatorFunction(Calculator.Distance::parse);
+        calculateTimePaceEditText.setInput(Input.PACE);
+        calculateTimePaceEditText.setValidatorFunction(Calculator.Pace::parse);
+        interactionContainers.add(new InteractionContainer(Property.CALCULATE_TIME, calculateTimeDistanceEditText, calculateTimePaceEditText, calculateTimeResultsTextView, R.string.calculate_time_results));
+
+        TextView calculateDistanceResultsTextView = findViewById(R.id.calculate_distance_results_tv);
+        KeyboardlessEditText calculateDistanceTimeEditText = findViewById(R.id.calculate_distance_time_et);
+        KeyboardlessEditText calculateDistancePaceEditText = findViewById(R.id.calculate_distance_pace_et);
+        calculateDistanceTimeEditText.setInput(Input.TIME);
+        calculateDistanceTimeEditText.setValidatorFunction(Calculator.Time::parse);
+        calculateDistancePaceEditText.setInput(Input.PACE);
+        calculateDistancePaceEditText.setValidatorFunction(Calculator.Pace::parse);
+        interactionContainers.add(new InteractionContainer(Property.CALCULATE_DISTANCE, calculateDistanceTimeEditText, calculateDistancePaceEditText, calculateDistanceResultsTextView, R.string.calculate_distance_results));
     }
 
     private void setGlobalTexts() {
@@ -112,6 +145,14 @@ public class RunnersCalculator extends AppCompatActivity {
         calculatePaceDistanceHintTextView.setText(String.format(getString(R.string.hint_distance), RunnersCalculator.distance));
         calculatePaceTimeHintTextView.setText(String.format(getString(R.string.hint_time), getString(R.string.default_time)));
         calculatePaceResultHintTextView.setText(String.format(getString(R.string.hint_pace), RunnersCalculator.pace));
+        calculateTimeTextView.setText(String.format(getString(R.string.calculate_xx), getString(R.string.time)));
+        calculateTimeDistanceHintTextView.setText(String.format(getString(R.string.hint_distance), RunnersCalculator.distance));
+        calculateTimePaceHintTextView.setText(String.format(getString(R.string.hint_pace), RunnersCalculator.pace));
+        calculateTimeResultHintTextView.setText(String.format(getString(R.string.hint_time), getString(R.string.default_time)));
+        calculateDistanceTextView.setText(String.format(getString(R.string.calculate_xx), getString(R.string.distance)));
+        calculateDistanceTimeHintTextView.setText(String.format(getString(R.string.hint_time), getString(R.string.default_time)));
+        calculateDistancePaceHintTextView.setText(String.format(getString(R.string.hint_pace), RunnersCalculator.pace));
+        calculateDistanceResultHintTextView.setText(String.format(getString(R.string.hint_distance), getString(R.string.default_speed_distance)));
     }
 
     private void setListeners() {

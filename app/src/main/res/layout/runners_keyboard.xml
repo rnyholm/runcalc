@@ -172,7 +172,7 @@
             android:fontFamily="@font/montserrat"
             android:textColor="@color/colorButtonText"
             android:padding="16dp"
-            android:text="@string/keyboard_colon"
+            android:text="@string/keyboard_separator"
             android:textSize="35sp" />
 
         <Button
