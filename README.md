@@ -1,4 +1,4 @@
-# Runners Calculator
+# Runners Calculator [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/rnyholm/runcalc/master/LICENSE)
 
 Branch | Travis opinion
 -------|-------
