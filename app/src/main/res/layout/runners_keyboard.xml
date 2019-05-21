@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,9 +20,9 @@
             android:layout_toStartOf="@+id/button_2"
             android:background="@drawable/keyboard_button_selector"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorButtonText"
             android:padding="16dp"
             android:text="@string/keyboard_1"
+            android:textColor="@color/colorButtonText"
             android:textSize="35sp" />
 
         <Button
@@ -32,9 +33,9 @@
             android:layout_centerInParent="true"
             android:background="@drawable/keyboard_button_selector"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorButtonText"
             android:padding="16dp"
             android:text="@string/keyboard_2"
+            android:textColor="@color/colorButtonText"
             android:textSize="35sp" />
 
         <Button
@@ -46,9 +47,9 @@
             android:layout_toEndOf="@+id/button_2"
             android:background="@drawable/keyboard_button_selector"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorButtonText"
             android:padding="16dp"
             android:text="@string/keyboard_3"
+            android:textColor="@color/colorButtonText"
             android:textSize="35sp" />
 
     </RelativeLayout>
@@ -69,9 +70,9 @@
             android:layout_toStartOf="@+id/button_5"
             android:background="@drawable/keyboard_button_selector"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorButtonText"
             android:padding="16dp"
             android:text="@string/keyboard_4"
+            android:textColor="@color/colorButtonText"
             android:textSize="35sp" />
 
         <Button
@@ -82,9 +83,9 @@
             android:layout_centerInParent="true"
             android:background="@drawable/keyboard_button_selector"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorButtonText"
             android:padding="16dp"
             android:text="@string/keyboard_5"
+            android:textColor="@color/colorButtonText"
             android:textSize="35sp" />
 
         <Button
@@ -96,9 +97,9 @@
             android:layout_toEndOf="@+id/button_5"
             android:background="@drawable/keyboard_button_selector"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorButtonText"
             android:padding="16dp"
             android:text="@string/keyboard_6"
+            android:textColor="@color/colorButtonText"
             android:textSize="35sp" />
 
     </RelativeLayout>
@@ -119,9 +120,9 @@
             android:layout_toStartOf="@+id/button_8"
             android:background="@drawable/keyboard_button_selector"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorButtonText"
             android:padding="16dp"
             android:text="@string/keyboard_7"
+            android:textColor="@color/colorButtonText"
             android:textSize="35sp" />
 
         <Button
@@ -132,9 +133,9 @@
             android:layout_centerInParent="true"
             android:background="@drawable/keyboard_button_selector"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorButtonText"
             android:padding="16dp"
             android:text="@string/keyboard_8"
+            android:textColor="@color/colorButtonText"
             android:textSize="35sp" />
 
         <Button
@@ -146,9 +147,9 @@
             android:layout_toEndOf="@+id/button_8"
             android:background="@drawable/keyboard_button_selector"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorButtonText"
             android:padding="16dp"
             android:text="@string/keyboard_9"
+            android:textColor="@color/colorButtonText"
             android:textSize="35sp" />
 
     </RelativeLayout>
@@ -170,9 +171,9 @@
             android:layout_toStartOf="@+id/button_0"
             android:background="@drawable/keyboard_button_selector"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorButtonText"
             android:padding="16dp"
             android:text="@string/keyboard_separator"
+            android:textColor="@color/colorButtonText"
             android:textSize="35sp" />
 
         <Button
@@ -183,9 +184,9 @@
             android:layout_centerInParent="true"
             android:background="@drawable/keyboard_button_selector"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorButtonText"
             android:padding="16dp"
             android:text="@string/keyboard_0"
+            android:textColor="@color/colorButtonText"
             android:textSize="35sp" />
 
         <Button
@@ -193,8 +194,8 @@
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginTop="17dp"
             android:layout_marginStart="35dp"
+            android:layout_marginTop="17dp"
             android:layout_toEndOf="@+id/button_0"
             android:background="@drawable/keyboard_button_backspace_selector"
             android:padding="16dp" />
