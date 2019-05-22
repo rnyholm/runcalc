@@ -37,15 +37,12 @@ public class RunnersCalculator extends AppCompatActivity {
     private TextView calculatePaceTextView;
     private TextView calculatePaceDistanceHintTextView;
     private TextView calculatePaceTimeHintTextView;
-    private TextView calculatePaceResultHintTextView;
     private TextView calculateTimeTextView;
     private TextView calculateTimeDistanceHintTextView;
     private TextView calculateTimePaceHintTextView;
-    private TextView calculateTimeResultHintTextView;
     private TextView calculateDistanceTextView;
     private TextView calculateDistanceTimeHintTextView;
     private TextView calculateDistancePaceHintTextView;
-    private TextView calculateDistanceResultHintTextView;
     private TextView versionNameTextView;
 
     @Override
@@ -82,15 +79,12 @@ public class RunnersCalculator extends AppCompatActivity {
         calculatePaceTextView = findViewById(R.id.calculate_pace_tv);
         calculatePaceDistanceHintTextView = findViewById(R.id.calculate_pace_distance_hint_tv);
         calculatePaceTimeHintTextView = findViewById(R.id.calculate_pace_time_hint_tv);
-        calculatePaceResultHintTextView = findViewById(R.id.calculate_pace_result_hint_tv);
         calculateTimeTextView = findViewById(R.id.calculate_time_tv);
         calculateTimeDistanceHintTextView = findViewById(R.id.calculate_time_distance_hint_tv);
         calculateTimePaceHintTextView = findViewById(R.id.calculate_time_pace_hint_tv);
-        calculateTimeResultHintTextView = findViewById(R.id.calculate_time_result_hint_tv);
         calculateDistanceTextView = findViewById(R.id.calculate_distance_tv);
         calculateDistanceTimeHintTextView = findViewById(R.id.calculate_distance_time_hint_tv);
         calculateDistancePaceHintTextView = findViewById(R.id.calculate_distance_pace_hint_tv);
-        calculateDistanceResultHintTextView = findViewById(R.id.calculate_distance_result_hint_tv);
         versionNameTextView = findViewById(R.id.version_name_tv);
 
         TextView paceToSpeedResultsTextView = findViewById(R.id.pace_to_speed_results_tv);
@@ -144,18 +138,15 @@ public class RunnersCalculator extends AppCompatActivity {
 
         convertPaceToSpeedTextView.setText(String.format(getString(R.string.convert_xx_to_xx), RunnersCalculator.pace, RunnersCalculator.speed));
         convertSpeedToPaceTextView.setText(String.format(getString(R.string.convert_xx_to_xx), RunnersCalculator.speed, RunnersCalculator.pace));
-        calculatePaceTextView.setText(String.format(getString(R.string.calculate_xx), getString(R.string.pace)));
+        calculatePaceTextView.setText(String.format(getString(R.string.calculate_xx), getString(R.string.pace).toLowerCase()));
         calculatePaceDistanceHintTextView.setText(String.format(getString(R.string.hint_distance), RunnersCalculator.distance));
         calculatePaceTimeHintTextView.setText(String.format(getString(R.string.hint_time), getString(R.string.default_time)));
-        calculatePaceResultHintTextView.setText(String.format(getString(R.string.hint_pace), RunnersCalculator.pace));
-        calculateTimeTextView.setText(String.format(getString(R.string.calculate_xx), getString(R.string.time)));
+        calculateTimeTextView.setText(String.format(getString(R.string.calculate_xx), getString(R.string.time).toLowerCase()));
         calculateTimeDistanceHintTextView.setText(String.format(getString(R.string.hint_distance), RunnersCalculator.distance));
         calculateTimePaceHintTextView.setText(String.format(getString(R.string.hint_pace), RunnersCalculator.pace));
-        calculateTimeResultHintTextView.setText(String.format(getString(R.string.hint_time), getString(R.string.default_time)));
-        calculateDistanceTextView.setText(String.format(getString(R.string.calculate_xx), getString(R.string.distance)));
+        calculateDistanceTextView.setText(String.format(getString(R.string.calculate_xx), getString(R.string.distance).toLowerCase()));
         calculateDistanceTimeHintTextView.setText(String.format(getString(R.string.hint_time), getString(R.string.default_time)));
         calculateDistancePaceHintTextView.setText(String.format(getString(R.string.hint_pace), RunnersCalculator.pace));
-        calculateDistanceResultHintTextView.setText(String.format(getString(R.string.hint_distance), getString(R.string.default_speed_distance)));
     }
 
     private void setListeners() {

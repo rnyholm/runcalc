@@ -176,7 +176,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:fontFamily="@font/open_sans"
-                        android:text="@string/hint_pace"
+                        android:text="@string/pace"
                         android:textColor="@color/colorText"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -292,7 +292,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:fontFamily="@font/open_sans"
-                        android:text="@string/hint_time"
+                        android:text="@string/time"
                         android:textColor="@color/colorText"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -408,7 +408,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:fontFamily="@font/open_sans"
-                        android:text="@string/hint_distance"
+                        android:text="@string/distance"
                         android:textColor="@color/colorText"
                         android:textSize="14sp" />
                 </LinearLayout>

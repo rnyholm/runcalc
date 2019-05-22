@@ -17,9 +17,9 @@
     <string name="unit_pace_imperial">min/mi</string>
     <string name="unit_speed_metric">km/h</string>
     <string name="unit_speed_imperial">mi/h</string>
-    <string name="pace">pace</string>
-    <string name="distance">distance</string>
-    <string name="time">time</string>
+    <string name="pace">Pace</string>
+    <string name="distance">Distance</string>
+    <string name="time">Time</string>
     <string name="hint_distance">Distance(%s)</string>
     <string name="hint_time">Time(%s)</string>
     <string name="hint_pace">Pace(%s)</string>
