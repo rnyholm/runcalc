@@ -1,4 +1,4 @@
-package ax.stardust.runcal;
+package ax.stardust.runcalc;
 
 import java.util.Locale;
 

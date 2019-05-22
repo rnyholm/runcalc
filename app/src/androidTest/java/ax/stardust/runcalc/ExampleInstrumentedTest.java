@@ -1,4 +1,4 @@
-package ax.stardust.runcal;
+package ax.stardust.runcalc;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ax.stardust.runcal">
+    package="ax.stardust.runcalc">
 
     <application
         android:allowBackup="true"
@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="ax.stardust.runcal.activity.RunnersCalculator"
+            android:name="ax.stardust.runcalc.activity.RunnersCalculator"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">

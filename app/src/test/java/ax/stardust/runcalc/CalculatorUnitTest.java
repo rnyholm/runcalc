@@ -1,4 +1,4 @@
-package ax.stardust.runcal;
+package ax.stardust.runcalc;
 
 import org.junit.Before;
 import org.junit.Test;

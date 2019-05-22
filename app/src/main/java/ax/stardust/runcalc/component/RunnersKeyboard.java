@@ -1,4 +1,4 @@
-package ax.stardust.runcal.component;
+package ax.stardust.runcalc.component;
 
 import android.content.Context;
 import android.os.Handler;
@@ -11,7 +11,7 @@ import android.view.inputmethod.InputConnection;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import ax.stardust.runcal.R;
+import ax.stardust.runcalc.R;
 
 public class RunnersKeyboard extends LinearLayout implements View.OnClickListener, View.OnLongClickListener {
     private static final int HIDE_DELAY = 25;

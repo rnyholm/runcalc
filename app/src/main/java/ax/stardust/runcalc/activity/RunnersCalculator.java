@@ -1,4 +1,4 @@
-package ax.stardust.runcal.activity;
+package ax.stardust.runcalc.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -15,13 +15,13 @@ import android.widget.TextView;
 import java.util.Set;
 import java.util.TreeSet;
 
-import ax.stardust.runcal.Calculator;
-import ax.stardust.runcal.Input;
-import ax.stardust.runcal.Measurement;
-import ax.stardust.runcal.Property;
-import ax.stardust.runcal.R;
-import ax.stardust.runcal.component.KeyboardlessEditText;
-import ax.stardust.runcal.component.RunnersKeyboard;
+import ax.stardust.runcalc.Calculator;
+import ax.stardust.runcalc.Input;
+import ax.stardust.runcalc.Measurement;
+import ax.stardust.runcalc.Property;
+import ax.stardust.runcalc.R;
+import ax.stardust.runcalc.component.KeyboardlessEditText;
+import ax.stardust.runcalc.component.RunnersKeyboard;
 
 public class RunnersCalculator extends AppCompatActivity {
     private static Measurement measurement;

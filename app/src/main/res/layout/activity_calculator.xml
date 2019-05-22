@@ -45,7 +45,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ax.stardust.runcal.component.KeyboardlessEditText
+                <ax.stardust.runcalc.component.KeyboardlessEditText
                     android:id="@+id/pace_to_speed_et"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ax.stardust.runcal.component.KeyboardlessEditText
+                <ax.stardust.runcalc.component.KeyboardlessEditText
                     android:id="@+id/speed_to_pace_et"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
@@ -188,7 +188,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <ax.stardust.runcal.component.KeyboardlessEditText
+                    <ax.stardust.runcalc.component.KeyboardlessEditText
                         android:id="@+id/calculate_pace_distance_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -205,7 +205,7 @@
                         android:textColor="@color/colorInputText"
                         android:textCursorDrawable="@drawable/input_cursor_default" />
 
-                    <ax.stardust.runcal.component.KeyboardlessEditText
+                    <ax.stardust.runcalc.component.KeyboardlessEditText
                         android:id="@+id/calculate_pace_time_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -304,7 +304,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <ax.stardust.runcal.component.KeyboardlessEditText
+                    <ax.stardust.runcalc.component.KeyboardlessEditText
                         android:id="@+id/calculate_time_distance_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -321,7 +321,7 @@
                         android:textColor="@color/colorInputText"
                         android:textCursorDrawable="@drawable/input_cursor_default" />
 
-                    <ax.stardust.runcal.component.KeyboardlessEditText
+                    <ax.stardust.runcalc.component.KeyboardlessEditText
                         android:id="@+id/calculate_time_pace_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -420,7 +420,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <ax.stardust.runcal.component.KeyboardlessEditText
+                    <ax.stardust.runcalc.component.KeyboardlessEditText
                         android:id="@+id/calculate_distance_time_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -437,7 +437,7 @@
                         android:textColor="@color/colorInputText"
                         android:textCursorDrawable="@drawable/input_cursor_default" />
 
-                    <ax.stardust.runcal.component.KeyboardlessEditText
+                    <ax.stardust.runcalc.component.KeyboardlessEditText
                         android:id="@+id/calculate_distance_pace_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -487,14 +487,14 @@
         android:paddingRight="5dp"
         android:paddingBottom="5dp">
 
-        <ax.stardust.runcal.component.RunnersKeyboard
+        <ax.stardust.runcalc.component.RunnersKeyboard
             android:id="@+id/soft_keyboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="gone">
 
-        </ax.stardust.runcal.component.RunnersKeyboard>
+        </ax.stardust.runcalc.component.RunnersKeyboard>
 
         <RelativeLayout
             android:id="@+id/author_version_rl"
