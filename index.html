@@ -1,1 +1,178 @@
-Runners Calculator GitHub Page, to be continued..
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Web page of the Runners Calculator application">
+	<meta name="author" content="Robert Nyholm">
+
+	<title>Runners Calculator</title>
+
+	<link rel="stylesheet" href="css/mini-default.css" />
+	<link rel="apple-touch-icon" sizes="180x180" href="css/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="css/img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="css/img/favicon-16x16.png">
+	<link rel="manifest" href="css/img/site.webmanifest">
+	<link rel="mask-icon" href="css/img/safari-pinned-tab.svg" color="#5bbad5">
+</head>
+
+<body>
+	<header class="sticky">
+		<!-- <label for="drawer-control" class="button drawer-toggle persistent hidden-md hidden-lg"></label> -->
+		<a href="#" class="logo">Runners Calculator</a>
+		<a href="#" class="button hidden-sm">Introduction</a>
+		<a href="#features" class="button hidden-sm">Features</a>
+		<a href="#open_source" class="button hidden-sm">Open source</a>
+	</header>
+
+	<input type="checkbox" id="drawer-control" class="drawer persistent">
+	<nav class="drawer hidden-md hidden-lg">
+		<label for="drawer-control" class="close"></label>
+		<a href="">Introduction</a>
+		<a href="#features">Features</a>
+		<a href="#open_source">Open source</a>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+				<br />
+				<h1>Introduction</h1>
+				<p>Runners Calculator is a minimalistic utility application for Android made by a runner for runners.
+					The purpose of the app is to make a few of the most common runner related conversions and calculations a bit easier.
+					This includes conversions between pace and speed and vice versa, calculations of distance, time and pace from given input.
+					Another important goal of the app is that it should be foolproof and easy to use, so you can focus more on the stuff that matters, running.
+				</p>
+				<a name="features"></a>
+				<p>
+					Even though the app is made for runners the app can be used by anyone in need of theese kind of conversions and calculations.
+				</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+				<br />
+				<h1>Features</h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+				<h3>Convert pace to speed and vice versa</h3>
+				<p>Your friend track their run in speed and you in pace and now you're wondering what pace 11.46km/h is? No problem! Just as easy as stealing candy
+					from a child you can make these conversions, just type in your pace or speed and converted value will be presented to you.</p>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+				<br />
+				<h3>Calculate pace</h3>
+				<p>Want to know what pace you need to keep in order to run a half marathon sub 2h? Give the distance and time and the application will calulate the rest for you.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+				<br />
+				<h3>Calculate time</h3>
+				<p>How long does it take to run 17km in 5:30min/km pace? The answer is given by the app.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+				<br />
+				<h3>Calculate distance</h3>
+				<p>How far have you run when you spent 1 hour in the running tracks at a pace of 6:17min/km? This is starting to get old but just give this input to the app
+					and the answer will be served to you.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+				<br />
+				<h3>Metric and imperial</h3>
+				<p>The app supports both metric and imperial measurements. Metric units uses format <strong>min/km</strong> and <strong>km/h</strong>, imperial on the other hand
+					uses <strong>min/mi</strong> and <strong>mi/h</strong>. The default system is metric, but it kan easily be switched and any existing conversions nad calculations
+					will be recalculated.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+				<br />
+				<h3>Sleek user interface</h3>
+				<p>The user interface is designed with a minimalistic, simple and sleek mindset. This is to made the app as simple as possible to use and understand.
+					This along with custom fonts and a fresh color palette makes the app a joy to use.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+				<br />
+				<h3>Simple input</h3>
+				<p>In order to make the app even easier to use, it has a completely custom made keyboard. Which prevents the user for giving faulty input and makes input a lot faster.
+					The different kinds of input; time, pace, speed and distance, uses the same input format across the app. The different input formats are following; time is given
+					in format <strong>hours:minutes:seconds</strong> or <strong>hours:minutes:seconds</strong>, pace in <strong>minutes:seconds</strong>, speed and distance are both given in
+					decimal format like <strong>12.6</strong>.</p>
+
+				<p>Even though it's almost foolproof to give user input it's still possible to give faulty input. The input validation is handled in realtime when the input is made and shows directly
+					to the user if someting is wrong by changing color of the input field.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+				<br />
+				<h3>No buttons</h3>
+				<p>Yes it's true, there are no buttons in this app. This is a decision which makes the app even more minimalistic, sleek and easy to use. The app makes calculations and conversions
+					along with users input. If the input is correct and there are enough input for any calculations to be made the app makes them automagically. Isn't this neat or what :)</p>
+				<a name="open_source"></a>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+				<br />
+				<h1>Open source</h1>
+				<p>This application is made as an open source hobby project, just because I'm a developer, runner and makes these kind of calculations quite often. The source code is completely free
+					to check out, use and do wathever you want with according to the MIT license. But I would be extremely happy if you live a comment on any forum, star
+					<a href="https://github.com/rnyholm/runcalc" target="_blank">this project on github</a> or in any other way show your support.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+				<br />
+				<h1>At last</h1>
+				<p>Run fast, long and happy :)</p>
+			</div>
+		</div>
+	</div>
+
+	<footer class="container">
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1">
+				Runners Calculator <span id="year">2019</span> <br />
+				Created by <a href="mailto:runnerscalculator.app@gmail.com">Robert Nyholm</a> / <a href="https://www.instagram.com/skidrupert/" target="_blank">@skidrupert</a> <br />
+				<figure>
+					<a href="https://github.com/rnyholm/runcalc" target="_blank">
+						<img src="css/img/github-logo.png" alt="GitHub logo" />
+					</a>
+				</figure>
+			</div>
+		</div>
+	</footer>
+
+	<script>
+		document.getElementById("year").innerHTML = new Date().getFullYear();
+	</script>
+</body>
+
+</html>
