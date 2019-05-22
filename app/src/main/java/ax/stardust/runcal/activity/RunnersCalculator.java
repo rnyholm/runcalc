@@ -46,6 +46,7 @@ public class RunnersCalculator extends AppCompatActivity {
     private TextView calculateDistanceTimeHintTextView;
     private TextView calculateDistancePaceHintTextView;
     private TextView calculateDistanceResultHintTextView;
+    private TextView versionNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,8 @@ public class RunnersCalculator extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (runnersKeyboard.getVisibility() == View.VISIBLE) {
-            runnersKeyboard.delayedHide();
+            // hacky way to release focus from any edit text, by releasing it also the keyboard will be closed
+            versionNameTextView.requestFocus();
         } else {
             super.onBackPressed();
         }
@@ -89,6 +91,7 @@ public class RunnersCalculator extends AppCompatActivity {
         calculateDistanceTimeHintTextView = findViewById(R.id.calculate_distance_time_hint_tv);
         calculateDistancePaceHintTextView = findViewById(R.id.calculate_distance_pace_hint_tv);
         calculateDistanceResultHintTextView = findViewById(R.id.calculate_distance_result_hint_tv);
+        versionNameTextView = findViewById(R.id.version_name_tv);
 
         TextView paceToSpeedResultsTextView = findViewById(R.id.pace_to_speed_results_tv);
         KeyboardlessEditText paceToSpeedEditText = findViewById(R.id.pace_to_speed_et);
