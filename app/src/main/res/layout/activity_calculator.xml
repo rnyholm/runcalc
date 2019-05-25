@@ -491,6 +491,7 @@
             android:id="@+id/soft_keyboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -500,6 +501,7 @@
             android:id="@+id/author_version_rl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:gravity="center_horizontal">
 
             <TextView
@@ -519,10 +521,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="1dp"
                 android:layout_toEndOf="@id/author_tv"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center_horizontal"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center_horizontal"
                 android:text="@string/version_name"
                 android:textColor="@color/colorText"
                 android:textSize="8sp" />
