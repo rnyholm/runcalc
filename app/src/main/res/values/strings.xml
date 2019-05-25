@@ -1,19 +1,19 @@
 <resources>
-    <string name="app_name">Runners Calculator</string>
-    <string name="author">By @skidrupert,</string>
+    <string name="app_name" translatable="false">Runners Calculator</string>
+    <string name="author" translatable="false">by @skidrupert,</string>
     <string name="calculate_xx">Calculate %s</string>
     <string name="convert_xx_to_xx">Convert %s to %s</string>
-    <string name="pace_to_speed_results"> {pace} = {result}{speed}</string>
-    <string name="speed_to_pace_results"> {speed} = {result}{pace} </string>
-    <string name="calculate_pace_results"> {result}{pace}</string>
-    <string name="calculate_time_results"> {result}</string>
-    <string name="calculate_distance_results"> {result}{distance}</string>
-    <string name="default_pace">0:00</string>
-    <string name="default_speed_distance">0.0</string>
-    <string name="default_time">00:00:00</string>
-    <string name="unit_distance">km</string>
-    <string name="unit_pace">min/km</string>
-    <string name="unit_speed">km/h</string>
+    <string name="pace_to_speed_results" translatable="false"> {pace} = {result}{speed}</string>
+    <string name="speed_to_pace_results" translatable="false"> {speed} = {result}{pace} </string>
+    <string name="calculate_pace_results" translatable="false"> {result}{pace}</string>
+    <string name="calculate_time_results" translatable="false"> {result}</string>
+    <string name="calculate_distance_results" translatable="false"> {result}{distance}</string>
+    <string name="default_pace" translatable="false">0:00</string>
+    <string name="default_speed_distance" translatable="false">0.0</string>
+    <string name="default_time" translatable="false">00:00:00</string>
+    <string name="unit_distance" translatable="false">km</string>
+    <string name="unit_pace" translatable="false">min/km</string>
+    <string name="unit_speed" translatable="false">km/h</string>
     <string name="pace">Pace</string>
     <string name="distance">Distance</string>
     <string name="time">Time</string>
@@ -21,17 +21,17 @@
     <string name="hint_time">Time(%s)</string>
     <string name="hint_pace">Pace(%s)</string>
 
-    <string name="keyboard_0">0</string>
-    <string name="keyboard_1">1</string>
-    <string name="keyboard_2">2</string>
-    <string name="keyboard_3">3</string>
-    <string name="keyboard_4">4</string>
-    <string name="keyboard_5">5</string>
-    <string name="keyboard_6">6</string>
-    <string name="keyboard_7">7</string>
-    <string name="keyboard_8">8</string>
-    <string name="keyboard_9">9</string>
-    <string name="keyboard_separator">:</string>
+    <string name="keyboard_0" translatable="false">0</string>
+    <string name="keyboard_1" translatable="false">1</string>
+    <string name="keyboard_2" translatable="false">2</string>
+    <string name="keyboard_3" translatable="false">3</string>
+    <string name="keyboard_4" translatable="false">4</string>
+    <string name="keyboard_5" translatable="false">5</string>
+    <string name="keyboard_6" translatable="false">6</string>
+    <string name="keyboard_7" translatable="false">7</string>
+    <string name="keyboard_8" translatable="false">8</string>
+    <string name="keyboard_9" translatable="false">9</string>
+    <string name="keyboard_separator" translatable="false">:</string>
 
-    <string name="filter_view_runners_calculator">View Runners Calculator</string>
+    <string name="filter_view_runners_calculator" translatable="false">View Runners Calculator</string>
 </resources>

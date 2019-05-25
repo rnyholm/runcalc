@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calculate_xx">Beräkna %s</string>
+    <string name="convert_xx_to_xx">Omvandla %s till %s</string>
+    <string name="distance">Distans</string>
+    <string name="hint_distance">Distans(%s)</string>
+    <string name="hint_pace">Tempo(%s)</string>
+    <string name="hint_time">Tid(%s)</string>
+    <string name="pace">Tempo</string>
+    <string name="time">Tid</string>
+</resources>

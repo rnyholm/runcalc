@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calculate_xx">Calculate %s</string>
+    <string name="convert_xx_to_xx">Convert %s to %s</string>
+    <string name="distance">Distance</string>
+    <string name="hint_distance">Distance(%s)</string>
+    <string name="hint_pace">Pace(%s)</string>
+    <string name="hint_time">Time(%s)</string>
+    <string name="pace">Pace</string>
+    <string name="time">Time</string>
+</resources>
