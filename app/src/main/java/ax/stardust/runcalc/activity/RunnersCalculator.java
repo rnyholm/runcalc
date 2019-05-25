@@ -15,16 +15,14 @@ import android.widget.TextView;
 import java.util.Set;
 import java.util.TreeSet;
 
-import ax.stardust.runcalc.Calculator;
-import ax.stardust.runcalc.Input;
-import ax.stardust.runcalc.Measurement;
-import ax.stardust.runcalc.Property;
+import ax.stardust.runcalc.util.Calculator;
+import ax.stardust.runcalc.input.Input;
+import ax.stardust.runcalc.input.Property;
 import ax.stardust.runcalc.R;
 import ax.stardust.runcalc.component.KeyboardlessEditText;
 import ax.stardust.runcalc.component.RunnersKeyboard;
 
 public class RunnersCalculator extends AppCompatActivity {
-    private static Measurement measurement;
     private static String pace;
     private static String speed;
     private static String distance;
@@ -49,8 +47,6 @@ public class RunnersCalculator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
-
-        setMeasurement(Measurement.METRIC);
         findViews();
         setGlobalTexts();
         setTexts();
@@ -65,10 +61,6 @@ public class RunnersCalculator extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
-    }
-
-    private void setMeasurement(Measurement measurement) {
-        RunnersCalculator.measurement = measurement;
     }
 
     private void findViews() {
@@ -128,9 +120,9 @@ public class RunnersCalculator extends AppCompatActivity {
     }
 
     private void setGlobalTexts() {
-        RunnersCalculator.pace = getString(Measurement.METRIC.equals(RunnersCalculator.measurement) ? R.string.unit_pace_metric : R.string.unit_pace_imperial);
-        RunnersCalculator.speed = getString(Measurement.METRIC.equals(RunnersCalculator.measurement) ? R.string.unit_speed_metric : R.string.unit_speed_imperial);
-        RunnersCalculator.distance = getString(Measurement.METRIC.equals(RunnersCalculator.measurement) ? R.string.unit_distance_metric : R.string.unit_distance_imperial);
+        RunnersCalculator.pace = getString(R.string.unit_pace);
+        RunnersCalculator.speed = getString(R.string.unit_speed);
+        RunnersCalculator.distance = getString(R.string.unit_distance);
     }
 
     private void setTexts() {

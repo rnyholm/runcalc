@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
 import java.util.Objects;
 import java.util.function.Function;
 
-import ax.stardust.runcalc.Input;
+import ax.stardust.runcalc.input.Input;
 
 /**
  * EditText which suppresses IME show up and is bound to a specific @{@link Input} and validator-function for validating input of this EditText.

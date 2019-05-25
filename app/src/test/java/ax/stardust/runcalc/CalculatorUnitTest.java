@@ -3,6 +3,8 @@ package ax.stardust.runcalc;
 import org.junit.Before;
 import org.junit.Test;
 
+import ax.stardust.runcalc.util.Calculator;
+
 import static org.junit.Assert.*;
 
 

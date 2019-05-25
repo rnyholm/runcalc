@@ -1,4 +1,4 @@
-package ax.stardust.runcalc;
+package ax.stardust.runcalc.util;
 
 import java.util.Locale;
 
@@ -6,18 +6,17 @@ public class Calculator {
     private static final int SECONDS_IN_HOUR = 3600;
 
     private static final double SECOND_IN_MINUTE = 0.0166666667;
-//    private static final double KM_IN_MILES = 0.621371192;
 
     private static final String PACE_PATTERN = "^[0-9]*$|^[0-9]*:[0-9]*$";
     private static final String SPEED_DISTANCE_PATTERN = "^[0-9]*$|^[0-9]*\\.[0-9]*$";
     private static final String TIME_PATTERN = "^[0-9]{1,2}:[0-9]{1,2}$|^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$";
     private static final String COMBINED_STRING_PATTERN = "^[^|]+\\|[^|]+$";
 
-    static String convertPaceToSpeed(String pace) {
+    public static String convertPaceToSpeed(String pace) {
         return Pace.parse(pace).asSpeed();
     }
 
-    static String convertSpeedToPace(String speed) {
+    public static String convertSpeedToPace(String speed) {
         return Speed.parse(speed).asPace();
     }
 
@@ -29,7 +28,7 @@ public class Calculator {
      * @param distanceAndTime Combined value of distance and time
      * @return Calculated pace
      */
-    static String calculatePace(String distanceAndTime) {
+    public static String calculatePace(String distanceAndTime) {
         throwExceptionIfMalformedStringPattern(distanceAndTime);
         String[] split = distanceAndTime.split("\\|");
 
@@ -52,7 +51,7 @@ public class Calculator {
      * @param distanceAndPace Combined value of distance and pace
      * @return Calculated time
      */
-    static String calculateTime(String distanceAndPace) {
+    public static String calculateTime(String distanceAndPace) {
         throwExceptionIfMalformedStringPattern(distanceAndPace);
         String[] split = distanceAndPace.split("\\|");
 
@@ -75,7 +74,7 @@ public class Calculator {
      * @param timeAndPace Combined value of time and pace
      * @return Calculated distance
      */
-    static String calculateDistance(String timeAndPace) {
+    public static String calculateDistance(String timeAndPace) {
         throwExceptionIfMalformedStringPattern(timeAndPace);
         String[] split = timeAndPace.split("\\|");
 

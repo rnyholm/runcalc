@@ -1,4 +1,4 @@
-package ax.stardust.runcalc;
+package ax.stardust.runcalc.input;
 
 public enum Input {
     PACE(":"),
