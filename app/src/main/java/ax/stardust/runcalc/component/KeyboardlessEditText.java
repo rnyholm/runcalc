@@ -109,6 +109,7 @@ public class KeyboardlessEditText extends AppCompatEditText {
     }
 
     @Override
+    @SuppressWarnings("EmptyMethod")
     public boolean performClick() {
         return super.performClick();
     }
@@ -139,12 +140,11 @@ public class KeyboardlessEditText extends AppCompatEditText {
         Class<?> superClass = ((Class<?>) EditText.class).getSuperclass();
         while (superClass != Object.class) {
             try {
-                assert superClass != null;
-                return superClass.getDeclaredMethod("setShowSoftInputOnFocus", parametersType);
+                return Objects.requireNonNull(superClass).getDeclaredMethod("setShowSoftInputOnFocus", parametersType);
             } catch (NoSuchMethodException e) {
                 // Just super it again
             }
-            superClass = superClass.getSuperclass();
+            superClass = Objects.requireNonNull(superClass).getSuperclass();
         }
         return null;
     }
@@ -155,10 +155,8 @@ public class KeyboardlessEditText extends AppCompatEditText {
     @SuppressWarnings("SameParameterValue")
     private static void invokeMethod(Object receiver, Object... args) {
         final String LOG_TAG = KeyboardlessEditText.class.getSimpleName();
-
         try {
-            assert KeyboardlessEditText.SHOW_SOFT_INPUT_ON_FOCUS != null;
-            KeyboardlessEditText.SHOW_SOFT_INPUT_ON_FOCUS.invoke(receiver, args);
+            Objects.requireNonNull(KeyboardlessEditText.SHOW_SOFT_INPUT_ON_FOCUS).invoke(receiver, args);
         } catch (IllegalArgumentException e) {
             Log.e(LOG_TAG, "Safe invoke fail - Invalid args", e);
         } catch (IllegalAccessException e) {
@@ -166,6 +164,5 @@ public class KeyboardlessEditText extends AppCompatEditText {
         } catch (InvocationTargetException e) {
             Log.e(LOG_TAG, "Safe invoke fail - Invalid target", e);
         }
-
     }
 }

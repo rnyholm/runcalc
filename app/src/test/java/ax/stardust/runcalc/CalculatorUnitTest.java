@@ -8,7 +8,6 @@ import ax.stardust.runcalc.util.Calculator;
 import static org.junit.Assert.*;
 
 
-@SuppressWarnings("Duplicates")
 public class CalculatorUnitTest {
     private final String PACE_0 = "0";
     private final String PACE_0_0 = "0:0";

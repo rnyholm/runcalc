@@ -145,7 +145,6 @@ public class RunnersCalculator extends AppCompatActivity {
         interactionContainers.forEach(InteractionContainer::setListeners);
     }
 
-
     private class InteractionContainer implements Comparable {
         private final Property property;
         private final KeyboardlessEditText firstInput;

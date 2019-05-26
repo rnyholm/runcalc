@@ -4,8 +4,6 @@
     <color name="colorPrimaryDark">#4E9231</color>
     <color name="colorPrimaryAccent">#2E6E12</color>
     <color name="colorError">#FF9999</color>
-    <color name="colorErrorDark">#E55B5B</color>
-    <color name="colorErrorAccent">#BF2626</color>
     <color name="colorDisabled">#E0E0E0</color>
     <color name="colorCursor">#E0E0E0</color>
     <color name="colorButtonText">#FFFFFF</color>
