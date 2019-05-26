@@ -5,41 +5,37 @@ Branch | Travis opinion
 Master | [![Build Status](https://travis-ci.com/rnyholm/runcalc.svg?branch=master)](https://travis-ci.com/rnyholm/runcalc)
 Develop | [![Build Status](https://travis-ci.com/rnyholm/runcalc.svg?branch=dev-v1.0)](https://travis-ci.com/rnyholm/runcalc)
 
-## In short
-A simple and minimalistic android app made by a runner for runners who often converts speeds, paces, calculates estimates and so on.
+## Introduction
+Runners Calculator is a minimalistic utility application for Android made by a runner for runners. The purpose of the app is to make a few of the most common runner related conversions and calculations a bit easier. This includes conversions between pace and speed and vice versa as well as different calculations of distance, time and pace. Another important goal of the app is that it should be foolproof and easy to use, so you can focus more on the stuff that matters - running🏃‍♂️
+
+Even though the app is made for runners it can be used by anyone in need of these kind of conversions and calculations.
 
 ## Features
-### Convert pace to speed
-Conversion between pace and speed, just give the pace in format **minutes:seconds** or **minutes** and the speed will be given to you in
-decimal format like **11.6**.
-
-### Convert speed to pace
-Conversion between speed and pace, just give the speed in decimal format like **12.6** or just **12** and the pace will be given to you 
-in format **minutes:seconds**.
+### Convert pace to speed and vice versa
+Does your friend track their runs in speed and you in pace and now you're wondering what pace 11.46km/h is? No problem! Just as easy as stealing candy from a child you can make these conversions, just type in your pace or speed and the converted value will be presented to you.
 
 ### Calculate pace
-Calculate pace from distance and time. Pace is given in format **minutes:seconds** or **minutes** and time in format 
-**hours:minutes:seconds** or **minutes:seconds**. From these two values the pace is calculated and given in format **minutes:seconds**
+Want to know what pace you need to keep in order to run a half marathon sub 2h? Give the distance and time and the application will calulate the rest for you.
 
 ### Calculate time
-Calculate time from distance and pace. Distance is given in decimal format like **15.6** or just **15** and pace in format 
-**minutes:seconds** or **minutes**. From these two values the time is calculated and given in format **hours:minutes:seconds**.
+How long does it take to run 17km at 5:30min/km pace? The answer is given by the app.
 
 ### Calculate distance
-Calculate distance from time and pace. Time is given in format **hours:minutes:seconds** or **minutes:seconds** and pace in format 
-**minutes:seconds** or **minutes**. From these two values the distance is calculated and given in decimal format like **21.00**.
+How far have you run when you spent 1 hour in the running tracks at a pace of 6:17min/km? This is starting to get old but just give this input to the app and the answer will be served to you.
 
-### Metric and imperial
-Support for both metric and imperial units. Metric is default, but it's possible to change this in the app. Metric units uses format
-**min/km** and **km/h** and imperial uses format **min/mi** and **mi/h**. Any existing calculations will be changed upon unit change.
+### Sleek user interface
+The user interface is designed with a minimalistic, simple and sleek mindset. This is to make the app as simple as possible to use and understand. This along with custom fonts and a fresh color palette makes the app a joy to use.
 
-### Sleek UI
-The user interface is minimalistic, simple and sleek. This along with custom fonts and fresh color palette makes the app to a joy to use
+### Simple input
+In order to make the app even easier to use, it has a completely custom made keyboard. Which prevents the user for giving faulty input and makes input a lot faster. The different kinds of input; time, pace, speed and distance, uses the same input format across the app. The different input formats are following; time is given in format **hours:minutes:seconds** or **minutes:seconds**, pace in **minutes:seconds**, speed and distance are both given in decimal format like **12.6**.
 
-### Custom soft keyboard
-The app has a completely own soft keyboard, this is a big deal as it not just only prevents faulty input but also
-makes the input a lot faster and easier.
+Even though it's almost foolproof to give user input it's still possible to give faulty input. The input validation is handled in realtime when the input is made and shows directly to the user if someting is wrong by changing color of the input field.
 
-### One button
-One button, that's all it takes to make all calculations and conversions! The app knows when it's time to make some calculations
-and what kind of property that's possible to make depending on your input, therefore only one button is needed.
+### No buttons
+Yes it's true, there are no buttons in this app. This is a decision which makes the app even more minimalistic, sleek and easy to use. The app makes calculations and conversions along with users input. If the input is correct and there are enough input for any calculations to be made the app makes them automagically. Isn't this neat or what😁
+
+## Open source
+This application is made as an open source hobby project, just because I'm a developer and runner and makes these kind of calculations quite often. The source code is completely free to check out, use and do wathever you want with according to the MIT license. But I would be extremely happy if you leave a comment, star this project or in any other way show your support.
+
+## At last
+Run fast, long and happy🏃‍♂️
