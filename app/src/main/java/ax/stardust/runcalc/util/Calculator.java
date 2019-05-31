@@ -89,6 +89,24 @@ public class Calculator {
         return String.format(Locale.ENGLISH, "%.2f", distance);
     }
 
+    /**
+     * To calculate an estimated vo2max from given cooper test result in meters.<br />
+     * The given result must be between 550 and 5000 meters as any other result would give <br />
+     * an unrealistic vo2max estimate.
+     *
+     * @param cooperTestResult Result from cooper test in meters
+     * @return Estimated vo2max
+     */
+    public static String calculateVO2MaxEstimate(String cooperTestResult) {
+        double result = Distance.parse(cooperTestResult).getDistance();
+        if (result < 550 || result > 5000) {
+            throw new IllegalArgumentException(); // unrealistic vo2max results
+        }
+
+        double VO2Max = (result - 504.9) / 44.73;
+        return String.format(Locale.ENGLISH, "%.1f", VO2Max);
+    }
+
     public static class Speed {
         private final MatchedDouble speed;
 

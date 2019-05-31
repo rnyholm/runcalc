@@ -5,8 +5,8 @@ import org.junit.Test;
 
 import ax.stardust.runcalc.util.Calculator;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class CalculatorUnitTest {
     private final String PACE_0 = "0";
@@ -165,6 +165,27 @@ public class CalculatorUnitTest {
         assertEquals(SPEED_DISTANCE_7_21, Calculator.calculateDistance(combineStrings(TIME_00_59_58, PACE_8_19)));
         assertEquals(SPEED_DISTANCE_1_00, Calculator.calculateDistance(combineStrings(TIME_01_00_00, PACE_60_00)));
         assertEquals(SPEED_DISTANCE_0_10, Calculator.calculateDistance(combineStrings(TIME_01_00_00, PACE_600_00)));
+    }
+
+    @Test
+    public void testCalculateVO2MaxEstimate() {
+        assertEquals("1.0", Calculator.calculateVO2MaxEstimate("550"));
+        assertEquals("8.7", Calculator.calculateVO2MaxEstimate("896"));
+        assertEquals("15.1", Calculator.calculateVO2MaxEstimate("1179"));
+        assertEquals("20.0", Calculator.calculateVO2MaxEstimate("1400"));
+        assertEquals("25.1", Calculator.calculateVO2MaxEstimate("1629.78"));
+        assertEquals("32.8", Calculator.calculateVO2MaxEstimate("1971"));
+        assertEquals("42.2", Calculator.calculateVO2MaxEstimate("2394"));
+        assertEquals("46.0", Calculator.calculateVO2MaxEstimate("2563.9"));
+        assertEquals("53.5", Calculator.calculateVO2MaxEstimate("2900"));
+        assertEquals("54.8", Calculator.calculateVO2MaxEstimate("2956.26"));
+        assertEquals("59.8", Calculator.calculateVO2MaxEstimate("3178"));
+        assertEquals("66.8", Calculator.calculateVO2MaxEstimate("3492"));
+        assertEquals("73.4", Calculator.calculateVO2MaxEstimate("3789"));
+        assertEquals("78.1", Calculator.calculateVO2MaxEstimate("3999"));
+        assertEquals("86.1", Calculator.calculateVO2MaxEstimate("4356"));
+        assertEquals("92.5", Calculator.calculateVO2MaxEstimate("4644"));
+        assertEquals("100.5", Calculator.calculateVO2MaxEstimate("5000"));
     }
 
     @Test
@@ -540,6 +561,72 @@ public class CalculatorUnitTest {
         }
 
         assertEquals(12, exceptionCounter);
+    }
+
+    @Test
+    public void testCalculateVO2MaxEstimateExceptions() {
+        try {
+            Calculator.calculateVO2MaxEstimate("-10000");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+        try {
+            Calculator.calculateVO2MaxEstimate("-1");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+        try {
+            Calculator.calculateVO2MaxEstimate("5");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+        try {
+            Calculator.calculateVO2MaxEstimate("549");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+        try {
+            Calculator.calculateVO2MaxEstimate("549.9");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+        try {
+            Calculator.calculateVO2MaxEstimate("556,87");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+        try {
+            Calculator.calculateVO2MaxEstimate("gu978");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+        try {
+            Calculator.calculateVO2MaxEstimate("5000.1");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+        try {
+            Calculator.calculateVO2MaxEstimate("5001");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+        try {
+            Calculator.calculateVO2MaxEstimate("100000");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        assertEquals(10, exceptionCounter);
     }
 
     private String combineStrings(String s1, String s2) {
