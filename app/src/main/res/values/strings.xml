@@ -8,15 +8,19 @@
     <string name="calculate_pace_results" translatable="false"> {result}{pace}</string>
     <string name="calculate_time_results" translatable="false"> {result}</string>
     <string name="calculate_distance_results" translatable="false"> {result}{distance}</string>
+    <string name="calculate_vo2max_estimate_results"> m estimates to a VO2max of {result}</string>
+    <string name="calculate_vo2max_estimate_description">Calculate an estimated VO2max value from your cooper test result in meters.</string>
     <string name="default_pace" translatable="false">0:00</string>
     <string name="default_speed_distance" translatable="false">0.0</string>
     <string name="default_time" translatable="false">00:00:00</string>
+    <string name="default_vo2max" translatable="false">0.0</string>
     <string name="unit_distance" translatable="false">km</string>
     <string name="unit_pace" translatable="false">min/km</string>
     <string name="unit_speed" translatable="false">km/h</string>
     <string name="pace">Pace</string>
     <string name="distance">Distance</string>
     <string name="time">Time</string>
+    <string name="vo2max" translatable="false">VO2max</string>
     <string name="hint_distance">Distance(%s)</string>
     <string name="hint_time">Time(%s)</string>
     <string name="hint_pace">Pace(%s)</string>

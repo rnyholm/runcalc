@@ -41,6 +41,7 @@ public class RunnersCalculator extends AppCompatActivity {
     private TextView calculateDistanceTextView;
     private TextView calculateDistanceTimeHintTextView;
     private TextView calculateDistancePaceHintTextView;
+    private TextView calculateVO2maxEstimateTextView;
     private TextView versionNameTextView;
 
     @Override
@@ -77,6 +78,7 @@ public class RunnersCalculator extends AppCompatActivity {
         calculateDistanceTextView = findViewById(R.id.calculate_distance_tv);
         calculateDistanceTimeHintTextView = findViewById(R.id.calculate_distance_time_hint_tv);
         calculateDistancePaceHintTextView = findViewById(R.id.calculate_distance_pace_hint_tv);
+        calculateVO2maxEstimateTextView = findViewById(R.id.calculate_vo2max_estimate_tv);
         versionNameTextView = findViewById(R.id.version_name_tv);
 
         TextView paceToSpeedResultsTextView = findViewById(R.id.pace_to_speed_results_tv);
@@ -117,6 +119,12 @@ public class RunnersCalculator extends AppCompatActivity {
         calculateDistancePaceEditText.setInput(Input.PACE);
         calculateDistancePaceEditText.setValidatorFunction(Calculator.Pace::parse);
         interactionContainers.add(new InteractionContainer(Property.CALCULATE_DISTANCE, calculateDistanceTimeEditText, calculateDistancePaceEditText, calculateDistanceResultsTextView, R.string.calculate_distance_results));
+
+        TextView calculateVO2MaxEstimateResultsTextView = findViewById(R.id.calculate_vo2max_estimate_results_tv);
+        KeyboardlessEditText calculateVO2maxEstimateCooperTestResultEditText = findViewById(R.id.calculate_vo2max_estimate_cooper_test_result_et);
+        calculateVO2maxEstimateCooperTestResultEditText.setInput(Input.DISTANCE);
+        calculateVO2maxEstimateCooperTestResultEditText.setValidatorFunction(Calculator.Distance::parse);
+        interactionContainers.add(new InteractionContainer(Property.CONVERT_PACE_TO_SPEED, calculateVO2maxEstimateCooperTestResultEditText, calculateVO2MaxEstimateResultsTextView, R.string.calculate_vo2max_estimate_results));
     }
 
     private void setGlobalTexts() {
@@ -139,6 +147,7 @@ public class RunnersCalculator extends AppCompatActivity {
         calculateDistanceTextView.setText(String.format(getString(R.string.calculate_xx), getString(R.string.distance).toLowerCase()));
         calculateDistanceTimeHintTextView.setText(String.format(getString(R.string.hint_time), getString(R.string.default_time)));
         calculateDistancePaceHintTextView.setText(String.format(getString(R.string.hint_pace), RunnersCalculator.pace));
+        calculateVO2maxEstimateTextView.setText(String.format(getString(R.string.calculate_xx), getString(R.string.vo2max)));
     }
 
     private void setListeners() {
@@ -251,6 +260,8 @@ public class RunnersCalculator extends AppCompatActivity {
                     break;
                 case CALCULATE_DISTANCE:
                     setResultText(getString(R.string.default_speed_distance));
+                case CALCULATE_VO2MAX_ESTIMATE:
+                    setResultText(getString(R.string.default_vo2max));
             }
         }
 

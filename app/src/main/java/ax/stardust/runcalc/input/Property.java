@@ -9,7 +9,8 @@ public enum Property {
     CONVERT_SPEED_TO_PACE(Calculator::convertSpeedToPace),
     CALCULATE_PACE(Calculator::calculatePace),
     CALCULATE_TIME(Calculator::calculateTime),
-    CALCULATE_DISTANCE(Calculator::calculateDistance);
+    CALCULATE_DISTANCE(Calculator::calculateDistance),
+    CALCULATE_VO2MAX_ESTIMATE(Calculator::calculateVO2MaxEstimate);
 
     private final Function<String, String> calculatorFunction;
 
