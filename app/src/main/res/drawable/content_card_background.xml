@@ -3,7 +3,7 @@
     <solid android:color="@color/colorContentCardBackground" />
 
     <stroke
-        android:width="2dp"
+        android:width="1dp"
         android:color="@color/colorContentCardBorder" />
 
     <corners
