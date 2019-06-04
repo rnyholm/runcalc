@@ -8,6 +8,5 @@
     <string name="hint_time">Time(%s)</string>
     <string name="pace">Pace</string>
     <string name="time">Time</string>
-    <string name="calculate_vo2max_estimate_description">Calculate an estimated VO2max value from your cooper test result in meters.</string>
-    <string name="calculate_vo2max_estimate_results">" m estimates to a VO2max of {result}"</string>
+    <string name="calculate_vo2max_estimate_description">Calculate an estimated VO2max value from a cooper test result in meters.</string>
 </resources>

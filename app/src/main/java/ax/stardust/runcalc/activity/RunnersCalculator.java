@@ -124,7 +124,7 @@ public class RunnersCalculator extends AppCompatActivity {
         KeyboardlessEditText calculateVO2maxEstimateCooperTestResultEditText = findViewById(R.id.calculate_vo2max_estimate_cooper_test_result_et);
         calculateVO2maxEstimateCooperTestResultEditText.setInput(Input.DISTANCE);
         calculateVO2maxEstimateCooperTestResultEditText.setValidatorFunction(Calculator.Distance::parse);
-        interactionContainers.add(new InteractionContainer(Property.CONVERT_PACE_TO_SPEED, calculateVO2maxEstimateCooperTestResultEditText, calculateVO2MaxEstimateResultsTextView, R.string.calculate_vo2max_estimate_results));
+        interactionContainers.add(new InteractionContainer(Property.CALCULATE_VO2MAX_ESTIMATE, calculateVO2maxEstimateCooperTestResultEditText, calculateVO2MaxEstimateResultsTextView, R.string.calculate_vo2max_estimate_results));
     }
 
     private void setGlobalTexts() {

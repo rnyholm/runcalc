@@ -8,6 +8,5 @@
     <string name="hint_time">Tid(%s)</string>
     <string name="pace">Tempo</string>
     <string name="time">Tid</string>
-    <string name="calculate_vo2max_estimate_description">Beräkna ett estimerat VO2max värde genom att ange ditt resultat på coopertestet i meter.</string>
-    <string name="calculate_vo2max_estimate_results">m är estimerat ett VO2max på {result}</string>
+    <string name="calculate_vo2max_estimate_description">Beräkna ett estimerat VO2max värde genom att ange ett resultat från coopertestet i meter.</string>
 </resources>
