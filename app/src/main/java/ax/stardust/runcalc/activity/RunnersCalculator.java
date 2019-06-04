@@ -1,6 +1,8 @@
 package ax.stardust.runcalc.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Set;
@@ -43,6 +46,8 @@ public class RunnersCalculator extends AppCompatActivity {
     private TextView calculateDistancePaceHintTextView;
     private TextView calculateVO2maxEstimateTextView;
     private TextView versionNameTextView;
+
+    private ImageView cooperTestLinkImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +130,8 @@ public class RunnersCalculator extends AppCompatActivity {
         calculateVO2maxEstimateCooperTestResultEditText.setInput(Input.DISTANCE);
         calculateVO2maxEstimateCooperTestResultEditText.setValidatorFunction(Calculator.Distance::parse);
         interactionContainers.add(new InteractionContainer(Property.CALCULATE_VO2MAX_ESTIMATE, calculateVO2maxEstimateCooperTestResultEditText, calculateVO2MaxEstimateResultsTextView, R.string.calculate_vo2max_estimate_results));
+
+        cooperTestLinkImageView = findViewById(R.id.cooper_test_link_iv);
     }
 
     private void setGlobalTexts() {
@@ -152,6 +159,11 @@ public class RunnersCalculator extends AppCompatActivity {
 
     private void setListeners() {
         interactionContainers.forEach(InteractionContainer::setListeners);
+
+        cooperTestLinkImageView.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_cooper_test)));
+            startActivity(intent);
+        });
     }
 
     private class InteractionContainer implements Comparable {
