@@ -38,4 +38,6 @@
     <string name="keyboard_separator" translatable="false">:</string>
 
     <string name="filter_view_runners_calculator" translatable="false">View Runners Calculator</string>
+    <string name="image_link_content_descriptor" translatable="false">Link image</string>
+    <string name="url_cooper_test" translatable="false">https://en.wikipedia.org/wiki/Cooper_test</string>
 </resources>
