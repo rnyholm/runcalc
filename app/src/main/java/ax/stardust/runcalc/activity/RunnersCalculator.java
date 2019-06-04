@@ -154,7 +154,7 @@ public class RunnersCalculator extends AppCompatActivity {
         calculateDistanceTextView.setText(String.format(getString(R.string.calculate_xx), getString(R.string.distance).toLowerCase()));
         calculateDistanceTimeHintTextView.setText(String.format(getString(R.string.hint_time), getString(R.string.default_time)));
         calculateDistancePaceHintTextView.setText(String.format(getString(R.string.hint_pace), RunnersCalculator.pace));
-        calculateVO2maxEstimateTextView.setText(String.format(getString(R.string.calculate_xx), getString(R.string.vo2max)));
+        calculateVO2maxEstimateTextView.setText(String.format(getString(R.string.estimate_xx), getString(R.string.vo2max)));
     }
 
     private void setListeners() {

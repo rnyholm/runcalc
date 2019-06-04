@@ -28,7 +28,7 @@
             android:contextClickable="true"
             android:drawablePadding="5dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="@string/calculate_xx"
+            android:text="@string/estimate_xx"
             android:textColor="@color/colorHeadingText"
             android:textSize="18sp"
             android:textStyle="bold" />

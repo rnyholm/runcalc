@@ -2,6 +2,7 @@
     <string name="app_name" translatable="false">Runners Calculator</string>
     <string name="author" translatable="false">by @skidrupert,</string>
     <string name="calculate_xx">Calculate %s</string>
+    <string name="estimate_xx">Estimate %s</string>
     <string name="convert_xx_to_xx">Convert %s to %s</string>
     <string name="pace_to_speed_results" translatable="false"> {pace} = {result}{speed}</string>
     <string name="speed_to_pace_results" translatable="false"> {speed} = {result}{pace} </string>
@@ -9,7 +10,7 @@
     <string name="calculate_time_results" translatable="false"> {result}</string>
     <string name="calculate_distance_results" translatable="false"> {result}{distance}</string>
     <string name="calculate_vo2max_estimate_results" translatable="false"> m ~ {result} mL/kg/min</string>
-    <string name="calculate_vo2max_estimate_description">Calculate an estimated VO2max value from your cooper test result in meters.</string>
+    <string name="calculate_vo2max_estimate_description">Calculate an estimated VO2max value by giving a cooper test result in meters.</string>
     <string name="default_pace" translatable="false">0:00</string>
     <string name="default_speed_distance" translatable="false">0.0</string>
     <string name="default_time" translatable="false">00:00:00</string>
