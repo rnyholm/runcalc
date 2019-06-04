@@ -6,8 +6,10 @@
     <color name="colorError">#FF9999</color>
     <color name="colorDisabled">#E0E0E0</color>
     <color name="colorCursor">#E0E0E0</color>
-    <color name="colorButtonText">#FFFFFF</color>
-    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorContentCardBackground">#FFFFFF</color>
+    <color name="colorContentCardBorder">#E0E0E0</color>
+    <color name="colorButtonText">#FAFAFA</color>
+    <color name="colorBackground">#FAFAFA</color>
     <color name="colorHeadingText">#737373</color>
     <color name="colorText">#737373</color>
     <color name="colorInputText">#4A4A4A</color>
