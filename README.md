@@ -3,7 +3,7 @@
 Branch | Travis opinion
 -------|-------
 Master | [![Build Status](https://travis-ci.com/rnyholm/runcalc.svg?branch=master)](https://travis-ci.com/rnyholm/runcalc)
-Develop | [![Build Status](https://travis-ci.com/rnyholm/runcalc.svg?branch=dev-v1.1)](https://travis-ci.com/rnyholm/runcalc)
+Develop | [![Build Status](https://travis-ci.com/rnyholm/runcalc.svg?branch=dev-v1.2)](https://travis-ci.com/rnyholm/runcalc)
 
 ## Introduction
 Runners Calculator is a minimalistic utility application for Android made by a runner for runners. The purpose of the app is to make a few of the most common runner related conversions and calculations a bit easier. This includes conversions between pace and speed and vice versa as well as different calculations of distance, time and pace. Another important goal of the app is that it should be foolproof and easy to use, so you can focus more on the stuff that matters - running🏃‍♂️
