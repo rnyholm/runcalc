@@ -1,6 +1,12 @@
 package ax.stardust.runcalc.util;
 
+import com.google.gson.GsonBuilder;
+
 import java.util.Locale;
+
+import ax.stardust.runcalc.json.HeartRateZones;
+
+import static ax.stardust.runcalc.json.HeartRateZones.*;
 
 public class Calculator {
     private static final int SECONDS_IN_HOUR = 3600;
@@ -10,7 +16,9 @@ public class Calculator {
     private static final String PACE_PATTERN = "^[0-9]*$|^[0-9]*:[0-9]*$";
     private static final String SPEED_DISTANCE_PATTERN = "^[0-9]*$|^[0-9]*\\.[0-9]*$";
     private static final String TIME_PATTERN = "^[0-9]{1,2}:[0-9]{1,2}$|^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$";
-    private static final String COMBINED_STRING_PATTERN = "^[^|]+\\|[^|]+$";
+    private static final String SIMPLE_COMBINED_STRING_PATTERN = "^[^|]+\\|[^|]+$";
+    private static final String TRAINING_EXPERIENCE_HRREST_HRMAX_PATTERN = "^[b|B|e|E]\\|[0-9]{2,3}\\|[0-9]{3}$";
+    private static final String TRAINING_EXPERIENCE_HRREST_AGE_PATTERN = "^[b|B|e|E]\\|[0-9]{2,3}\\|[0-9]{2}$";
 
     public static String convertPaceToSpeed(String pace) {
         return Pace.parse(pace).asSpeed();
@@ -105,6 +113,98 @@ public class Calculator {
 
         double VO2Max = (result - 504.9) / 44.73;
         return String.format(Locale.ENGLISH, "%.1f", VO2Max);
+    }
+
+    /**
+     * To calculate the different training heart zones based on given data. The data can be provided in
+     * two ways. Either by providing training experience, rest heart rate and maximum heart rate. This
+     * way is preferred as it relies on an actual maximum heart rate. Pattern for this is: B/E|hrr|hrm<br />
+     * The other way is to provide training experience, rest heart rate and age. Pattern for this is: B/E|hrr|age.
+     * This way an estimated maximum heart rate is calculated based on age using the Fox method(220-age).<br />
+     * Training experience is needed cause the training zones differs a bit if it's an experienced user
+     * or beginner. Experienced use zoning;
+     *  z5:95-100% of hrMax
+     *  z4:85-95%
+     *  z3:75-85%
+     *  z2:60-75%
+     *  z1:50-60%
+     * Beginner on the other hand uses zoning;
+     *  z5:90-100%
+     *  z4:80-90%
+     *  z3:70-80%
+     *  z2:60-70%
+     *  z1:50-60%.
+     * As the Karvonen method is used to calculate the different zones are used it's also needed to provide
+     * resting heart rate.<br />
+     * The returned string is Json formatted and contains the different training heart zones with it's corresponding
+     *
+     * @param heartRateCalculationData Combined value of data needed
+     * @return Json formatted string with the different training heart zones
+     */
+    public static String calculateHeartRateZones(String heartRateCalculationData) {
+        return HeartRateCalculationData.parse(heartRateCalculationData).getHeartRateZones();
+    }
+
+    static class HeartRateCalculationData {
+        final int hrRest;
+        final int hrMax;
+        final boolean experienced;
+
+        private HeartRateCalculationData(int hrRest, int hrMax, boolean experienced) {
+            this.hrRest = hrRest;
+            this.hrMax = hrMax;
+            this.experienced = experienced;
+        }
+
+        static HeartRateCalculationData parse(String heartRateCalculationData) {
+            if (heartRateCalculationData != null) {
+                if (heartRateCalculationData.isEmpty()) {
+                    return new HeartRateCalculationData(0, 0, false);
+                }
+
+                if (heartRateCalculationData.matches(TRAINING_EXPERIENCE_HRREST_HRMAX_PATTERN) ||   // B/E|hrRest|hrMax
+                        heartRateCalculationData.matches(TRAINING_EXPERIENCE_HRREST_AGE_PATTERN)) {  // B/E|hrRest|age
+                    String[] split = heartRateCalculationData.split("\\|");
+                    boolean experienced = split[0].equalsIgnoreCase("E");
+                    int hrRest = Integer.parseInt(split[1]);
+                    int hrMax;
+
+                    if (heartRateCalculationData.matches(TRAINING_EXPERIENCE_HRREST_HRMAX_PATTERN)) {
+                        hrMax = Integer.parseInt(split[2]);
+                    } else {
+                        int age = Integer.parseInt(split[2]);
+                        hrMax = 220 - age; // fox method
+                    }
+
+                    return new HeartRateCalculationData(hrRest, hrMax, experienced);
+                }
+            }
+
+            throw new IllegalArgumentException();
+        }
+
+        private int heartRateForPercent(int percent) {
+            return (int) Math.round(((hrMax - hrRest) * (percent * 0.01)) + hrRest);
+        }
+
+        String getHeartRateZones() {
+            HeartRateZones heartRateZones = new HeartRateZones();
+            if (experienced) {
+                heartRateZones.addZone(HeartRateZone.create(ZONE_5, heartRateForPercent(95), hrMax, 95, 100));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_4, heartRateForPercent(85), heartRateForPercent(95) - 1, 85, 95));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_3, heartRateForPercent(75), heartRateForPercent(85) - 1, 75, 85));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_2, heartRateForPercent(60), heartRateForPercent(75) -1 , 60, 75));
+            } else {
+                heartRateZones.addZone(HeartRateZone.create(ZONE_5, heartRateForPercent(90), hrMax, 90, 100));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_4, heartRateForPercent(80), heartRateForPercent(90) - 1, 80, 90));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_3, heartRateForPercent(70), heartRateForPercent(80) - 1, 70, 80));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_2, heartRateForPercent(60), heartRateForPercent(70) -1 , 60, 70));
+            }
+
+            heartRateZones.addZone(HeartRateZone.create(ZONE_1, heartRateForPercent(50), heartRateForPercent(60) - 1, 50, 60));
+
+            return new GsonBuilder().create().toJson(heartRateZones);
+        }
     }
 
     public static class Speed {
@@ -321,7 +421,7 @@ public class Calculator {
     }
 
     private static void throwExceptionIfMalformedStringPattern(String combined) {
-        if (combined == null || combined.isEmpty() || !combined.matches(COMBINED_STRING_PATTERN)) {
+        if (combined == null || combined.isEmpty() || !combined.matches(SIMPLE_COMBINED_STRING_PATTERN)) {
             throw new IllegalArgumentException();
         }
     }
