@@ -4,9 +4,9 @@ import com.google.gson.GsonBuilder;
 
 import java.util.Locale;
 
-import ax.stardust.runcalc.json.HeartRateZones;
+import ax.stardust.runcalc.pojo.HeartRateZones;
 
-import static ax.stardust.runcalc.json.HeartRateZones.*;
+import static ax.stardust.runcalc.pojo.HeartRateZones.*;
 
 public class Calculator {
     private static final int SECONDS_IN_HOUR = 3600;
@@ -17,8 +17,8 @@ public class Calculator {
     private static final String SPEED_DISTANCE_PATTERN = "^[0-9]*$|^[0-9]*\\.[0-9]*$";
     private static final String TIME_PATTERN = "^[0-9]{1,2}:[0-9]{1,2}$|^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$";
     private static final String SIMPLE_COMBINED_STRING_PATTERN = "^[^|]+\\|[^|]+$";
-    private static final String TRAINING_EXPERIENCE_HRREST_HRMAX_PATTERN = "^[b|B|e|E]\\|[0-9]{2,3}\\|[0-9]{3}$";
-    private static final String TRAINING_EXPERIENCE_HRREST_AGE_PATTERN = "^[b|B|e|E]\\|[0-9]{2,3}\\|[0-9]{2}$";
+    private static final String TRAINING_EXPERIENCE_HRREST_HRMAX_PATTERN = "^[B|E]\\|[0-9]{2,3}\\|HR-[0-9]{3}$";
+    private static final String TRAINING_EXPERIENCE_HRREST_AGE_PATTERN = "^[B|E]\\|[0-9]{2,3}\\|A-[0-9]{2}$";
 
     public static String convertPaceToSpeed(String pace) {
         return Pace.parse(pace).asSpeed();
@@ -116,10 +116,10 @@ public class Calculator {
     }
 
     /**
-     * To calculate the different training heart zones based on given data. The data can be provided in
+     * To calculate the different heart zones for training based on given data. The data can be provided in
      * two ways. Either by providing training experience, rest heart rate and maximum heart rate. This
-     * way is preferred as it relies on an actual maximum heart rate. Pattern for this is: B/E|hrr|hrm<br />
-     * The other way is to provide training experience, rest heart rate and age. Pattern for this is: B/E|hrr|age.
+     * way is preferred as it relies on an actual maximum heart rate. Pattern for this is: B/E|hrr|HR-hrm<br />
+     * The other way is to provide training experience, rest heart rate and age. Pattern for this is: B/E|hrr|A-age.
      * This way an estimated maximum heart rate is calculated based on age using the Fox method(220-age).<br />
      * Training experience is needed cause the training zones differs a bit if it's an experienced user
      * or beginner. Experienced use zoning;
@@ -136,9 +136,14 @@ public class Calculator {
      *  z1:50-60%.
      * As the Karvonen method is used to calculate the different zones are used it's also needed to provide
      * resting heart rate.<br />
+     * Validation of the data is being to check that it's within reasonable ranges, following values are valid:
+     *  training experience: B or E
+     *  resting heart rate: a numeric value between 26 and 100
+     *  maximum heart rate: a numeric value between 120 and 220
+     *  age: a numeric value between 10 and 99
      * The returned string is Json formatted and contains the different training heart zones with it's corresponding
      *
-     * @param heartRateCalculationData Combined value of data needed
+     * @param heartRateCalculationData Combined value of data needed for calculation
      * @return Json formatted string with the different training heart zones
      */
     public static String calculateHeartRateZones(String heartRateCalculationData) {
@@ -162,18 +167,29 @@ public class Calculator {
                     return new HeartRateCalculationData(0, 0, false);
                 }
 
-                if (heartRateCalculationData.matches(TRAINING_EXPERIENCE_HRREST_HRMAX_PATTERN) ||   // B/E|hrRest|hrMax
-                        heartRateCalculationData.matches(TRAINING_EXPERIENCE_HRREST_AGE_PATTERN)) {  // B/E|hrRest|age
+                if (heartRateCalculationData.matches(TRAINING_EXPERIENCE_HRREST_HRMAX_PATTERN) ||   // B/E|hrRest|HR-hrMax
+                        heartRateCalculationData.matches(TRAINING_EXPERIENCE_HRREST_AGE_PATTERN)) {  // B/E|hrRest|A-age
                     String[] split = heartRateCalculationData.split("\\|");
+                    String[] subSplit = split[2].split("-");
                     boolean experienced = split[0].equalsIgnoreCase("E");
                     int hrRest = Integer.parseInt(split[1]);
+                    int hrmOrAge = Integer.parseInt(subSplit[1]); // hrm or age
                     int hrMax;
 
+                    if (hrRest < 26 || hrRest > 100) { // world record in lowest resting heart beat broken or you should train more
+                        throw new IllegalArgumentException();
+                    }
+
                     if (heartRateCalculationData.matches(TRAINING_EXPERIENCE_HRREST_HRMAX_PATTERN)) {
-                        hrMax = Integer.parseInt(split[2]);
-                    } else {
-                        int age = Integer.parseInt(split[2]);
-                        hrMax = 220 - age; // fox method
+                        if (hrmOrAge > 220 || hrmOrAge < 120) { // Hmm, tachycardia next or magically low mhr
+                            throw new IllegalArgumentException();
+                        }
+                        hrMax = hrmOrAge;
+                    } else { // age
+                        if (hrmOrAge > 99) { // sorry all 99+ seniors
+                            throw new IllegalArgumentException();
+                        }
+                        hrMax = 220 - hrmOrAge; // fox method
                     }
 
                     return new HeartRateCalculationData(hrRest, hrMax, experienced);
@@ -183,25 +199,25 @@ public class Calculator {
             throw new IllegalArgumentException();
         }
 
-        private int heartRateForPercent(int percent) {
-            return (int) Math.round(((hrMax - hrRest) * (percent * 0.01)) + hrRest);
+        private int toHeartRate(int percent) {
+            return (int) Math.round(((hrMax - hrRest) * (percent * 0.01)) + hrRest); // karvonen method
         }
 
         String getHeartRateZones() {
             HeartRateZones heartRateZones = new HeartRateZones();
             if (experienced) {
-                heartRateZones.addZone(HeartRateZone.create(ZONE_5, heartRateForPercent(95), hrMax, 95, 100));
-                heartRateZones.addZone(HeartRateZone.create(ZONE_4, heartRateForPercent(85), heartRateForPercent(95) - 1, 85, 95));
-                heartRateZones.addZone(HeartRateZone.create(ZONE_3, heartRateForPercent(75), heartRateForPercent(85) - 1, 75, 85));
-                heartRateZones.addZone(HeartRateZone.create(ZONE_2, heartRateForPercent(60), heartRateForPercent(75) -1 , 60, 75));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_5, toHeartRate(95), hrMax, 95, 100));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_4, toHeartRate(85), toHeartRate(95) - 1, 85, 95));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_3, toHeartRate(75), toHeartRate(85) - 1, 75, 85));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_2, toHeartRate(60), toHeartRate(75) -1 , 60, 75));
             } else {
-                heartRateZones.addZone(HeartRateZone.create(ZONE_5, heartRateForPercent(90), hrMax, 90, 100));
-                heartRateZones.addZone(HeartRateZone.create(ZONE_4, heartRateForPercent(80), heartRateForPercent(90) - 1, 80, 90));
-                heartRateZones.addZone(HeartRateZone.create(ZONE_3, heartRateForPercent(70), heartRateForPercent(80) - 1, 70, 80));
-                heartRateZones.addZone(HeartRateZone.create(ZONE_2, heartRateForPercent(60), heartRateForPercent(70) -1 , 60, 70));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_5, toHeartRate(90), hrMax, 90, 100));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_4, toHeartRate(80), toHeartRate(90) - 1, 80, 90));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_3, toHeartRate(70), toHeartRate(80) - 1, 70, 80));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_2, toHeartRate(60), toHeartRate(70) -1 , 60, 70));
             }
 
-            heartRateZones.addZone(HeartRateZone.create(ZONE_1, heartRateForPercent(50), heartRateForPercent(60) - 1, 50, 60));
+            heartRateZones.addZone(HeartRateZone.create(ZONE_1, toHeartRate(50), toHeartRate(60) - 1, 50, 60));
 
             return new GsonBuilder().create().toJson(heartRateZones);
         }

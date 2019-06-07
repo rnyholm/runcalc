@@ -5,8 +5,8 @@ import com.google.gson.GsonBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
-import ax.stardust.runcalc.json.HeartRateZones;
-import ax.stardust.runcalc.json.HeartRateZones.HeartRateZone;
+import ax.stardust.runcalc.pojo.HeartRateZones;
+import ax.stardust.runcalc.pojo.HeartRateZones.HeartRateZone;
 import ax.stardust.runcalc.util.Calculator;
 
 import static org.junit.Assert.assertEquals;
@@ -194,110 +194,199 @@ public class CalculatorUnitTest {
         assertEquals("100.5", Calculator.calculateVO2MaxEstimate("5000"));
     }
 
-    private void validateHeartRateZone(HeartRateZone heartRateZone) {
-        assertNotNull(heartRateZone);
-        assertTrue(heartRateZone.getZone() != null && !heartRateZone.getZone().isEmpty());
-        assertTrue(heartRateZone.getHrMin() > 40);
-        assertTrue(heartRateZone.getHrMax() < 215);
-        assertTrue(heartRateZone.getPercentageMin() > 49);
-        assertTrue(heartRateZone.getPercentageMax() < 101);
-    }
+    @Test
+    public void testCalculateHeartRateZones() {
+        HeartRateZones heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("E|60|HR-191"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 184, 191, 95, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 171, 183, 85, 95);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 158, 170, 75, 85);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 139, 157, 60, 75);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 126, 138, 50, 60);
 
-    private HeartRateZones validateHeartRateZones(String heartRateZonesJson) {
-        if (heartRateZonesJson == null || heartRateZonesJson.isEmpty()) {
-            fail("Heart rate zone json is null or empty");
-        }
-        HeartRateZones heartRateZones = new GsonBuilder().create().fromJson(heartRateZonesJson, HeartRateZones.class);
-        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5));
-        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4));
-        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3));
-        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2));
-        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1));
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("E|60|A-29"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 184, 191, 95, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 171, 183, 85, 95);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 158, 170, 75, 85);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 139, 157, 60, 75);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 126, 138, 50, 60);
 
-        return heartRateZones;
-    }
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("E|75|HR-188"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 182, 188, 95, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 171, 181, 85, 95);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 160, 170, 75, 85);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 143, 159, 60, 75);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 132, 142, 50, 60);
 
-    private void validateHeartRateZone(HeartRateZone heartRateZone, int hrMinExpected, int hrMaxExpected, int percentageMinExpected, int percentageMaxExpected) {
-        assertEquals(hrMinExpected, heartRateZone.getHrMin());
-        assertEquals(hrMaxExpected, heartRateZone.getHrMax());
-        assertEquals(percentageMinExpected, heartRateZone.getPercentageMin());
-        assertEquals(percentageMaxExpected, heartRateZone.getPercentageMax());
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("E|75|A-32"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 182, 188, 95, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 171, 181, 85, 95);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 160, 170, 75, 85);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 143, 159, 60, 75);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 132, 142, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("E|75|HR-200"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 194, 200, 95, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 181, 193, 85, 95);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 169, 180, 75, 85);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 150, 168, 60, 75);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 138, 149, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("E|75|A-20"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 194, 200, 95, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 181, 193, 85, 95);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 169, 180, 75, 85);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 150, 168, 60, 75);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 138, 149, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("E|41|HR-121"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 117, 121, 95, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 109, 116, 85, 95);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 101, 108, 75, 85);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 89, 100, 60, 75);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 81, 88, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("E|41|A-99"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 117, 121, 95, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 109, 116, 85, 95);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 101, 108, 75, 85);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 89, 100, 60, 75);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 81, 88, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("E|85|HR-210"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 204, 210, 95, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 191, 203, 85, 95);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 179, 190, 75, 85);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 160, 178, 60, 75);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 148, 159, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("E|85|A-10"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 204, 210, 95, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 191, 203, 85, 95);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 179, 190, 75, 85);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 160, 178, 60, 75);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 148, 159, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("E|59|HR-190"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 183, 190, 95, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 170, 182, 85, 95);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 157, 169, 75, 85);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 138, 156, 60, 75);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 125, 137, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("E|59|A-30"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 183, 190, 95, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 170, 182, 85, 95);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 157, 169, 75, 85);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 138, 156, 60, 75);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 125, 137, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("B|60|HR-191"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 178, 191, 90, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 165, 177, 80, 90);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 152, 164, 70, 80);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 139, 151, 60, 70);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 126, 138, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("B|60|A-29"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 178, 191, 90, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 165, 177, 80, 90);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 152, 164, 70, 80);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 139, 151, 60, 70);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 126, 138, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("B|75|HR-188"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 177, 188, 90, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 165, 176, 80, 90);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 154, 164, 70, 80);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 143, 153, 60, 70);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 132, 142, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("B|75|A-32"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 177, 188, 90, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 165, 176, 80, 90);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 154, 164, 70, 80);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 143, 153, 60, 70);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 132, 142, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("B|75|HR-200"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 188, 200, 90, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 175, 187, 80, 90);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 163, 174, 70, 80);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 150, 162, 60, 70);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 138, 149, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("B|75|A-20"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 188, 200, 90, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 175, 187, 80, 90);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 163, 174, 70, 80);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 150, 162, 60, 70);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 138, 149, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("B|41|HR-121"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 113, 121, 90, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 105, 112, 80, 90);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 97, 104, 70, 80);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 89, 96, 60, 70);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 81, 88, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("B|41|A-99"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 113, 121, 90, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 105, 112, 80, 90);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 97, 104, 70, 80);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 89, 96, 60, 70);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 81, 88, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("B|85|HR-210"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 198, 210, 90, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 185, 197, 80, 90);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 173, 184, 70, 80);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 160, 172, 60, 70);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 148, 159, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("B|85|A-10"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 198, 210, 90, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 185, 197, 80, 90);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 173, 184, 70, 80);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 160, 172, 60, 70);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 148, 159, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("B|59|HR-190"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 177, 190, 90, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 164, 176, 80, 90);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 151, 163, 70, 80);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 138, 150, 60, 70);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 125, 137, 50, 60);
+
+        heartRateZones = validateHeartRateZones(Calculator.calculateHeartRateZones("B|59|A-30"));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5), 177, 190, 90, 100);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4), 164, 176, 80, 90);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 151, 163, 70, 80);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 138, 150, 60, 70);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 125, 137, 50, 60);
     }
 
     @Test
-    public void testCalculateHeartRateZones() {
-        HeartRateZones hrz = validateHeartRateZones(Calculator.calculateHeartRateZones("E|60|191"));
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_5), 184, 191, 95, 100);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_4), 171, 183, 85, 95);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_3), 158, 170, 75, 85);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_2), 139, 157, 60, 75);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_1), 126, 138, 50, 60);
+    public void testHeartRateZones() {
+        HeartRateZones heartRateZones = new HeartRateZones();
+        HeartRateZone heartRateZone = HeartRateZone.create(HeartRateZones.ZONE_3, 151, 163, 70, 80);
+        heartRateZones.addZone(heartRateZone);
 
-        hrz = validateHeartRateZones(Calculator.calculateHeartRateZones("E|60|29"));
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_5), 184, 191, 95, 100);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_4), 171, 183, 85, 95);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_3), 158, 170, 75, 85);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_2), 139, 157, 60, 75);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_1), 126, 138, 50, 60);
+        try {
+           heartRateZones.getZone("z10");
+           fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
 
-        hrz = validateHeartRateZones(Calculator.calculateHeartRateZones("E|75|188"));
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_5), 182, 188, 95, 100);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_4), 171, 181, 85, 95);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_3), 160, 170, 75, 85);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_2), 143, 159, 60, 75);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_1), 132, 142, 50, 60);
+        try {
+            heartRateZones.getZone("z5");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
 
-        hrz = validateHeartRateZones(Calculator.calculateHeartRateZones("E|75|32"));
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_5), 182, 188, 95, 100);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_4), 171, 181, 85, 95);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_3), 160, 170, 75, 85);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_2), 143, 159, 60, 75);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_1), 132, 142, 50, 60);
-
-        hrz = validateHeartRateZones(Calculator.calculateHeartRateZones("E|75|200"));
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_5), 194, 200, 95, 100);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_4), 181, 193, 85, 95);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_3), 169, 180, 75, 85);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_2), 150, 168, 60, 75);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_1), 138, 149, 50, 60);
-
-        hrz = validateHeartRateZones(Calculator.calculateHeartRateZones("E|75|20"));
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_5), 194, 200, 95, 100);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_4), 181, 193, 85, 95);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_3), 169, 180, 75, 85);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_2), 150, 168, 60, 75);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_1), 138, 149, 50, 60);
-
-        hrz = validateHeartRateZones(Calculator.calculateHeartRateZones("E|85|210"));
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_5), 204, 210, 95, 100);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_4), 191, 203, 85, 95);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_3), 179, 190, 75, 85);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_2), 160, 178, 60, 75);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_1), 148, 159, 50, 60);
-
-        hrz = validateHeartRateZones(Calculator.calculateHeartRateZones("E|85|10"));
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_5), 204, 210, 95, 100);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_4), 191, 203, 85, 95);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_3), 179, 190, 75, 85);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_2), 160, 178, 60, 75);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_1), 148, 159, 50, 60);
-
-        hrz = validateHeartRateZones(Calculator.calculateHeartRateZones("E|59|190"));
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_5), 183, 190, 95, 100);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_4), 170, 182, 85, 95);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_3), 157, 169, 75, 85);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_2), 138, 156, 60, 75);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_1), 125, 137, 50, 60);
-
-        hrz = validateHeartRateZones(Calculator.calculateHeartRateZones("E|59|30"));
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_5), 183, 190, 95, 100);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_4), 170, 182, 85, 95);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_3), 157, 169, 75, 85);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_2), 138, 156, 60, 75);
-        validateHeartRateZone(hrz.getZone(HeartRateZones.ZONE_1), 125, 137, 50, 60);
-        System.out.println(hrz.toString());
-//        System.out.println(Calculator.calculateHeartRateZones("E|60|191"));
-//        System.out.println(Calculator.calculateHeartRateZones("B|60|191"));
+        assertEquals(heartRateZone, heartRateZones.getZone(HeartRateZones.ZONE_3));
+        assertEquals(2, exceptionCounter);
     }
 
     @Test
@@ -676,6 +765,151 @@ public class CalculatorUnitTest {
     }
 
     @Test
+    public void testCalculateHeartRateZonesEstimateExceptions() {
+        try {
+            Calculator.calculateHeartRateZones("B|56|121");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("B|76|hr-121");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("b|64|HR-121");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("e|53|HR-121");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("E|74|HR-99");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("E|69|a-43");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("e|57|A-43");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("b|65|A-43");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("B|49|A-9");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("B|39|A-100");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("B|25|A-100");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("B|25|A-100");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("B|0|A-100");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("B|-1|A-100");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("B|101|A-100");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("B|110|A-100");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("B|47|HR-221");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("B|99|HR--221");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("B|86|HR-119");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateHeartRateZones("E|58|HR-100");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        assertEquals(20, exceptionCounter);
+    }
+
+    @Test
     public void testCalculateVO2MaxEstimateExceptions() {
         try {
             Calculator.calculateVO2MaxEstimate("-10000");
@@ -743,5 +977,35 @@ public class CalculatorUnitTest {
 
     private String combineStrings(String s1, String s2) {
         return s1 + "|" + s2;
+    }
+
+    private HeartRateZones validateHeartRateZones(String heartRateZonesJson) {
+        if (heartRateZonesJson == null || heartRateZonesJson.isEmpty()) {
+            fail("Heart rate zone json is null or empty");
+        }
+        HeartRateZones heartRateZones = new GsonBuilder().create().fromJson(heartRateZonesJson, HeartRateZones.class);
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_4));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2));
+        validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1));
+
+        return heartRateZones;
+    }
+
+    private void validateHeartRateZone(HeartRateZone heartRateZone, int hrMinExpected, int hrMaxExpected, int percentageMinExpected, int percentageMaxExpected) {
+        assertEquals(hrMinExpected, heartRateZone.getHrMin());
+        assertEquals(hrMaxExpected, heartRateZone.getHrMax());
+        assertEquals(percentageMinExpected, heartRateZone.getPercentageMin());
+        assertEquals(percentageMaxExpected, heartRateZone.getPercentageMax());
+    }
+
+    private void validateHeartRateZone(HeartRateZone heartRateZone) {
+        assertNotNull(heartRateZone);
+        assertTrue(heartRateZone.getZone() != null && !heartRateZone.getZone().isEmpty());
+        assertTrue(heartRateZone.getHrMin() > 40);
+        assertTrue(heartRateZone.getHrMax() < 215);
+        assertTrue(heartRateZone.getPercentageMin() > 49);
+        assertTrue(heartRateZone.getPercentageMax() < 101);
     }
 }

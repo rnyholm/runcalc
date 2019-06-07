@@ -1,4 +1,4 @@
-package ax.stardust.runcalc.json;
+package ax.stardust.runcalc.pojo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,9 +13,6 @@ public class HeartRateZones {
     public static final String ZONE_1 = "z1";
 
     private final List<HeartRateZone> heartRateZones = new ArrayList<>();
-
-    public HeartRateZones() {
-    }
 
     public void addZone(HeartRateZone heartRateZone) {
         heartRateZones.add(heartRateZone);
