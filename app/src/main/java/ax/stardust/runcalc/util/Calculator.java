@@ -122,13 +122,13 @@ public class Calculator {
      * The other way is to provide training experience, rest heart rate and age. Pattern for this is: B/E|hrr|A-age.
      * This way an estimated maximum heart rate is calculated based on age using the Fox method(220-age).<br />
      * Training experience is needed cause the training zones differs a bit if it's an experienced user
-     * or beginner. Experienced use zoning;
+     * or basic user. Experienced use zoning;
      *  z5:95-100% of hrMax
      *  z4:85-95%
      *  z3:75-85%
      *  z2:60-75%
      *  z1:50-60%
-     * Beginner on the other hand uses zoning;
+     * Basic on the other hand uses zoning;
      *  z5:90-100%
      *  z4:80-90%
      *  z3:70-80%

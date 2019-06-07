@@ -1,5 +1,7 @@
 package ax.stardust.runcalc.pojo;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,17 +25,18 @@ public class HeartRateZones {
             throw new IllegalArgumentException();
         }
 
-        Optional<HeartRateZone> optionalTrainingHeartRateZone = heartRateZones.stream()
-                .filter(thrz -> zone.equals(thrz.getZone()))
+        Optional<HeartRateZone> optionalHeartRateZone = heartRateZones.stream()
+                .filter(heartRateZone -> zone.equals(heartRateZone.getZone()))
                 .findFirst();
 
-        if (!optionalTrainingHeartRateZone.isPresent()) {
+        if (!optionalHeartRateZone.isPresent()) {
             throw new IllegalStateException();
         }
 
-        return optionalTrainingHeartRateZone.get();
+        return optionalHeartRateZone.get();
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "(" + heartRateZones + ")";
@@ -79,6 +82,7 @@ public class HeartRateZones {
             return percentageMax;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return zone + " - " + hrMin + " - " + hrMax + " - " + percentageMin  + " - " + percentageMax;
