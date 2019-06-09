@@ -56,7 +56,7 @@
         android:textSize="16sp" />
 
     <LinearLayout
-        android:id="@+id/calculate_vo2max_estimate_ll"
+        android:id="@+id/maximum_heart_rate_input_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -64,7 +64,7 @@
         android:orientation="horizontal">
 
         <ax.stardust.runcalc.component.KeyboardlessEditText
-            android:id="@+id/calculate_vo2max_estimate_cooper_test_result_et"
+            android:id="@+id/calculate_training_zones_maximum_heart_rate_et"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -80,7 +80,7 @@
             android:textCursorDrawable="@drawable/input_cursor_default" />
 
         <TextView
-            android:id="@+id/calculate_vo2max_estimate_results_tv"
+            android:id="@+id/maximum_heart_rate_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
