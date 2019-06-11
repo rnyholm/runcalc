@@ -10,4 +10,9 @@
     <string name="time">Tid</string>
     <string name="calculate_vo2max_estimate_description">Beräkna ett estimerat VO2max genom att ange resultat från coopertestet i meter.</string>
     <string name="estimate_xx">Estimera %s</string>
+    <string name="age">Ålder</string>
+    <string name="experienced_runner">Erfaren löpare</string>
+    <string name="maximum_heart_rate">Maxpuls</string>
+    <string name="training_heart_rate_zones">Träningszoner</string>
+    <string name="calculate_training_heart_rate_zones_description">Beräkna dina träningszoner utifrån din maxpuls eller ålder i kombination med din vilopuls och träningsnivå. Om ålder används kommer maxpulsen räknas ut enligt formeln 220-ålder, vilket är mindre noggrant alternativ. Vilopulsen behövs eftersom Karvonen-metoden används för att räkna ut de olika träningszonerna.</string>
 </resources>

@@ -11,7 +11,7 @@
     <string name="calculate_distance_results" translatable="false"> {result}{distance}</string>
     <string name="calculate_vo2max_estimate_results" translatable="false"> m ~ {result} mL/kg/min</string>
     <string name="calculate_vo2max_estimate_description">Calculate an estimated VO2max by giving a cooper test result in meters.</string>
-    <string name="calculate_training_heart_rate_zones_description">Calculate your training heart rate zones from your maximum heart rate or age and your resting heart rate. If age is used the maximum heart rate will be calculated as 220-your age, which is less accurate than if you have measured your actual maximum heart rate. The resting heart rate is needed because the Karvonen method is used to calculate the different training heart rate zones.</string>
+    <string name="calculate_training_heart_rate_zones_description">Calculate your training heart rate zones from your maximum heart rate or age combined with your resting heart rate and training experience. If age is used the maximum heart rate will be calculated as 220-your age, which is a less accurate option. The resting heart rate is needed because the Karvonen method is used to calculate the different training heart rate zones.</string>
     <string name="default_pace" translatable="false">0:00</string>
     <string name="default_speed_distance" translatable="false">0.0</string>
     <string name="default_time" translatable="false">00:00:00</string>
@@ -28,7 +28,7 @@
     <string name="training_heart_rate_zones">Training heart rate zones</string>
     <string name="maximum_heart_rate">Maximum heart rate</string>
     <string name="age">Age</string>
-    <string name="training_experience">Training experience</string>
+    <string name="experienced_runner">Experienced runner</string>
     <string name="hint_distance">Distance(%s)</string>
     <string name="hint_time">Time(%s)</string>
     <string name="hint_pace">Pace(%s)</string>
@@ -48,4 +48,5 @@
     <string name="filter_view_runners_calculator" translatable="false">View Runners Calculator</string>
     <string name="image_link_content_descriptor" translatable="false">Link image</string>
     <string name="url_cooper_test" translatable="false">https://en.wikipedia.org/wiki/Cooper_test</string>
+    <string name="url_karvonen_method" translatable="false">https://en.wikipedia.org/wiki/Heart_rate#Karvonen_method</string>
 </resources>

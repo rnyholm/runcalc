@@ -47,7 +47,7 @@ public class RunnersCalculator extends AppCompatActivity {
     private TextView calculateVO2maxEstimateTextView;
     private TextView versionNameTextView;
 
-    private ImageView cooperTestLinkImageView;
+    private ImageView calculateVO2maxEstimateCooperTestLinkImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +131,7 @@ public class RunnersCalculator extends AppCompatActivity {
         calculateVO2maxEstimateCooperTestResultEditText.setValidatorFunction(Calculator.Distance::parse);
         interactionContainers.add(new InteractionContainer(Property.CALCULATE_VO2MAX_ESTIMATE, calculateVO2maxEstimateCooperTestResultEditText, calculateVO2MaxEstimateResultsTextView, R.string.calculate_vo2max_estimate_results));
 
-        cooperTestLinkImageView = findViewById(R.id.cooper_test_link_iv);
+        calculateVO2maxEstimateCooperTestLinkImageView = findViewById(R.id.calculate_vo2max_estimate_cooper_test_link_iv);
     }
 
     private void setGlobalTexts() {
@@ -160,7 +160,7 @@ public class RunnersCalculator extends AppCompatActivity {
     private void setListeners() {
         interactionContainers.forEach(InteractionContainer::setListeners);
 
-        cooperTestLinkImageView.setOnClickListener(view -> {
+        calculateVO2maxEstimateCooperTestLinkImageView.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_cooper_test)));
             startActivity(intent);
         });

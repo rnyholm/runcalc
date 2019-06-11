@@ -10,4 +10,9 @@
     <string name="time">Time</string>
     <string name="calculate_vo2max_estimate_description">Calculate an estimated VO2max by giving a cooper test result in meters.</string>
     <string name="estimate_xx">Estimate %s</string>
+    <string name="age">Age</string>
+    <string name="experienced_runner">Experienced runner</string>
+    <string name="maximum_heart_rate">Maximum heart rate</string>
+    <string name="training_heart_rate_zones">Training heart rate zones</string>
+    <string name="calculate_training_heart_rate_zones_description">Calculate your training heart rate zones from your maximum heart rate or age combined with your resting heart rate and training experience. If age is used the maximum heart rate will be calculated as 220-your age, which is a less accurate option. The resting heart rate is needed because the Karvonen method is used to calculate the different training heart rate zones.</string>
 </resources>

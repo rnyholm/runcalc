@@ -34,7 +34,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/karvonen_link_iv"
+            android:id="@+id/calculate_training_heart_rate_zones_karvonen_link_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -56,21 +56,21 @@
         android:textSize="16sp" />
 
     <LinearLayout
-        android:id="@+id/calculate_heart_rate_zones_input_ll"
+        android:id="@+id/calculate_training_heart_rate_zones_input_ll"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/maximum_heart_rate_input_ll"
+            android:id="@+id/calculate_training_heart_rate_zones_maximum_heart_rate_input_ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/maximum_heart_rate_tv"
+                android:id="@+id/calculate_training_heart_rate_zones_maximum_heart_rate_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="7dp"
@@ -81,7 +81,7 @@
                 android:textSize="16sp" />
 
             <ax.stardust.runcalc.component.KeyboardlessEditText
-                android:id="@+id/calculate_training_zones_maximum_heart_rate_et"
+                android:id="@+id/calculate_training_heart_rate_zones_maximum_heart_rate_et"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/input_default"
@@ -98,15 +98,15 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/age_input_ll"
+            android:id="@+id/calculate_training_heart_rate_zones_age_input_ll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/age_tv"
+                android:id="@+id/calculate_training_heart_rate_zones_age_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -116,7 +116,7 @@
                 android:textSize="16sp" />
 
             <ax.stardust.runcalc.component.KeyboardlessEditText
-                android:id="@+id/calculate_training_zones_age_et"
+                android:id="@+id/calculate_training_heart_rate_zones_age_et"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/input_default"
@@ -133,45 +133,22 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/training_experience_input_ll"
+            android:id="@+id/calculate_training_heart_rate_zones_training_experience_input_ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/training_experience_tv"
+            <Switch
+                android:id="@+id/calculate_training_heart_rate_zones_training_experience_sw"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="@string/experienced_runner"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/training_experience"
                 android:textColor="@color/colorText"
-                android:textSize="16sp" />
-
-            <RadioGroup
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:checkedButton="@id/radioButton"
-                android:orientation='horizontal'>
-
-                <RadioButton
-                    android:id="@+id/radioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="RadioButton" />
-
-                <RadioButton
-                    android:id="@+id/radioButton2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="RadioButton" />
-            </RadioGroup>
-
+                android:textSize="16sp"/>
         </LinearLayout>
     </LinearLayout>
 
