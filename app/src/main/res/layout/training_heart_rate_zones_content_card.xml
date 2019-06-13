@@ -5,7 +5,6 @@
     android:id="@+id/training_heart_rate_zones_content_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/content_card_background"
     android:orientation="vertical"
     android:paddingStart="6dp"
     android:paddingTop="4dp"
@@ -84,6 +83,7 @@
                 android:id="@+id/calculate_training_heart_rate_zones_maximum_heart_rate_et"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
                 android:background="@drawable/input_default"
                 android:ems="10"
                 android:fontFamily="@font/open_sans"
@@ -145,11 +145,108 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/experienced_runner"
                 android:fontFamily="@font/open_sans"
+                android:text="@string/experienced_runner"
                 android:textColor="@color/colorText"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/calculate_training_heart_rate_zones_training_zones_tl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TableRow
+            android:id="@+id/calculate_training_heart_rate_zones_zone5_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorHRZone5">
+
+            <TextView
+                android:id="@+id/calculate_training_heart_rate_zones_zone5_results_tv"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/hr_zone_5_default"
+                android:textColor="@color/colorHRZonesText"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/calculate_training_heart_rate_zones_zone4_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorHRZone4">
+
+            <TextView
+                android:id="@+id/calculate_training_heart_rate_zones_zone4_results_tv"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/hr_zone_4_default"
+                android:textColor="@color/colorHRZonesText"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/calculate_training_heart_rate_zones_zone3_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorHRZone3">
+
+            <TextView
+                android:id="@+id/calculate_training_heart_rate_zones_zone3_results_tv"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/hr_zone_3_default"
+                android:textColor="@color/colorHRZonesText"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/calculate_training_heart_rate_zones_zone2_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorHRZone2">
+
+            <TextView
+                android:id="@+id/calculate_training_heart_rate_zones_zone2_results_tv"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/hr_zone_2_default"
+                android:textColor="@color/colorHRZonesText"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/calculate_training_heart_rate_zones_zone1_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorHRZone1">
+
+            <TextView
+                android:id="@+id/calculate_training_heart_rate_zones_zone1_results_tv"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/hr_zone_1_default"
+                android:textColor="@color/colorHRZonesText"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+        </TableRow>
+    </TableLayout>
 
 </LinearLayout>

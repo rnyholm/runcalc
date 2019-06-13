@@ -11,8 +11,18 @@
     <string name="calculate_vo2max_estimate_description">Beräkna ett estimerat VO2max genom att ange resultat från coopertestet i meter.</string>
     <string name="estimate_xx">Estimera %s</string>
     <string name="age">Ålder</string>
-    <string name="experienced_runner">Erfaren löpare</string>
+    <string name="experienced_runner">Van löpare</string>
     <string name="maximum_heart_rate">Maxpuls</string>
     <string name="training_heart_rate_zones">Träningszoner</string>
     <string name="calculate_training_heart_rate_zones_description">Beräkna dina träningszoner utifrån din maxpuls eller ålder i kombination med din vilopuls och träningsnivå. Om ålder används kommer maxpulsen räknas ut enligt formeln 220-ålder, vilket är mindre noggrant alternativ. Vilopulsen behövs eftersom Karvonen-metoden används för att räkna ut de olika träningszonerna.</string>
+    <string name="hr_zone_1_results">Pulszon 1 - {hr-range}bpm {hr-range-percentage}%</string>
+    <string name="hr_zone_2_results">Pulszon 2 - {hr-range}bpm {hr-range-percentage}%</string>
+    <string name="hr_zone_3_results">Pulszon 3 - {hr-range}bpm {hr-range-percentage}%</string>
+    <string name="hr_zone_4_results">Pulszon 4 - {hr-range}bpm {hr-range-percentage}%</string>
+    <string name="hr_zone_5_results">Pulszon 5 - {hr-range}bpm {hr-range-percentage}%</string>
+    <string name="hr_zone_1_default">Pulszon 1</string>
+    <string name="hr_zone_2_default">Pulszon 2</string>
+    <string name="hr_zone_3_default">Pulszon 3</string>
+    <string name="hr_zone_4_default">Pulszon 4</string>
+    <string name="hr_zone_5_default">Pulszon 5</string>
 </resources>

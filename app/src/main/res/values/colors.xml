@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#A8DB92</color>
     <color name="colorPrimaryDark">#4E9231</color>
-    <color name="colorPrimaryAccent">#2E6E12</color>
+    <color name="colorPrimaryAccent">#4E9231</color>
     <color name="colorError">#FF9999</color>
     <color name="colorDisabled">#E0E0E0</color>
     <color name="colorCursor">#E0E0E0</color>
@@ -13,4 +13,10 @@
     <color name="colorHeadingText">#737373</color>
     <color name="colorText">#737373</color>
     <color name="colorInputText">#4A4A4A</color>
+    <color name="colorHRZonesText">#FFFFFF</color>
+    <color name="colorHRZone5">#FF727C</color>
+    <color name="colorHRZone4">#FFEA66</color>
+    <color name="colorHRZone3">#82F28D</color>
+    <color name="colorHRZone2">#4FB2FF</color>
+    <color name="colorHRZone1">#E2E2E2</color>
 </resources>
