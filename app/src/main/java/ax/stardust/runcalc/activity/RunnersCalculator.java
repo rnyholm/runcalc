@@ -273,7 +273,7 @@ public class RunnersCalculator extends AppCompatActivity {
 
     private interface InteractionContainerInterface {
         void calculateIfPossible();
-        boolean hasValidCaulculationInput(KeyboardlessEditText input);
+        boolean hasValidCalculationInput(KeyboardlessEditText input);
         void setDefaultResults();
         void setResult();
     }
