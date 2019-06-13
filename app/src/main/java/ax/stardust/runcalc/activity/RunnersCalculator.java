@@ -48,6 +48,7 @@ public class RunnersCalculator extends AppCompatActivity {
     private TextView versionNameTextView;
 
     private ImageView calculateVO2maxEstimateCooperTestLinkImageView;
+    private ImageView calculateTrainingHeartRateZonesKarvonenLinkImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +133,7 @@ public class RunnersCalculator extends AppCompatActivity {
         interactionContainers.add(new InteractionContainer(Property.CALCULATE_VO2MAX_ESTIMATE, calculateVO2maxEstimateCooperTestResultEditText, calculateVO2MaxEstimateResultsTextView, R.string.calculate_vo2max_estimate_results));
 
         calculateVO2maxEstimateCooperTestLinkImageView = findViewById(R.id.calculate_vo2max_estimate_cooper_test_link_iv);
+        calculateTrainingHeartRateZonesKarvonenLinkImageView = findViewById(R.id.calculate_training_heart_rate_zones_karvonen_link_iv);
     }
 
     private void setGlobalTexts() {
@@ -162,6 +164,11 @@ public class RunnersCalculator extends AppCompatActivity {
 
         calculateVO2maxEstimateCooperTestLinkImageView.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_cooper_test)));
+            startActivity(intent);
+        });
+
+        calculateTrainingHeartRateZonesKarvonenLinkImageView.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_karvonen_method)));
             startActivity(intent);
         });
     }
