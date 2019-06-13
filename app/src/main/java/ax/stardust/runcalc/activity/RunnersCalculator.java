@@ -13,17 +13,18 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.Set;
 import java.util.TreeSet;
 
-import ax.stardust.runcalc.util.Calculator;
-import ax.stardust.runcalc.input.Input;
-import ax.stardust.runcalc.input.Property;
 import ax.stardust.runcalc.R;
 import ax.stardust.runcalc.component.KeyboardlessEditText;
 import ax.stardust.runcalc.component.RunnersKeyboard;
+import ax.stardust.runcalc.input.Input;
+import ax.stardust.runcalc.input.Property;
+import ax.stardust.runcalc.util.Calculator;
 
 public class RunnersCalculator extends AppCompatActivity {
     private static String pace;
@@ -132,6 +133,8 @@ public class RunnersCalculator extends AppCompatActivity {
         calculateVO2maxEstimateCooperTestResultEditText.setValidatorFunction(Calculator.Distance::parse);
         interactionContainers.add(new InteractionContainer(Property.CALCULATE_VO2MAX_ESTIMATE, calculateVO2maxEstimateCooperTestResultEditText, calculateVO2MaxEstimateResultsTextView, R.string.calculate_vo2max_estimate_results));
 
+        TextView viewById = findViewById(R.id.calculate_training_heart_rate_zones_resting_heart_rate_et);
+
         calculateVO2maxEstimateCooperTestLinkImageView = findViewById(R.id.calculate_vo2max_estimate_cooper_test_link_iv);
         calculateTrainingHeartRateZonesKarvonenLinkImageView = findViewById(R.id.calculate_training_heart_rate_zones_karvonen_link_iv);
     }
@@ -171,6 +174,108 @@ public class RunnersCalculator extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_karvonen_method)));
             startActivity(intent);
         });
+    }
+
+    private class HeartRateZonesInteractionContainer {
+        private Property property;
+        private KeyboardlessEditText maximumHeartRateInput;
+        private KeyboardlessEditText restingHeartRateInput;
+        private KeyboardlessEditText ageInput;
+        private Switch experiencedRunnerInput;
+
+        private TextView heartRateZone1Results;
+        private TextView heartRateZone2Results;
+        private TextView heartRateZone3Results;
+        private TextView heartRateZone4Results;
+        private TextView heartRateZone5Results;
+
+        private HeartRateZonesInteractionContainer() {
+        }
+
+        public class Builder {
+            private Property property;
+            private KeyboardlessEditText maximumHeartRateInput;
+            private KeyboardlessEditText restingHeartRateInput;
+            private KeyboardlessEditText ageInput;
+            private Switch experiencedRunnerInput;
+
+            private TextView heartRateZone1Results;
+            private TextView heartRateZone2Results;
+            private TextView heartRateZone3Results;
+            private TextView heartRateZone4Results;
+            private TextView heartRateZone5Results;
+
+            public Builder(Property property) {
+                this.property = property;
+            }
+
+            public Builder setMaximumHeartRateInput(KeyboardlessEditText maximumHeartRateInput) {
+                this.maximumHeartRateInput = maximumHeartRateInput;
+                return this;
+            }
+
+            public Builder setRestingHeartRateInput(KeyboardlessEditText restingHeartRateInput) {
+                this.restingHeartRateInput = restingHeartRateInput;
+                return this;
+            }
+
+            public Builder setAgeInput(KeyboardlessEditText ageInput) {
+                this.ageInput = ageInput;
+                return this;
+            }
+
+            public Builder setExperiencedRunnerInput(Switch experiencedRunnerInput) {
+                this.experiencedRunnerInput = experiencedRunnerInput;
+                return this;
+            }
+
+            public Builder setHeartRateZone1Results(TextView heartRateZone1Results) {
+                this.heartRateZone1Results = heartRateZone1Results;
+                return this;
+            }
+
+            public Builder setHeartRateZone2Results(TextView heartRateZone2Results) {
+                this.heartRateZone2Results = heartRateZone2Results;
+                return this;
+            }
+
+            public Builder setHeartRateZone3Results(TextView heartRateZone3Results) {
+                this.heartRateZone3Results = heartRateZone3Results;
+                return this;
+            }
+
+            public Builder setHeartRateZone4Results(TextView heartRateZone4Results) {
+                this.heartRateZone4Results = heartRateZone4Results;
+                return this;
+            }
+
+            public Builder setHeartRateZone5Results(TextView heartRateZone5Results) {
+                this.heartRateZone5Results = heartRateZone5Results;
+                return this;
+            }
+
+            public HeartRateZonesInteractionContainer build() {
+                HeartRateZonesInteractionContainer interactionContainer = new HeartRateZonesInteractionContainer();
+                interactionContainer.property = this.property;
+                interactionContainer.maximumHeartRateInput = this.maximumHeartRateInput;
+                interactionContainer.restingHeartRateInput = this.restingHeartRateInput;
+                interactionContainer.ageInput = this.ageInput;
+                interactionContainer.experiencedRunnerInput = this.experiencedRunnerInput;
+                interactionContainer.heartRateZone1Results = this.heartRateZone1Results;
+                interactionContainer.heartRateZone2Results = this.heartRateZone2Results;
+                interactionContainer.heartRateZone3Results = this.heartRateZone3Results;
+                interactionContainer.heartRateZone4Results = this.heartRateZone4Results;
+                interactionContainer.heartRateZone5Results = this.heartRateZone5Results;
+                return interactionContainer;
+            }
+        }
+    }
+
+    private interface InteractionContainerInterface {
+        void calculateIfPossible();
+        boolean hasValidCaulculationInput(KeyboardlessEditText input);
+        void setDefaultResults();
+        void setResult();
     }
 
     private class InteractionContainer implements Comparable {
