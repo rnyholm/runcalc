@@ -4,10 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.os.health.HealthStats;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -16,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.security.Key;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -24,9 +24,10 @@ import ax.stardust.runcalc.component.KeyboardlessEditText;
 import ax.stardust.runcalc.component.RunnersKeyboard;
 import ax.stardust.runcalc.input.Input;
 import ax.stardust.runcalc.input.Property;
-import ax.stardust.runcalc.interaction.container.DualInputInteractionContainer;
-import ax.stardust.runcalc.interaction.container.InteractionContainer;
-import ax.stardust.runcalc.interaction.container.SingleInputInteractionContainer;
+import ax.stardust.runcalc.interaction.DualInputInteractionContainer;
+import ax.stardust.runcalc.interaction.HeartRateZonesInteractionContainer;
+import ax.stardust.runcalc.interaction.InteractionContainer;
+import ax.stardust.runcalc.interaction.SingleInputInteractionContainer;
 import ax.stardust.runcalc.util.Calculator;
 
 public class RunnersCalculator extends AppCompatActivity {
@@ -175,7 +176,35 @@ public class RunnersCalculator extends AppCompatActivity {
                 .build();
         interactionContainers.add(calculateVO2MaxEstimateContainer);
 
-        TextView viewById = findViewById(R.id.calculate_training_heart_rate_zones_resting_heart_rate_et);
+        KeyboardlessEditText maximumHeartRateEditText = findViewById(R.id.calculate_training_heart_rate_zones_maximum_heart_rate_et);
+        maximumHeartRateEditText.setInput(Input.HEART_RATE);
+        maximumHeartRateEditText.setValidatorFunction(Calculator.MaximumHeartRate::parse);
+        KeyboardlessEditText restingHeartRateEditText = findViewById(R.id.calculate_training_heart_rate_zones_resting_heart_rate_et);
+        restingHeartRateEditText.setInput(Input.HEART_RATE);
+        restingHeartRateEditText.setValidatorFunction(Calculator.RestingHeartRate::parse);
+        KeyboardlessEditText ageEditText = findViewById(R.id.calculate_training_heart_rate_zones_age_et);
+        ageEditText.setInput(Input.AGE);
+        ageEditText.setValidatorFunction(Calculator.Age::parse);
+        Switch trainingExperienceSwitch = findViewById(R.id.calculate_training_heart_rate_zones_training_experience_sw);
+        HeartRateZonesInteractionContainer calculateTrainingHeartRateZonesContainer = new HeartRateZonesInteractionContainer.Builder(this)
+                .setProperty(Property.CALCULATE_HEART_RATE_ZONES)
+                .setKeyboard(runnersKeyboard)
+                .setMaximumHeartRateInput(maximumHeartRateEditText)
+                .setRestingHeartRateInput(restingHeartRateEditText)
+                .setAgeInput(ageEditText)
+                .setExperiencedRunnerInput(trainingExperienceSwitch)
+                .setHeartRateZone1ResultsTextView(findViewById(R.id.calculate_training_heart_rate_zones_zone1_results_tv))
+                .setHeartRateZone2ResultsTextView(findViewById(R.id.calculate_training_heart_rate_zones_zone2_results_tv))
+                .setHeartRateZone3ResultsTextView(findViewById(R.id.calculate_training_heart_rate_zones_zone3_results_tv))
+                .setHeartRateZone4ResultsTextView(findViewById(R.id.calculate_training_heart_rate_zones_zone4_results_tv))
+                .setHeartRateZone5ResultsTextView(findViewById(R.id.calculate_training_heart_rate_zones_zone5_results_tv))
+                .setHeartRateZone1ResultsTextID(R.string.hr_zone_1_results)
+                .setHeartRateZone2ResultsTextID(R.string.hr_zone_2_results)
+                .setHeartRateZone3ResultsTextID(R.string.hr_zone_3_results)
+                .setHeartRateZone4ResultsTextID(R.string.hr_zone_4_results)
+                .setHeartRateZone5ResultsTextID(R.string.hr_zone_5_results)
+                .build();
+        interactionContainers.add(calculateTrainingHeartRateZonesContainer);
 
         calculateVO2maxEstimateCooperTestLinkImageView = findViewById(R.id.calculate_vo2max_estimate_cooper_test_link_iv);
         calculateTrainingHeartRateZonesKarvonenLinkImageView = findViewById(R.id.calculate_training_heart_rate_zones_karvonen_link_iv);
@@ -216,93 +245,5 @@ public class RunnersCalculator extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_karvonen_method)));
             startActivity(intent);
         });
-    }
-
-    public static class ReferencedTextWatcher implements TextWatcher {
-        private final InteractionContainer interactionContainer;
-        private final KeyboardlessEditText input;
-        private final RunnersKeyboard runnersKeyboard;
-
-        public ReferencedTextWatcher(InteractionContainer interactionContainer, KeyboardlessEditText input, RunnersKeyboard runnersKeyboard) {
-            this.interactionContainer = interactionContainer;
-            this.input = input;
-            this.runnersKeyboard = runnersKeyboard;
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            // Do nothing...
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            String inputText = charSequence.toString();
-            if (!inputText.isEmpty()) {
-                try {
-                    input.getValidatorFunction().apply(inputText);
-                    interactionContainer.calculateIfPossible();
-                    input.setBackgroundResource(R.drawable.input_default);
-                } catch (Exception e) {
-                    // ignore and just set edit-text error color and default result text
-                    setDefaultResultTextAndBackgroundResource(R.drawable.input_error);
-                }
-            } else { // empty input is okay, but nothing to calculate, set default result text
-                setDefaultResultTextAndBackgroundResource(R.drawable.input_default);
-            }
-            runnersKeyboard.enableDeleteButton(!inputText.isEmpty());
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            // Do nothing...
-        }
-
-        private void setDefaultResultTextAndBackgroundResource(int backgroundResource) {
-            interactionContainer.setDefaultResults();
-            input.setBackgroundResource(backgroundResource);
-        }
-    }
-
-    public static class KeyboardHandler implements View.OnFocusChangeListener, View.OnTouchListener {
-        private final RunnersKeyboard runnersKeyboard;
-
-        public KeyboardHandler(RunnersKeyboard runnersKeyboard) {
-            this.runnersKeyboard = runnersKeyboard;
-        }
-
-        @Override
-        public void onFocusChange(View view, boolean hasFocus) {
-            if (KeyboardlessEditText.class.isAssignableFrom(view.getClass())) {
-                KeyboardlessEditText keyboardlessEditText = (KeyboardlessEditText) view;
-                if (hasFocus) {
-                    Editable editable = keyboardlessEditText.getText();
-                    InputConnection inputConnection = view.onCreateInputConnection(new EditorInfo());
-                    this.runnersKeyboard.show();
-                    this.runnersKeyboard.setSeparator(keyboardlessEditText.getInput().getSeparator());
-                    this.runnersKeyboard.enableDeleteButton(editable != null && !editable.toString().isEmpty());
-                    this.runnersKeyboard.setInputConnection(inputConnection);
-                } else {
-                    this.runnersKeyboard.delayedHide();
-                }
-            }
-        }
-
-        @Override
-        @SuppressLint("ClickableViewAccessibility")
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (KeyboardlessEditText.class.isAssignableFrom(view.getClass())) {
-                if (runnersKeyboard.getVisibility() != View.VISIBLE) {
-                    KeyboardlessEditText keyboardlessEditText = (KeyboardlessEditText) view;
-                    Editable editable = keyboardlessEditText.getText();
-                    InputConnection inputConnection = view.onCreateInputConnection(new EditorInfo());
-                    this.runnersKeyboard.show();
-                    this.runnersKeyboard.setSeparator(keyboardlessEditText.getInput().getSeparator());
-                    this.runnersKeyboard.enableDeleteButton(editable != null && !editable.toString().isEmpty());
-                    this.runnersKeyboard.setInputConnection(inputConnection);
-                }
-            }
-            // let the rest of the framework handle this event also
-            return false;
-        }
     }
 }

@@ -1,4 +1,4 @@
-package ax.stardust.runcalc.interaction.container;
+package ax.stardust.runcalc.interaction;
 
 import android.text.Editable;
 
@@ -20,5 +20,20 @@ public interface InteractionContainer {
         }
 
         return text;
+    }
+
+    default boolean hasValidCalculationInput(KeyboardlessEditText input) {
+        if (input != null) {
+            String text = getTextOfInput(input);
+            if (!text.isEmpty()) {
+                try {
+                    input.getValidatorFunction().apply(text);
+                    return true;
+                } catch (Exception e) {
+                    // catch it and let it fall through
+                }
+            }
+        }
+        return false;
     }
 }

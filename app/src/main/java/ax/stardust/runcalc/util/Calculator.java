@@ -123,24 +123,24 @@ public class Calculator {
      * This way an estimated maximum heart rate is calculated based on age using the Fox method(220-age).<br />
      * Training experience is needed cause the training zones differs a bit if it's an experienced user
      * or basic user. Experienced use zoning;
-     *  z5:95-100% of hrMax
-     *  z4:85-95%
-     *  z3:75-85%
-     *  z2:60-75%
-     *  z1:50-60%
+     * z5:95-100% of hrMax
+     * z4:85-95%
+     * z3:75-85%
+     * z2:60-75%
+     * z1:50-60%
      * Basic on the other hand uses zoning;
-     *  z5:90-100%
-     *  z4:80-90%
-     *  z3:70-80%
-     *  z2:60-70%
-     *  z1:50-60%.
+     * z5:90-100%
+     * z4:80-90%
+     * z3:70-80%
+     * z2:60-70%
+     * z1:50-60%.
      * As the Karvonen method is used to calculate the different zones are used it's also needed to provide
      * resting heart rate.<br />
      * Validation of the data is being to check that it's within reasonable ranges, following values are valid:
-     *  training experience: B or E
-     *  resting heart rate: a numeric value between 26 and 100
-     *  maximum heart rate: a numeric value between 120 and 220
-     *  age: a numeric value between 10 and 99
+     * training experience: B or E
+     * resting heart rate: a numeric value between 26 and 100
+     * maximum heart rate: a numeric value between 120 and 220
+     * age: a numeric value between 10 and 99
      * The returned string is Json formatted and contains the different training heart zones with it's corresponding
      *
      * @param heartRateCalculationData Combined value of data needed for calculation
@@ -171,25 +171,15 @@ public class Calculator {
                         heartRateCalculationData.matches(TRAINING_EXPERIENCE_HRREST_AGE_PATTERN)) {  // B/E|hrRest|A-age
                     String[] split = heartRateCalculationData.split("\\|");
                     String[] subSplit = split[2].split("-");
+                    String hrMaxOrAge = subSplit[1]; // hrm or age
                     boolean experienced = split[0].equalsIgnoreCase("E");
-                    int hrRest = Integer.parseInt(split[1]);
-                    int hrmOrAge = Integer.parseInt(subSplit[1]); // hrm or age
+                    int hrRest = RestingHeartRate.parse(split[1]).getHeartRate();
                     int hrMax;
 
-                    if (hrRest < 26 || hrRest > 100) { // world record in lowest resting heart beat broken or you should train more
-                        throw new IllegalArgumentException();
-                    }
-
                     if (heartRateCalculationData.matches(TRAINING_EXPERIENCE_HRREST_HRMAX_PATTERN)) {
-                        if (hrmOrAge > 220 || hrmOrAge < 120) { // Hmm, tachycardia next or magically low mhr
-                            throw new IllegalArgumentException();
-                        }
-                        hrMax = hrmOrAge;
+                        hrMax = MaximumHeartRate.parse(hrMaxOrAge).getHeartRate();
                     } else { // age
-                        if (hrmOrAge > 99) { // sorry all 99+ seniors
-                            throw new IllegalArgumentException();
-                        }
-                        hrMax = 220 - hrmOrAge; // fox method
+                        hrMax = 220 - Age.parse(hrMaxOrAge).getAge(); // fox method
                     }
 
                     return new HeartRateCalculationData(hrRest, hrMax, experienced);
@@ -209,17 +199,86 @@ public class Calculator {
                 heartRateZones.addZone(HeartRateZone.create(ZONE_5, toHeartRate(95), hrMax, 95, 100));
                 heartRateZones.addZone(HeartRateZone.create(ZONE_4, toHeartRate(85), toHeartRate(95) - 1, 85, 95));
                 heartRateZones.addZone(HeartRateZone.create(ZONE_3, toHeartRate(75), toHeartRate(85) - 1, 75, 85));
-                heartRateZones.addZone(HeartRateZone.create(ZONE_2, toHeartRate(60), toHeartRate(75) -1 , 60, 75));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_2, toHeartRate(60), toHeartRate(75) - 1, 60, 75));
             } else {
                 heartRateZones.addZone(HeartRateZone.create(ZONE_5, toHeartRate(90), hrMax, 90, 100));
                 heartRateZones.addZone(HeartRateZone.create(ZONE_4, toHeartRate(80), toHeartRate(90) - 1, 80, 90));
                 heartRateZones.addZone(HeartRateZone.create(ZONE_3, toHeartRate(70), toHeartRate(80) - 1, 70, 80));
-                heartRateZones.addZone(HeartRateZone.create(ZONE_2, toHeartRate(60), toHeartRate(70) -1 , 60, 70));
+                heartRateZones.addZone(HeartRateZone.create(ZONE_2, toHeartRate(60), toHeartRate(70) - 1, 60, 70));
             }
 
             heartRateZones.addZone(HeartRateZone.create(ZONE_1, toHeartRate(50), toHeartRate(60) - 1, 50, 60));
 
             return new GsonBuilder().create().toJson(heartRateZones);
+        }
+    }
+
+    public static class MaximumHeartRate {
+        final int heartRate;
+
+        private MaximumHeartRate(int heartRate) {
+            this.heartRate = heartRate;
+        }
+
+        public static MaximumHeartRate parse(String hrMax) {
+            if (hrMax != null && !hrMax.isEmpty()) {
+                int heartRate = Integer.parseInt(hrMax);
+                if (heartRate > 220 || heartRate < 120) { // Hmm, tachycardia next or magically low mhr
+                    throw new IllegalArgumentException();
+                }
+                return new MaximumHeartRate(heartRate);
+            }
+            throw new IllegalArgumentException();
+        }
+
+        int getHeartRate() {
+            return heartRate;
+        }
+    }
+
+    public static class RestingHeartRate {
+        final int heartRate;
+
+        private RestingHeartRate(int heartRate) {
+            this.heartRate = heartRate;
+        }
+
+        public static RestingHeartRate parse(String hrRest) {
+            if (hrRest != null && !hrRest.isEmpty()) {
+                int heartRate = Integer.parseInt(hrRest);
+                if (heartRate < 26 || heartRate > 100) { // world record in lowest resting heart beat broken or you should train more
+                    throw new IllegalArgumentException();
+                }
+                return new RestingHeartRate(heartRate);
+            }
+            throw new IllegalArgumentException();
+        }
+
+        int getHeartRate() {
+            return heartRate;
+        }
+    }
+
+    public static class Age {
+        final int age;
+
+        private Age(int age) {
+            this.age = age;
+        }
+
+        public static Age parse(String ageStr) {
+            if (ageStr != null && !ageStr.isEmpty()) {
+                int age = Integer.parseInt(ageStr);
+                if (age < 10 || age > 99) { // sorry all kids and 99+ seniors
+                    throw new IllegalArgumentException();
+                }
+                return new Age(age);
+            }
+            throw new IllegalArgumentException();
+        }
+
+        int getAge() {
+            return age;
         }
     }
 
@@ -301,7 +360,6 @@ public class Calculator {
                     return new Pace(minutes, seconds);
                 }
             }
-
             throw new IllegalArgumentException();
         }
 
@@ -378,7 +436,6 @@ public class Calculator {
                     return new Time(hours, minutes, seconds);
                 }
             }
-
             throw new IllegalArgumentException();
         }
 
@@ -423,7 +480,6 @@ public class Calculator {
                     return new MatchedDouble(Double.parseDouble(str));
                 }
             }
-
             throw new IllegalArgumentException();
         }
 

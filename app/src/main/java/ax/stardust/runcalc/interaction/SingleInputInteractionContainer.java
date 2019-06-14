@@ -1,4 +1,4 @@
-package ax.stardust.runcalc.interaction.container;
+package ax.stardust.runcalc.interaction;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -6,7 +6,9 @@ import android.widget.TextView;
 
 import ax.stardust.runcalc.R;
 import ax.stardust.runcalc.activity.RunnersCalculator;
+import ax.stardust.runcalc.component.KeyboardHandler;
 import ax.stardust.runcalc.component.KeyboardlessEditText;
+import ax.stardust.runcalc.component.ReferencedTextWatcher;
 import ax.stardust.runcalc.component.RunnersKeyboard;
 import ax.stardust.runcalc.input.Property;
 
@@ -48,9 +50,9 @@ public class SingleInputInteractionContainer implements InteractionContainer, Co
 
     @Override
     public void setListeners() {
-        input.addTextChangedListener(new RunnersCalculator.ReferencedTextWatcher(this, input, keyboard));
-        input.setOnFocusChangeListener(new RunnersCalculator.KeyboardHandler(keyboard));
-        input.setOnTouchListener(new RunnersCalculator.KeyboardHandler(keyboard));
+        input.addTextChangedListener(new ReferencedTextWatcher(this, input, keyboard));
+        input.setOnFocusChangeListener(new KeyboardHandler(keyboard));
+        input.setOnTouchListener(new KeyboardHandler(keyboard));
     }
 
     private void setResult(String result) {
@@ -62,18 +64,8 @@ public class SingleInputInteractionContainer implements InteractionContainer, Co
     }
 
     @Override
-    public boolean equals(Object that) {
-        if (that != null) {
-            if (SingleInputInteractionContainer.class.isAssignableFrom(that.getClass())) {
-                return this.property.equals(((SingleInputInteractionContainer) that).getProperty());
-            }
-        }
-        return false;
-    }
-
-    @Override
     public int compareTo(@NonNull Object that) {
-        return this.property.compareTo(((SingleInputInteractionContainer) that).getProperty());
+        return this.property.compareTo(((InteractionContainer) that).getProperty());
     }
 
     public static class Builder {

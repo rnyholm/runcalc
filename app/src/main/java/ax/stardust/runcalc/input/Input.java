@@ -5,6 +5,8 @@ public enum Input {
     SPEED("."),
     DISTANCE("."),
     TIME(":"),
+    HEART_RATE(""),
+    AGE(""),
     NONE("");
 
     private final String separator;

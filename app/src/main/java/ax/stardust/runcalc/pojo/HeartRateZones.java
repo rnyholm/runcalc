@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 public class HeartRateZones {
@@ -80,6 +81,14 @@ public class HeartRateZones {
 
         public int getPercentageMax() {
             return percentageMax;
+        }
+
+        public String getHrRange() {
+            return String.format(Locale.ENGLISH, "%d - %d", hrMin, hrMax);
+        }
+
+        public String getPercentageRange() {
+            return String.format(Locale.ENGLISH, "%d - %d", percentageMin, percentageMax);
         }
 
         @NonNull

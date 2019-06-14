@@ -1,4 +1,4 @@
-package ax.stardust.runcalc.interaction.container;
+package ax.stardust.runcalc.interaction;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -6,7 +6,9 @@ import android.widget.TextView;
 
 import ax.stardust.runcalc.R;
 import ax.stardust.runcalc.activity.RunnersCalculator;
+import ax.stardust.runcalc.component.KeyboardHandler;
 import ax.stardust.runcalc.component.KeyboardlessEditText;
+import ax.stardust.runcalc.component.ReferencedTextWatcher;
 import ax.stardust.runcalc.component.RunnersKeyboard;
 import ax.stardust.runcalc.input.Property;
 
@@ -52,12 +54,12 @@ public class DualInputInteractionContainer implements InteractionContainer, Comp
 
     @Override
     public void setListeners() {
-        firstInput.addTextChangedListener(new RunnersCalculator.ReferencedTextWatcher(this, firstInput, keyboard));
-        firstInput.setOnFocusChangeListener(new RunnersCalculator.KeyboardHandler(keyboard));
-        firstInput.setOnTouchListener(new RunnersCalculator.KeyboardHandler(keyboard));
-        secondInput.addTextChangedListener(new RunnersCalculator.ReferencedTextWatcher(this, secondInput, keyboard));
-        secondInput.setOnFocusChangeListener(new RunnersCalculator.KeyboardHandler(keyboard));
-        secondInput.setOnTouchListener(new RunnersCalculator.KeyboardHandler(keyboard));
+        firstInput.addTextChangedListener(new ReferencedTextWatcher(this, firstInput, keyboard));
+        firstInput.setOnFocusChangeListener(new KeyboardHandler(keyboard));
+        firstInput.setOnTouchListener(new KeyboardHandler(keyboard));
+        secondInput.addTextChangedListener(new ReferencedTextWatcher(this, secondInput, keyboard));
+        secondInput.setOnFocusChangeListener(new KeyboardHandler(keyboard));
+        secondInput.setOnTouchListener(new KeyboardHandler(keyboard));
     }
 
     private void setResult(String result) {
@@ -66,21 +68,6 @@ public class DualInputInteractionContainer implements InteractionContainer, Comp
         text = text.replace("{distance}", RunnersCalculator.distance);
         text = text.replace("{result}", result);
         resultsTextView.setText(text);
-    }
-
-    private boolean hasValidCalculationInput(KeyboardlessEditText input) {
-        if (input != null) {
-            String text = getTextOfInput(input);
-            if (!text.isEmpty()) {
-                try {
-                    input.getValidatorFunction().apply(text);
-                    return true;
-                } catch (Exception e) {
-                    // catch it and let it fall through
-                }
-            }
-        }
-        return false;
     }
 
     private String getCombinedText() {
@@ -103,18 +90,8 @@ public class DualInputInteractionContainer implements InteractionContainer, Comp
     }
 
     @Override
-    public boolean equals(Object that) {
-        if (that != null) {
-            if (DualInputInteractionContainer.class.isAssignableFrom(that.getClass())) {
-                return this.property.equals(((DualInputInteractionContainer) that).getProperty());
-            }
-        }
-        return false;
-    }
-
-    @Override
     public int compareTo(@NonNull Object that) {
-        return this.property.compareTo(((DualInputInteractionContainer) that).getProperty());
+        return this.property.compareTo(((InteractionContainer) that).getProperty());
     }
 
     public static class Builder {
