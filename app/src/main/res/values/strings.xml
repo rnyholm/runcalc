@@ -33,16 +33,12 @@
     <string name="hint_distance">Distance(%s)</string>
     <string name="hint_time">Time(%s)</string>
     <string name="hint_pace">Pace(%s)</string>
-    <string name="hr_zone_5_default">HR-zone 5</string>
-    <string name="hr_zone_4_default">HR-zone 4</string>
-    <string name="hr_zone_3_default">HR-zone 3</string>
-    <string name="hr_zone_2_default">HR-zone 2</string>
-    <string name="hr_zone_1_default">HR-zone 1</string>
-    <string name="hr_zone_5_results">HR-zone 5 - {hr-range}bpm {hr-range-percentage}%</string>
-    <string name="hr_zone_4_results">HR-zone 4 - {hr-range}bpm {hr-range-percentage}%</string>
-    <string name="hr_zone_3_results">HR-zone 3 - {hr-range}bpm {hr-range-percentage}%</string>
-    <string name="hr_zone_2_results">HR-zone 2 - {hr-range}bpm {hr-range-percentage}%</string>
-    <string name="hr_zone_1_results">HR-zone 1 - {hr-range}bpm {hr-range-percentage}%</string>
+    <string name="hr_zone_5">HR-zone 5</string>
+    <string name="hr_zone_4">HR-zone 4</string>
+    <string name="hr_zone_3">HR-zone 3</string>
+    <string name="hr_zone_2">HR-zone 2</string>
+    <string name="hr_zone_1">HR-zone 1</string>
+    <string name="hr_zone_results" translatable="false">: {hr-range}bpm ({hr-range-percentage}%)</string>
 
     <string name="keyboard_0" translatable="false">0</string>
     <string name="keyboard_1" translatable="false">1</string>

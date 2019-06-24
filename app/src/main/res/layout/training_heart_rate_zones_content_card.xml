@@ -209,7 +209,7 @@
                 android:layout_width="wrap_content"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/hr_zone_5_default"
+                android:text="@string/hr_zone_5"
                 android:textColor="@color/colorHRZonesText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -227,7 +227,7 @@
                 android:layout_width="wrap_content"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/hr_zone_4_default"
+                android:text="@string/hr_zone_4"
                 android:textColor="@color/colorHRZonesText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -245,7 +245,7 @@
                 android:layout_width="wrap_content"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/hr_zone_3_default"
+                android:text="@string/hr_zone_3"
                 android:textColor="@color/colorHRZonesText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -263,7 +263,7 @@
                 android:layout_width="wrap_content"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/hr_zone_2_default"
+                android:text="@string/hr_zone_2"
                 android:textColor="@color/colorHRZonesText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -281,7 +281,7 @@
                 android:layout_width="wrap_content"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/hr_zone_1_default"
+                android:text="@string/hr_zone_1"
                 android:textColor="@color/colorHRZonesText"
                 android:textSize="18sp"
                 android:textStyle="bold" />

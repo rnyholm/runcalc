@@ -15,15 +15,10 @@
     <string name="maximum_heart_rate">Maximum heart rate</string>
     <string name="training_heart_rate_zones">Training heart rate zones</string>
     <string name="calculate_training_heart_rate_zones_description">Calculate your training heart rate zones from your maximum heart rate or age combined with your resting heart rate and training experience. If age is used the maximum heart rate will be calculated as 220-your age, which is a less accurate option. The resting heart rate is needed because the Karvonen method is used to calculate the different training heart rate zones.</string>
-    <string name="hr_zone_1_results">HR-zone 1 - {hr-range}bpm {hr-range-percentage}%</string>
-    <string name="hr_zone_2_results">HR-zone 2 - {hr-range}bpm {hr-range-percentage}%</string>
-    <string name="hr_zone_3_results">HR-zone 3 - {hr-range}bpm {hr-range-percentage}%</string>
-    <string name="hr_zone_4_results">HR-zone 4 - {hr-range}bpm {hr-range-percentage}%</string>
-    <string name="hr_zone_5_results">HR-zone 5 - {hr-range}bpm {hr-range-percentage}%</string>
-    <string name="hr_zone_1_default">HR-zone 1</string>
-    <string name="hr_zone_2_default">HR-zone 2</string>
-    <string name="hr_zone_3_default">HR-zone 3</string>
-    <string name="hr_zone_4_default">HR-zone 4</string>
-    <string name="hr_zone_5_default">HR-zone 5</string>
+    <string name="hr_zone_1">HR-zone 1</string>
+    <string name="hr_zone_2">HR-zone 2</string>
+    <string name="hr_zone_3">HR-zone 3</string>
+    <string name="hr_zone_4">HR-zone 4</string>
+    <string name="hr_zone_5">HR-zone 5</string>
     <string name="resting_heart_rate">Resting heart rate</string>
 </resources>

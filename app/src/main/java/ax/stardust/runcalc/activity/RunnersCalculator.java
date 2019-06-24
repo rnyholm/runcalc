@@ -198,11 +198,6 @@ public class RunnersCalculator extends AppCompatActivity {
                 .setHeartRateZone3ResultsTextView(findViewById(R.id.calculate_training_heart_rate_zones_zone3_results_tv))
                 .setHeartRateZone4ResultsTextView(findViewById(R.id.calculate_training_heart_rate_zones_zone4_results_tv))
                 .setHeartRateZone5ResultsTextView(findViewById(R.id.calculate_training_heart_rate_zones_zone5_results_tv))
-                .setHeartRateZone1ResultsTextID(R.string.hr_zone_1_results)
-                .setHeartRateZone2ResultsTextID(R.string.hr_zone_2_results)
-                .setHeartRateZone3ResultsTextID(R.string.hr_zone_3_results)
-                .setHeartRateZone4ResultsTextID(R.string.hr_zone_4_results)
-                .setHeartRateZone5ResultsTextID(R.string.hr_zone_5_results)
                 .build();
         interactionContainers.add(calculateTrainingHeartRateZonesContainer);
 

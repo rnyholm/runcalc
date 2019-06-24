@@ -84,11 +84,11 @@ public class HeartRateZones {
         }
 
         public String getHrRange() {
-            return String.format(Locale.ENGLISH, "%d - %d", hrMin, hrMax);
+            return String.format(Locale.ENGLISH, "%d-%d", hrMin, hrMax);
         }
 
         public String getPercentageRange() {
-            return String.format(Locale.ENGLISH, "%d - %d", percentageMin, percentageMax);
+            return String.format(Locale.ENGLISH, "%d-%d", percentageMin, percentageMax);
         }
 
         @NonNull
