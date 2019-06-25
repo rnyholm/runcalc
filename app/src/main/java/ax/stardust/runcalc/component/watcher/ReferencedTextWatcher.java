@@ -39,6 +39,7 @@ public class ReferencedTextWatcher implements TextWatcher {
         } else { // empty input is okay, but nothing to calculate, set default result text
             setDefaultResultTextAndBackgroundResource(R.drawable.input_default);
         }
+        interactionContainer.toggleWidgets(input);
         runnersKeyboard.enableDeleteButton(!inputText.isEmpty());
     }
 

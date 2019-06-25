@@ -2,6 +2,7 @@ package ax.stardust.runcalc.interaction.container;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -61,6 +62,12 @@ public class HeartRateZonesInteractionContainer implements InteractionContainer 
         }
     }
 
+    private void setResult(TextView resultsTextView, String resultsText, HeartRateZones.HeartRateZone heartRateZone) {
+        resultsText = resultsText.replace("{hr-range}", heartRateZone.getHrRange());
+        resultsText = resultsText.replace("{hr-range-percentage}", heartRateZone.getPercentageRange());
+        resultsTextView.setText(resultsText);
+    }
+
     @Override
     public void setDefaultResults() {
         heartRateZone1ResultsTextView.setText(context.getString(R.string.heart_rate_zone_1));
@@ -84,10 +91,26 @@ public class HeartRateZonesInteractionContainer implements InteractionContainer 
         experiencedRunnerInput.setOnCheckedChangeListener(new ReferencedSwitchWatcher(this));
     }
 
-    private void setResult(TextView resultsTextView, String resultsText, HeartRateZones.HeartRateZone heartRateZone) {
-        resultsText = resultsText.replace("{hr-range}", heartRateZone.getHrRange());
-        resultsText = resultsText.replace("{hr-range-percentage}", heartRateZone.getPercentageRange());
-        resultsTextView.setText(resultsText);
+    @Override
+    public void toggleWidgets(KeyboardlessEditText input) {
+        if (input != null) {
+            String text = getTextOfInput(input);
+            if (input == maximumHeartRateInput) {
+                ageInput.setEnabled(text.isEmpty());
+                toggleBackgroundResource(!text.isEmpty(), ageInput);
+            } else if (input == ageInput) {
+                maximumHeartRateInput.setEnabled(text.isEmpty());
+                toggleBackgroundResource(!text.isEmpty(), maximumHeartRateInput);
+            }
+        }
+    }
+
+    private void toggleBackgroundResource(boolean hasText, KeyboardlessEditText input) {
+        if (hasText) {
+            input.setBackgroundResource(R.drawable.input_disabled);
+        } else {
+            input.setBackgroundResource(R.drawable.input_default);
+        }
     }
 
     @Override

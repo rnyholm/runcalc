@@ -30,6 +30,17 @@ public interface InteractionContainer extends Comparable {
      */
     void setDefaultResults();
 
+    /**
+     * Some interaction containers may or may not toggle components(enable/disable),
+     * or do anything other depending on state of given input. Most of the containers
+     * is fine with this empty default implementation.
+     *
+     * @param input Input from which changes origin.
+     */
+    default void toggleWidgets(KeyboardlessEditText input) {
+        // default implementation does nothing
+    }
+
     default String getTextOfInput(KeyboardlessEditText input) {
         String text = "";
 
