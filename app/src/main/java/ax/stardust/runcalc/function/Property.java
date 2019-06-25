@@ -1,8 +1,6 @@
-package ax.stardust.runcalc.input;
+package ax.stardust.runcalc.function;
 
 import java.util.function.Function;
-
-import ax.stardust.runcalc.util.Calculator;
 
 public enum Property {
     CONVERT_PACE_TO_SPEED(Calculator::convertPaceToSpeed),

@@ -42,7 +42,7 @@
                 android:layout_marginTop="10dp" />
 
             <include
-                layout="@layout/training_heart_rate_zones_content_card"
+                layout="@layout/heart_rate_zones_content_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp" />
@@ -64,7 +64,7 @@
         android:paddingRight="5dp"
         android:paddingBottom="5dp">
 
-        <ax.stardust.runcalc.component.RunnersKeyboard
+        <ax.stardust.runcalc.component.keyboard.RunnersKeyboard
             android:id="@+id/soft_keyboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-        </ax.stardust.runcalc.component.RunnersKeyboard>
+        </ax.stardust.runcalc.component.keyboard.RunnersKeyboard>
 
         <RelativeLayout
             android:id="@+id/author_version_rl"

@@ -1,10 +1,12 @@
-package ax.stardust.runcalc.component;
+package ax.stardust.runcalc.component.watcher;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 
 import ax.stardust.runcalc.R;
-import ax.stardust.runcalc.interaction.InteractionContainer;
+import ax.stardust.runcalc.component.keyboard.RunnersKeyboard;
+import ax.stardust.runcalc.component.widget.KeyboardlessEditText;
+import ax.stardust.runcalc.interaction.container.InteractionContainer;
 
 public class ReferencedTextWatcher implements TextWatcher {
     private final InteractionContainer interactionContainer;

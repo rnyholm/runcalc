@@ -1,45 +1,60 @@
 <resources>
+    <!-- common app -->
     <string name="app_name" translatable="false">Runners Calculator</string>
     <string name="author" translatable="false">by @skidrupert,</string>
-    <string name="calculate_xx">Calculate %s</string>
-    <string name="estimate_xx">Estimate %s</string>
-    <string name="convert_xx_to_xx">Convert %s to %s</string>
-    <string name="pace_to_speed_results" translatable="false"> {pace} = {result}{speed}</string>
-    <string name="speed_to_pace_results" translatable="false"> {speed} = {result}{pace} </string>
-    <string name="calculate_pace_results" translatable="false"> {result}{pace}</string>
-    <string name="calculate_time_results" translatable="false"> {result}</string>
-    <string name="calculate_distance_results" translatable="false"> {result}{distance}</string>
-    <string name="calculate_vo2max_estimate_results" translatable="false"> m ~ {result} mL/kg/min</string>
-    <string name="calculate_vo2max_estimate_description">Calculate an estimated VO2max by giving a cooper test result in meters.</string>
-    <string name="calculate_training_heart_rate_zones_description">Calculate your training heart rate zones from your maximum heart rate or age combined with your resting heart rate and training experience. If age is used the maximum heart rate will be calculated as 220-your age, which is a less accurate option. The resting heart rate is needed because the Karvonen method is used to calculate the different training heart rate zones.</string>
+
+    <!-- defaults -->
+    <string name="default_age" translatable="false">0</string>
+    <string name="default_heart_rate" translatable="false">0</string>
     <string name="default_pace" translatable="false">0:00</string>
     <string name="default_speed_distance" translatable="false">0.0</string>
     <string name="default_time" translatable="false">00:00:00</string>
     <string name="default_vo2max" translatable="false">0.0</string>
-    <string name="default_heart_rate" translatable="false">0</string>
-    <string name="default_age" translatable="false">0</string>
+
+    <!-- units -->
     <string name="unit_distance" translatable="false">km</string>
     <string name="unit_pace" translatable="false">min/km</string>
     <string name="unit_speed" translatable="false">km/h</string>
-    <string name="pace">Pace</string>
+
+    <!-- results -->
+    <string name="calculate_distance_results" translatable="false"> {result}{distance}</string>
+    <string name="calculate_pace_results" translatable="false"> {result}{pace}</string>
+    <string name="calculate_time_results" translatable="false"> {result}</string>
+    <string name="hr_zone_results" translatable="false">: {hr-range}bpm ({hr-range-percentage}%)</string>
+    <string name="pace_to_speed_results" translatable="false"> {pace} = {result}{speed}</string>
+    <string name="speed_to_pace_results" translatable="false"> {speed} = {result}{pace} </string>
+    <string name="vo2max_estimate_results" translatable="false"> m ~ {result} mL/kg/min</string>
+
+    <!-- titles -->
+    <string name="calculate_xx">Calculate %s</string>
+    <string name="convert_xx_to_xx">Convert %s to %s</string>
+    <string name="estimate_xx">Estimate %s</string>
+
+    <!-- descriptions -->
+    <string name="heart_rate_zones_description">Calculate your training heart rate zones from your maximum heart rate or age combined with your resting heart rate and training experience. If age is used the maximum heart rate will be calculated as 220-your age, which is a less accurate option. The resting heart rate is needed because the Karvonen method is used to calculate the different training heart rate zones.</string>
+    <string name="vo2max_estimate_description">Calculate an estimated VO2max by giving a cooper test result in meters.</string>
+
+    <!-- hints -->
+    <string name="hint_distance">Distance(%s)</string>
+    <string name="hint_pace">Pace(%s)</string>
+    <string name="hint_time">Time(%s)</string>
+
+    <string name="age">Age</string>
     <string name="distance">Distance</string>
+    <string name="experienced_runner">Experienced runner</string>
+    <string name="heart_rate_zones">Training heart rate zones</string>
+    <string name="heart_rate_zone_5">HR-zone 5</string>
+    <string name="heart_rate_zone_4">HR-zone 4</string>
+    <string name="heart_rate_zone_3">HR-zone 3</string>
+    <string name="heart_rate_zone_2">HR-zone 2</string>
+    <string name="heart_rate_zone_1">HR-zone 1</string>
+    <string name="maximum_heart_rate">Maximum heart rate</string>
+    <string name="pace">Pace</string>
+    <string name="resting_heart_rate">Resting heart rate</string>
     <string name="time">Time</string>
     <string name="vo2max" translatable="false">VO2max</string>
-    <string name="training_heart_rate_zones">Training heart rate zones</string>
-    <string name="maximum_heart_rate">Maximum heart rate</string>
-    <string name="resting_heart_rate">Resting heart rate</string>
-    <string name="age">Age</string>
-    <string name="experienced_runner">Experienced runner</string>
-    <string name="hint_distance">Distance(%s)</string>
-    <string name="hint_time">Time(%s)</string>
-    <string name="hint_pace">Pace(%s)</string>
-    <string name="hr_zone_5">HR-zone 5</string>
-    <string name="hr_zone_4">HR-zone 4</string>
-    <string name="hr_zone_3">HR-zone 3</string>
-    <string name="hr_zone_2">HR-zone 2</string>
-    <string name="hr_zone_1">HR-zone 1</string>
-    <string name="hr_zone_results" translatable="false">: {hr-range}bpm ({hr-range-percentage}%)</string>
 
+    <!-- keyboard -->
     <string name="keyboard_0" translatable="false">0</string>
     <string name="keyboard_1" translatable="false">1</string>
     <string name="keyboard_2" translatable="false">2</string>
@@ -52,8 +67,11 @@
     <string name="keyboard_9" translatable="false">9</string>
     <string name="keyboard_separator" translatable="false">:</string>
 
-    <string name="filter_view_runners_calculator" translatable="false">View Runners Calculator</string>
-    <string name="image_link_content_descriptor" translatable="false">Link image</string>
+    <!-- links -->
     <string name="url_cooper_test" translatable="false">https://en.wikipedia.org/wiki/Cooper_test</string>
     <string name="url_karvonen_method" translatable="false">https://en.wikipedia.org/wiki/Heart_rate#Karvonen_method</string>
+
+    <!-- other -->
+    <string name="filter_view_runners_calculator" translatable="false">View Runners Calculator</string>
+    <string name="image_link_content_descriptor" translatable="false">Link image</string>
 </resources>

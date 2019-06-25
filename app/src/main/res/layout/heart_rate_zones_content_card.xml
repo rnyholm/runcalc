@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/training_heart_rate_zones_content_card"
+    android:id="@+id/heart_rate_zones_content_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/content_card_background"
@@ -13,14 +13,14 @@
     android:paddingBottom="8dp">
 
     <LinearLayout
-        android:id="@+id/calculate_training_heart_rate_zones_heading_ll"
+        android:id="@+id/heart_rate_zones_heading_ll"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         tools:ignore="UseCompoundDrawables">
 
         <TextView
-            android:id="@+id/calculate_training_heart_rate_zones_tv"
+            android:id="@+id/heart_rate_zones_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
@@ -28,13 +28,13 @@
             android:contextClickable="true"
             android:drawablePadding="5dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="@string/training_heart_rate_zones"
+            android:text="@string/heart_rate_zones"
             android:textColor="@color/colorHeadingText"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/calculate_training_heart_rate_zones_karvonen_link_iv"
+            android:id="@+id/heart_rate_zones_karvonen_link_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -46,31 +46,31 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/calculate_training_heart_rate_zones_descr_tv"
+        android:id="@+id/heart_rate_zones_descr_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:fontFamily="@font/open_sans"
-        android:text="@string/calculate_training_heart_rate_zones_description"
+        android:text="@string/heart_rate_zones_description"
         android:textColor="@color/colorText"
         android:textSize="16sp" />
 
     <LinearLayout
-        android:id="@+id/calculate_training_heart_rate_zones_input_ll"
+        android:id="@+id/heart_rate_zones_input_ll"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/calculate_training_heart_rate_zones_maximum_heart_rate_input_ll"
+            android:id="@+id/heart_rate_zones_maximum_heart_rate_input_ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/calculate_training_heart_rate_zones_maximum_heart_rate_tv"
+                android:id="@+id/heart_rate_zones_maximum_heart_rate_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="7dp"
@@ -80,8 +80,8 @@
                 android:textColor="@color/colorText"
                 android:textSize="16sp" />
 
-            <ax.stardust.runcalc.component.KeyboardlessEditText
-                android:id="@+id/calculate_training_heart_rate_zones_maximum_heart_rate_et"
+            <ax.stardust.runcalc.component.widget.KeyboardlessEditText
+                android:id="@+id/heart_rate_zones_maximum_heart_rate_et"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -99,7 +99,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/calculate_training_heart_rate_zones_age_input_ll"
+            android:id="@+id/heart_rate_zones_age_input_ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
@@ -107,7 +107,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/calculate_training_heart_rate_zones_age_tv"
+                android:id="@+id/heart_rate_zones_age_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -116,15 +116,15 @@
                 android:textColor="@color/colorText"
                 android:textSize="16sp" />
 
-            <ax.stardust.runcalc.component.KeyboardlessEditText
-                android:id="@+id/calculate_training_heart_rate_zones_age_et"
+            <ax.stardust.runcalc.component.widget.KeyboardlessEditText
+                android:id="@+id/heart_rate_zones_age_et"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/input_default"
                 android:ems="10"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center_horizontal"
-                android:hint="@string/default_heart_rate"
+                android:hint="@string/default_age"
                 android:inputType="text"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
@@ -134,7 +134,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/calculate_training_heart_rate_zones_resting_heart_rate_input_ll"
+            android:id="@+id/heart_rate_zones_resting_heart_rate_input_ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
@@ -142,7 +142,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/calculate_training_heart_rate_zones_resting_heart_rate_tv"
+                android:id="@+id/heart_rate_zones_resting_heart_rate_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="7dp"
@@ -152,8 +152,8 @@
                 android:textColor="@color/colorText"
                 android:textSize="16sp" />
 
-            <ax.stardust.runcalc.component.KeyboardlessEditText
-                android:id="@+id/calculate_training_heart_rate_zones_resting_heart_rate_et"
+            <ax.stardust.runcalc.component.widget.KeyboardlessEditText
+                android:id="@+id/heart_rate_zones_resting_heart_rate_et"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -171,7 +171,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/calculate_training_heart_rate_zones_training_experience_input_ll"
+            android:id="@+id/heart_rate_zones_training_experience_input_ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
@@ -179,7 +179,7 @@
             android:orientation="horizontal">
 
             <Switch
-                android:id="@+id/calculate_training_heart_rate_zones_training_experience_sw"
+                android:id="@+id/heart_rate_zones_training_experience_sw"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp"
@@ -192,96 +192,96 @@
     </LinearLayout>
 
     <TableLayout
-        android:id="@+id/calculate_training_heart_rate_zones_training_zones_tl"
+        android:id="@+id/heart_rate_zones_training_zones_tl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
 
         <TableRow
-            android:id="@+id/calculate_training_heart_rate_zones_zone5_tr"
+            android:id="@+id/heart_rate_zones_zone5_tr"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:background="@color/colorHRZone5">
 
             <TextView
-                android:id="@+id/calculate_training_heart_rate_zones_zone5_results_tv"
+                android:id="@+id/heart_rate_zones_zone5_results_tv"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/hr_zone_5"
+                android:text="@string/heart_rate_zone_5"
                 android:textColor="@color/colorHRZonesText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/calculate_training_heart_rate_zones_zone4_tr"
+            android:id="@+id/heart_rate_zones_zone4_tr"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:background="@color/colorHRZone4">
 
             <TextView
-                android:id="@+id/calculate_training_heart_rate_zones_zone4_results_tv"
+                android:id="@+id/heart_rate_zones_zone4_results_tv"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/hr_zone_4"
+                android:text="@string/heart_rate_zone_4"
                 android:textColor="@color/colorHRZonesText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/calculate_training_heart_rate_zones_zone3_tr"
+            android:id="@+id/heart_rate_zones_zone3_tr"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:background="@color/colorHRZone3">
 
             <TextView
-                android:id="@+id/calculate_training_heart_rate_zones_zone3_results_tv"
+                android:id="@+id/heart_rate_zones_zone3_results_tv"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/hr_zone_3"
+                android:text="@string/heart_rate_zone_3"
                 android:textColor="@color/colorHRZonesText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/calculate_training_heart_rate_zones_zone2_tr"
+            android:id="@+id/heart_rate_zones_zone2_tr"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:background="@color/colorHRZone2">
 
             <TextView
-                android:id="@+id/calculate_training_heart_rate_zones_zone2_results_tv"
+                android:id="@+id/heart_rate_zones_zone2_results_tv"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/hr_zone_2"
+                android:text="@string/heart_rate_zone_2"
                 android:textColor="@color/colorHRZonesText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/calculate_training_heart_rate_zones_zone1_tr"
+            android:id="@+id/heart_rate_zones_zone1_tr"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:background="@color/colorHRZone1">
 
             <TextView
-                android:id="@+id/calculate_training_heart_rate_zones_zone1_results_tv"
+                android:id="@+id/heart_rate_zones_zone1_results_tv"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/hr_zone_1"
+                android:text="@string/heart_rate_zone_1"
                 android:textColor="@color/colorHRZonesText"
                 android:textSize="18sp"
                 android:textStyle="bold" />

@@ -1,4 +1,4 @@
-package ax.stardust.runcalc.component;
+package ax.stardust.runcalc.component.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
 import java.util.Objects;
 import java.util.function.Function;
 
-import ax.stardust.runcalc.input.Input;
+import ax.stardust.runcalc.interaction.Input;
 
 /**
  * EditText which suppresses IME show up and is bound to a specific @{@link Input} and validator-function for validating input of this EditText.

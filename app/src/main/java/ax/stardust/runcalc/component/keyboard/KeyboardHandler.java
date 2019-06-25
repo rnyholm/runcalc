@@ -1,4 +1,4 @@
-package ax.stardust.runcalc.component;
+package ax.stardust.runcalc.component.keyboard;
 
 import android.annotation.SuppressLint;
 import android.text.Editable;
@@ -6,6 +6,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
+
+import ax.stardust.runcalc.component.widget.KeyboardlessEditText;
 
 public class KeyboardHandler implements View.OnFocusChangeListener, View.OnTouchListener {
     private final RunnersKeyboard runnersKeyboard;

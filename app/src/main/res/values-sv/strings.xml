@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- titles -->
     <string name="calculate_xx">Beräkna %s</string>
     <string name="convert_xx_to_xx">Omvandla %s till %s</string>
-    <string name="distance">Distans</string>
+    <string name="estimate_xx">Estimera %s</string>
+
+    <!-- descriptions -->
+    <string name="heart_rate_zones_description">Beräkna dina träningszoner utifrån din maxpuls eller ålder i kombination med din vilopuls och träningsnivå. Om ålder används kommer maxpulsen räknas ut enligt formeln 220-ålder, vilket är ett mindre noggrant alternativ. Vilopulsen behövs eftersom Karvonen-metoden används för att räkna ut de olika träningszonerna.</string>
+    <string name="vo2max_estimate_description">Beräkna ett estimerat VO2max genom att ange resultat från coopertestet i meter.</string>
+
+    <!-- hints -->
     <string name="hint_distance">Distans(%s)</string>
     <string name="hint_pace">Tempo(%s)</string>
     <string name="hint_time">Tid(%s)</string>
-    <string name="pace">Tempo</string>
-    <string name="time">Tid</string>
-    <string name="calculate_vo2max_estimate_description">Beräkna ett estimerat VO2max genom att ange resultat från coopertestet i meter.</string>
-    <string name="estimate_xx">Estimera %s</string>
+
     <string name="age">Ålder</string>
+    <string name="distance">Distans</string>
     <string name="experienced_runner">Erfaren löpare</string>
+    <string name="heart_rate_zones">Träningszoner</string>
+    <string name="heart_rate_zone_5">Pulszon 5</string>
+    <string name="heart_rate_zone_4">Pulszon 4</string>
+    <string name="heart_rate_zone_3">Pulszon 3</string>
+    <string name="heart_rate_zone_2">Pulszon 2</string>
+    <string name="heart_rate_zone_1">Pulszon 1</string>
     <string name="maximum_heart_rate">Maxpuls</string>
-    <string name="training_heart_rate_zones">Träningszoner</string>
-    <string name="calculate_training_heart_rate_zones_description">Beräkna dina träningszoner utifrån din maxpuls eller ålder i kombination med din vilopuls och träningsnivå. Om ålder används kommer maxpulsen räknas ut enligt formeln 220-ålder, vilket är ett mindre noggrant alternativ. Vilopulsen behövs eftersom Karvonen-metoden används för att räkna ut de olika träningszonerna.</string>
-    <string name="hr_zone_1">Pulszon 1</string>
-    <string name="hr_zone_2">Pulszon 2</string>
-    <string name="hr_zone_3">Pulszon 3</string>
-    <string name="hr_zone_4">Pulszon 4</string>
-    <string name="hr_zone_5">Pulszon 5</string>
+    <string name="pace">Tempo</string>
     <string name="resting_heart_rate">Vilopuls</string>
+    <string name="time">Tid</string>
 </resources>

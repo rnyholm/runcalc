@@ -1,34 +1,27 @@
 package ax.stardust.runcalc.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.health.HealthStats;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputConnection;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import java.security.Key;
 import java.util.Set;
 import java.util.TreeSet;
 
 import ax.stardust.runcalc.R;
-import ax.stardust.runcalc.component.KeyboardlessEditText;
-import ax.stardust.runcalc.component.RunnersKeyboard;
-import ax.stardust.runcalc.input.Input;
-import ax.stardust.runcalc.input.Property;
-import ax.stardust.runcalc.interaction.DualInputInteractionContainer;
-import ax.stardust.runcalc.interaction.HeartRateZonesInteractionContainer;
-import ax.stardust.runcalc.interaction.InteractionContainer;
-import ax.stardust.runcalc.interaction.SingleInputInteractionContainer;
-import ax.stardust.runcalc.util.Calculator;
+import ax.stardust.runcalc.component.widget.KeyboardlessEditText;
+import ax.stardust.runcalc.component.keyboard.RunnersKeyboard;
+import ax.stardust.runcalc.interaction.Input;
+import ax.stardust.runcalc.function.Property;
+import ax.stardust.runcalc.interaction.container.DualInputInteractionContainer;
+import ax.stardust.runcalc.interaction.container.HeartRateZonesInteractionContainer;
+import ax.stardust.runcalc.interaction.container.InteractionContainer;
+import ax.stardust.runcalc.interaction.container.SingleInputInteractionContainer;
+import ax.stardust.runcalc.function.Calculator;
 
 public class RunnersCalculator extends AppCompatActivity {
     public static String pace;
@@ -49,11 +42,11 @@ public class RunnersCalculator extends AppCompatActivity {
     private TextView calculateDistanceTextView;
     private TextView calculateDistanceTimeHintTextView;
     private TextView calculateDistancePaceHintTextView;
-    private TextView calculateVO2maxEstimateTextView;
+    private TextView vo2maxEstimateTextView;
     private TextView versionNameTextView;
 
-    private ImageView calculateVO2maxEstimateCooperTestLinkImageView;
-    private ImageView calculateTrainingHeartRateZonesKarvonenLinkImageView;
+    private ImageView vo2maxEstimateCooperTestLinkImageView;
+    private ImageView heartRateZonesKarvonenLinkImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,20 +82,20 @@ public class RunnersCalculator extends AppCompatActivity {
         calculateDistanceTextView = findViewById(R.id.calculate_distance_tv);
         calculateDistanceTimeHintTextView = findViewById(R.id.calculate_distance_time_hint_tv);
         calculateDistancePaceHintTextView = findViewById(R.id.calculate_distance_pace_hint_tv);
-        calculateVO2maxEstimateTextView = findViewById(R.id.calculate_vo2max_estimate_tv);
+        vo2maxEstimateTextView = findViewById(R.id.vo2max_estimate_tv);
         versionNameTextView = findViewById(R.id.version_name_tv);
 
         KeyboardlessEditText paceToSpeedEditText = findViewById(R.id.pace_to_speed_et);
         paceToSpeedEditText.setInput(Input.PACE);
         paceToSpeedEditText.setValidatorFunction(Calculator.Pace::parse);
-        SingleInputInteractionContainer paceTospeedContainer = new SingleInputInteractionContainer.Builder(this)
+        SingleInputInteractionContainer paceToSpeedContainer = new SingleInputInteractionContainer.Builder(this)
                 .setProperty(Property.CONVERT_PACE_TO_SPEED)
                 .setKeyboard(runnersKeyboard)
                 .setInput(paceToSpeedEditText)
                 .setResultsTextView(findViewById(R.id.pace_to_speed_results_tv))
                 .setResultsTextID(R.string.pace_to_speed_results)
                 .build();
-        interactionContainers.add(paceTospeedContainer);
+        interactionContainers.add(paceToSpeedContainer);
 
         KeyboardlessEditText speedToPaceEditText = findViewById(R.id.speed_to_pace_et);
         speedToPaceEditText.setInput(Input.SPEED);
@@ -164,45 +157,45 @@ public class RunnersCalculator extends AppCompatActivity {
                 .build();
         interactionContainers.add(calculateDistanceContainer);
 
-        KeyboardlessEditText calculateVO2maxEstimateCooperTestResultEditText = findViewById(R.id.calculate_vo2max_estimate_cooper_test_result_et);
-        calculateVO2maxEstimateCooperTestResultEditText.setInput(Input.DISTANCE);
-        calculateVO2maxEstimateCooperTestResultEditText.setValidatorFunction(Calculator.Distance::parse);
-        SingleInputInteractionContainer calculateVO2MaxEstimateContainer = new SingleInputInteractionContainer.Builder(this)
+        KeyboardlessEditText vo2maxEstimateCooperTestResultEditText = findViewById(R.id.vo2max_estimate_cooper_test_result_et);
+        vo2maxEstimateCooperTestResultEditText.setInput(Input.DISTANCE);
+        vo2maxEstimateCooperTestResultEditText.setValidatorFunction(Calculator.Distance::parse);
+        SingleInputInteractionContainer vo2MaxEstimateContainer = new SingleInputInteractionContainer.Builder(this)
                 .setProperty(Property.CALCULATE_VO2MAX_ESTIMATE)
                 .setKeyboard(runnersKeyboard)
-                .setInput(calculateVO2maxEstimateCooperTestResultEditText)
-                .setResultsTextView(findViewById(R.id.calculate_vo2max_estimate_results_tv))
-                .setResultsTextID(R.string.calculate_vo2max_estimate_results)
+                .setInput(vo2maxEstimateCooperTestResultEditText)
+                .setResultsTextView(findViewById(R.id.vo2max_estimate_results_tv))
+                .setResultsTextID(R.string.vo2max_estimate_results)
                 .build();
-        interactionContainers.add(calculateVO2MaxEstimateContainer);
+        interactionContainers.add(vo2MaxEstimateContainer);
 
-        KeyboardlessEditText maximumHeartRateEditText = findViewById(R.id.calculate_training_heart_rate_zones_maximum_heart_rate_et);
+        KeyboardlessEditText maximumHeartRateEditText = findViewById(R.id.heart_rate_zones_maximum_heart_rate_et);
         maximumHeartRateEditText.setInput(Input.HEART_RATE);
         maximumHeartRateEditText.setValidatorFunction(Calculator.MaximumHeartRate::parse);
-        KeyboardlessEditText restingHeartRateEditText = findViewById(R.id.calculate_training_heart_rate_zones_resting_heart_rate_et);
+        KeyboardlessEditText restingHeartRateEditText = findViewById(R.id.heart_rate_zones_resting_heart_rate_et);
         restingHeartRateEditText.setInput(Input.HEART_RATE);
         restingHeartRateEditText.setValidatorFunction(Calculator.RestingHeartRate::parse);
-        KeyboardlessEditText ageEditText = findViewById(R.id.calculate_training_heart_rate_zones_age_et);
+        KeyboardlessEditText ageEditText = findViewById(R.id.heart_rate_zones_age_et);
         ageEditText.setInput(Input.AGE);
         ageEditText.setValidatorFunction(Calculator.Age::parse);
-        Switch trainingExperienceSwitch = findViewById(R.id.calculate_training_heart_rate_zones_training_experience_sw);
-        HeartRateZonesInteractionContainer calculateTrainingHeartRateZonesContainer = new HeartRateZonesInteractionContainer.Builder(this)
+        Switch trainingExperienceSwitch = findViewById(R.id.heart_rate_zones_training_experience_sw);
+        HeartRateZonesInteractionContainer heartRateZonesContainer = new HeartRateZonesInteractionContainer.Builder(this)
                 .setProperty(Property.CALCULATE_HEART_RATE_ZONES)
                 .setKeyboard(runnersKeyboard)
                 .setMaximumHeartRateInput(maximumHeartRateEditText)
                 .setRestingHeartRateInput(restingHeartRateEditText)
                 .setAgeInput(ageEditText)
                 .setExperiencedRunnerInput(trainingExperienceSwitch)
-                .setHeartRateZone1ResultsTextView(findViewById(R.id.calculate_training_heart_rate_zones_zone1_results_tv))
-                .setHeartRateZone2ResultsTextView(findViewById(R.id.calculate_training_heart_rate_zones_zone2_results_tv))
-                .setHeartRateZone3ResultsTextView(findViewById(R.id.calculate_training_heart_rate_zones_zone3_results_tv))
-                .setHeartRateZone4ResultsTextView(findViewById(R.id.calculate_training_heart_rate_zones_zone4_results_tv))
-                .setHeartRateZone5ResultsTextView(findViewById(R.id.calculate_training_heart_rate_zones_zone5_results_tv))
+                .setHeartRateZone1ResultsTextView(findViewById(R.id.heart_rate_zones_zone1_results_tv))
+                .setHeartRateZone2ResultsTextView(findViewById(R.id.heart_rate_zones_zone2_results_tv))
+                .setHeartRateZone3ResultsTextView(findViewById(R.id.heart_rate_zones_zone3_results_tv))
+                .setHeartRateZone4ResultsTextView(findViewById(R.id.heart_rate_zones_zone4_results_tv))
+                .setHeartRateZone5ResultsTextView(findViewById(R.id.heart_rate_zones_zone5_results_tv))
                 .build();
-        interactionContainers.add(calculateTrainingHeartRateZonesContainer);
+        interactionContainers.add(heartRateZonesContainer);
 
-        calculateVO2maxEstimateCooperTestLinkImageView = findViewById(R.id.calculate_vo2max_estimate_cooper_test_link_iv);
-        calculateTrainingHeartRateZonesKarvonenLinkImageView = findViewById(R.id.calculate_training_heart_rate_zones_karvonen_link_iv);
+        vo2maxEstimateCooperTestLinkImageView = findViewById(R.id.vo2max_estimate_cooper_test_link_iv);
+        heartRateZonesKarvonenLinkImageView = findViewById(R.id.heart_rate_zones_karvonen_link_iv);
     }
 
     private void setGlobalTexts() {
@@ -225,18 +218,18 @@ public class RunnersCalculator extends AppCompatActivity {
         calculateDistanceTextView.setText(String.format(getString(R.string.calculate_xx), getString(R.string.distance).toLowerCase()));
         calculateDistanceTimeHintTextView.setText(String.format(getString(R.string.hint_time), getString(R.string.default_time)));
         calculateDistancePaceHintTextView.setText(String.format(getString(R.string.hint_pace), RunnersCalculator.pace));
-        calculateVO2maxEstimateTextView.setText(String.format(getString(R.string.estimate_xx), getString(R.string.vo2max)));
+        vo2maxEstimateTextView.setText(String.format(getString(R.string.estimate_xx), getString(R.string.vo2max)));
     }
 
     private void setListeners() {
         interactionContainers.forEach(InteractionContainer::setListeners);
 
-        calculateVO2maxEstimateCooperTestLinkImageView.setOnClickListener(view -> {
+        vo2maxEstimateCooperTestLinkImageView.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_cooper_test)));
             startActivity(intent);
         });
 
-        calculateTrainingHeartRateZonesKarvonenLinkImageView.setOnClickListener(view -> {
+        heartRateZonesKarvonenLinkImageView.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_karvonen_method)));
             startActivity(intent);
         });

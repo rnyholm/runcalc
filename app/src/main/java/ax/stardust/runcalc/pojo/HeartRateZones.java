@@ -94,7 +94,7 @@ public class HeartRateZones {
         @NonNull
         @Override
         public String toString() {
-            return zone + " - " + hrMin + " - " + hrMax + " - " + percentageMin  + " - " + percentageMax;
+            return zone + " - " + hrMin + " - " + hrMax + " - " + percentageMin + " - " + percentageMax;
         }
     }
 }

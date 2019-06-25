@@ -28,7 +28,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <ax.stardust.runcalc.component.KeyboardlessEditText
+        <ax.stardust.runcalc.component.widget.KeyboardlessEditText
             android:id="@+id/pace_to_speed_et"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <ax.stardust.runcalc.component.KeyboardlessEditText
+        <ax.stardust.runcalc.component.widget.KeyboardlessEditText
             android:id="@+id/speed_to_pace_et"
             android:layout_width="120dp"
             android:layout_height="wrap_content"

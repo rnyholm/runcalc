@@ -1,4 +1,4 @@
-package ax.stardust.runcalc.util;
+package ax.stardust.runcalc.function;
 
 import com.google.gson.GsonBuilder;
 
@@ -116,7 +116,7 @@ public class Calculator {
     }
 
     /**
-     * To calculate the different heart zones for training based on given data. The data can be provided in
+     * To calculate the different heart rate zones for training based on given data. The data can be provided in
      * two ways. Either by providing training experience, rest heart rate and maximum heart rate. This
      * way is preferred as it relies on an actual maximum heart rate. Pattern for this is: B/E|hrr|HR-hrm<br />
      * The other way is to provide training experience, rest heart rate and age. Pattern for this is: B/E|hrr|A-age.

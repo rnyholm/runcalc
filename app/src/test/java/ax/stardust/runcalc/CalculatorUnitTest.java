@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import ax.stardust.runcalc.pojo.HeartRateZones;
 import ax.stardust.runcalc.pojo.HeartRateZones.HeartRateZone;
-import ax.stardust.runcalc.util.Calculator;
+import ax.stardust.runcalc.function.Calculator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

@@ -1,4 +1,4 @@
-package ax.stardust.runcalc.interaction;
+package ax.stardust.runcalc.interaction.container;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,15 +8,15 @@ import android.widget.TextView;
 import com.google.gson.GsonBuilder;
 
 import ax.stardust.runcalc.R;
-import ax.stardust.runcalc.component.KeyboardHandler;
-import ax.stardust.runcalc.component.KeyboardlessEditText;
-import ax.stardust.runcalc.component.ReferencedSwitchWatcher;
-import ax.stardust.runcalc.component.ReferencedTextWatcher;
-import ax.stardust.runcalc.component.RunnersKeyboard;
-import ax.stardust.runcalc.input.Property;
+import ax.stardust.runcalc.component.keyboard.KeyboardHandler;
+import ax.stardust.runcalc.component.widget.KeyboardlessEditText;
+import ax.stardust.runcalc.component.watcher.ReferencedSwitchWatcher;
+import ax.stardust.runcalc.component.watcher.ReferencedTextWatcher;
+import ax.stardust.runcalc.component.keyboard.RunnersKeyboard;
+import ax.stardust.runcalc.function.Property;
 import ax.stardust.runcalc.pojo.HeartRateZones;
 
-public class HeartRateZonesInteractionContainer implements InteractionContainer, Comparable {
+public class HeartRateZonesInteractionContainer implements InteractionContainer {
     private Context context;
     private Property property;
     private RunnersKeyboard keyboard;
@@ -43,31 +43,31 @@ public class HeartRateZonesInteractionContainer implements InteractionContainer,
     public void calculateIfPossible() {
         if ((hasValidCalculationInput(maximumHeartRateInput) || hasValidCalculationInput(ageInput))
                 && hasValidCalculationInput(restingHeartRateInput)) {
-            String hrcd = (experiencedRunnerInput.isChecked() ? "E" : "B") + "|" + getTextOfInput(restingHeartRateInput);
+            String heartRateCalculationData = (experiencedRunnerInput.isChecked() ? "E" : "B") + "|" + getTextOfInput(restingHeartRateInput);
             if (hasValidCalculationInput(maximumHeartRateInput)) {
-                hrcd += "|HR-" + getTextOfInput(maximumHeartRateInput);
+                heartRateCalculationData += "|HR-" + getTextOfInput(maximumHeartRateInput);
             } else {
-                hrcd += "|A-" + getTextOfInput(ageInput);
+                heartRateCalculationData += "|A-" + getTextOfInput(ageInput);
             }
 
             HeartRateZones heartRateZones = new GsonBuilder().create()
-                    .fromJson(property.getCalculatorFunction().apply(hrcd), HeartRateZones.class);
+                    .fromJson(property.getCalculatorFunction().apply(heartRateCalculationData), HeartRateZones.class);
 
-            setResult(heartRateZone1ResultsTextView, context.getString(R.string.hr_zone_1) + context.getString(R.string.hr_zone_results), heartRateZones.getZone(HeartRateZones.ZONE_1));
-            setResult(heartRateZone2ResultsTextView, context.getString(R.string.hr_zone_2) + context.getString(R.string.hr_zone_results), heartRateZones.getZone(HeartRateZones.ZONE_2));
-            setResult(heartRateZone3ResultsTextView, context.getString(R.string.hr_zone_3) + context.getString(R.string.hr_zone_results), heartRateZones.getZone(HeartRateZones.ZONE_3));
-            setResult(heartRateZone4ResultsTextView, context.getString(R.string.hr_zone_4) + context.getString(R.string.hr_zone_results), heartRateZones.getZone(HeartRateZones.ZONE_4));
-            setResult(heartRateZone5ResultsTextView, context.getString(R.string.hr_zone_5) + context.getString(R.string.hr_zone_results), heartRateZones.getZone(HeartRateZones.ZONE_5));
+            setResult(heartRateZone1ResultsTextView, context.getString(R.string.heart_rate_zone_1) + context.getString(R.string.hr_zone_results), heartRateZones.getZone(HeartRateZones.ZONE_1));
+            setResult(heartRateZone2ResultsTextView, context.getString(R.string.heart_rate_zone_2) + context.getString(R.string.hr_zone_results), heartRateZones.getZone(HeartRateZones.ZONE_2));
+            setResult(heartRateZone3ResultsTextView, context.getString(R.string.heart_rate_zone_3) + context.getString(R.string.hr_zone_results), heartRateZones.getZone(HeartRateZones.ZONE_3));
+            setResult(heartRateZone4ResultsTextView, context.getString(R.string.heart_rate_zone_4) + context.getString(R.string.hr_zone_results), heartRateZones.getZone(HeartRateZones.ZONE_4));
+            setResult(heartRateZone5ResultsTextView, context.getString(R.string.heart_rate_zone_5) + context.getString(R.string.hr_zone_results), heartRateZones.getZone(HeartRateZones.ZONE_5));
         }
     }
 
     @Override
     public void setDefaultResults() {
-        heartRateZone1ResultsTextView.setText(context.getString(R.string.hr_zone_1));
-        heartRateZone2ResultsTextView.setText(context.getString(R.string.hr_zone_2));
-        heartRateZone3ResultsTextView.setText(context.getString(R.string.hr_zone_3));
-        heartRateZone4ResultsTextView.setText(context.getString(R.string.hr_zone_4));
-        heartRateZone5ResultsTextView.setText(context.getString(R.string.hr_zone_5));
+        heartRateZone1ResultsTextView.setText(context.getString(R.string.heart_rate_zone_1));
+        heartRateZone2ResultsTextView.setText(context.getString(R.string.heart_rate_zone_2));
+        heartRateZone3ResultsTextView.setText(context.getString(R.string.heart_rate_zone_3));
+        heartRateZone4ResultsTextView.setText(context.getString(R.string.heart_rate_zone_4));
+        heartRateZone5ResultsTextView.setText(context.getString(R.string.heart_rate_zone_5));
     }
 
     @Override
@@ -96,7 +96,7 @@ public class HeartRateZonesInteractionContainer implements InteractionContainer,
     }
 
     public static class Builder {
-        private Context context;
+        private final Context context;
         private Property property;
         private RunnersKeyboard keyboard;
         private KeyboardlessEditText maximumHeartRateInput;

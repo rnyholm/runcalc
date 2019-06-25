@@ -1,4 +1,4 @@
-package ax.stardust.runcalc.component;
+package ax.stardust.runcalc.component.keyboard;
 
 import android.content.Context;
 import android.os.Handler;
