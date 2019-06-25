@@ -2,7 +2,6 @@ package ax.stardust.runcalc.interaction.container;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -10,10 +9,10 @@ import com.google.gson.GsonBuilder;
 
 import ax.stardust.runcalc.R;
 import ax.stardust.runcalc.component.keyboard.KeyboardHandler;
-import ax.stardust.runcalc.component.widget.KeyboardlessEditText;
+import ax.stardust.runcalc.component.keyboard.RunnersKeyboard;
 import ax.stardust.runcalc.component.watcher.ReferencedSwitchWatcher;
 import ax.stardust.runcalc.component.watcher.ReferencedTextWatcher;
-import ax.stardust.runcalc.component.keyboard.RunnersKeyboard;
+import ax.stardust.runcalc.component.widget.KeyboardlessEditText;
 import ax.stardust.runcalc.function.Property;
 import ax.stardust.runcalc.pojo.HeartRateZones;
 
