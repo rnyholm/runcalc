@@ -50,4 +50,4 @@ Yes it's true, there are no buttons in this app. This is a decision which makes 
 This application is made as an open source hobby project, just because I'm a developer and runner and makes these kind of calculations quite often. The source code is completely free to check out, use and do whatever you want with according to the MIT license. But I would be extremely happy if you leave a comment, star this project or in any other way show your support.
 
 ## At last
-Run fast, long and happy🏃‍♂️
+Run, Forrest! Run!🏃‍♂️
