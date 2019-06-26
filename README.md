@@ -26,6 +26,15 @@ How far have you run when you spent 1 hour in the running tracks at a pace of 6:
 ### Estimate VO2max
 In how good shape are you really? Just give the result from your cooper test, in meters, and an estimated VO2max will be calculated and presented to you. See [Cooper test on wikipedia](https://en.wikipedia.org/wiki/Cooper_test) for more information about the cooper test and the calculations being made.
 
+### Heart rate zones
+Do you also agree that calculating the different heart rate zones is a boring thing to do? Good news, you don't need to do it manually anymore! The app does this work for you, you only need to provide your maximum heart rate or age along with you resting heart rate and the different heart rate zones will be given to you. It's also possible to toggle beast mode(or just experienced runner) which will use slightly different zone limits for the calculations. If you train according to your heart rate zones this setting will make your training, especially on higher intensity a bit more challenging but the rewards may be greater if you're a bit more experienced runner. 
+
+Why is the resting heart rate needed? Because the heart rate zones are calculated with the Karvonen-method which has the heart rate reserve as parameter and you get that by subtracting your resting heart rate from your maximum heart rate. Note, do not mix up your lowest heart rate(which usually is measured while you sleep) with resting heart rate, which you preferable measure when you have woke up but before you get up in the morning.
+
+One last thing, if you don't know your maximum heart rate and uses your age as input instead, the maximum heart rate will be calculated as 220 - age(fox method), which is a less accurate alternative.
+
+See more information about the [Karvonen method on wikipedia](https://en.wikipedia.org/wiki/Heart_rate#Karvonen_method).
+
 ### Sleek user interface
 The user interface is designed with a minimalistic, simple and sleek mindset. This is to make the app as simple as possible to use and understand. This along with custom fonts and a fresh color palette makes the app a joy to use.
 
