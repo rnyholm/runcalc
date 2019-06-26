@@ -106,7 +106,7 @@ public class Calculator {
      * @return Estimated vo2max
      */
     public static String calculateVO2MaxEstimate(String cooperTestResult) {
-        double result = Distance.parse(cooperTestResult).getDistance();
+        int result = Distance.parseMetersStrict(cooperTestResult);
         if (result < 550 || result > 5000) {
             throw new IllegalArgumentException(); // unrealistic vo2max results
         }
@@ -314,6 +314,10 @@ public class Calculator {
 
         public static Distance parse(String distance) {
             return new Distance(MatchedDouble.parse(distance));
+        }
+
+        public static int parseMetersStrict(String distance) {
+            return Integer.parseInt(distance);
         }
 
         double getDistance() {

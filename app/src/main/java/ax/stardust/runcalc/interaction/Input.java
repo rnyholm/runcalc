@@ -1,13 +1,14 @@
 package ax.stardust.runcalc.interaction;
 
 public enum Input {
+    AGE(""),
+    DISTANCE_KM("."),
+    DISTANCE_M(""),
+    HEART_RATE(""),
+    NONE(""),
     PACE(":"),
     SPEED("."),
-    DISTANCE("."),
-    TIME(":"),
-    HEART_RATE(""),
-    AGE(""),
-    NONE("");
+    TIME(":");
 
     private final String separator;
 

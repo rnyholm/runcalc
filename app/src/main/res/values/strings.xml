@@ -5,9 +5,10 @@
 
     <!-- defaults -->
     <string name="default_age" translatable="false">0</string>
+    <string name="default_distance_m" translatable="false">0</string>
     <string name="default_heart_rate" translatable="false">0</string>
     <string name="default_pace" translatable="false">0:00</string>
-    <string name="default_speed_distance" translatable="false">0.0</string>
+    <string name="default_speed_distance_km" translatable="false">0.0</string>
     <string name="default_time" translatable="false">00:00:00</string>
     <string name="default_vo2max" translatable="false">0.0</string>
 

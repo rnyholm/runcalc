@@ -111,7 +111,7 @@ public class RunnersCalculator extends AppCompatActivity {
 
         KeyboardlessEditText calculatePaceDistanceEditText = findViewById(R.id.calculate_pace_distance_et);
         KeyboardlessEditText calculatePaceTimeEditText = findViewById(R.id.calculate_pace_time_et);
-        calculatePaceDistanceEditText.setInput(Input.DISTANCE);
+        calculatePaceDistanceEditText.setInput(Input.DISTANCE_KM);
         calculatePaceDistanceEditText.setValidatorFunction(Calculator.Distance::parse);
         calculatePaceTimeEditText.setInput(Input.TIME);
         calculatePaceTimeEditText.setValidatorFunction(Calculator.Time::parse);
@@ -127,7 +127,7 @@ public class RunnersCalculator extends AppCompatActivity {
 
         KeyboardlessEditText calculateTimeDistanceEditText = findViewById(R.id.calculate_time_distance_et);
         KeyboardlessEditText calculateTimePaceEditText = findViewById(R.id.calculate_time_pace_et);
-        calculateTimeDistanceEditText.setInput(Input.DISTANCE);
+        calculateTimeDistanceEditText.setInput(Input.DISTANCE_KM);
         calculateTimeDistanceEditText.setValidatorFunction(Calculator.Distance::parse);
         calculateTimePaceEditText.setInput(Input.PACE);
         calculateTimePaceEditText.setValidatorFunction(Calculator.Pace::parse);
@@ -158,8 +158,8 @@ public class RunnersCalculator extends AppCompatActivity {
         interactionContainers.add(calculateDistanceContainer);
 
         KeyboardlessEditText vo2maxEstimateCooperTestResultEditText = findViewById(R.id.vo2max_estimate_cooper_test_result_et);
-        vo2maxEstimateCooperTestResultEditText.setInput(Input.DISTANCE);
-        vo2maxEstimateCooperTestResultEditText.setValidatorFunction(Calculator.Distance::parse);
+        vo2maxEstimateCooperTestResultEditText.setInput(Input.DISTANCE_M);
+        vo2maxEstimateCooperTestResultEditText.setValidatorFunction(Calculator.Distance::parseMetersStrict);
         SingleInputInteractionContainer vo2MaxEstimateContainer = new SingleInputInteractionContainer.Builder(this)
                 .setProperty(Property.CALCULATE_VO2MAX_ESTIMATE)
                 .setKeyboard(runnersKeyboard)

@@ -179,12 +179,12 @@ public class CalculatorUnitTest {
         assertEquals("8.7", Calculator.calculateVO2MaxEstimate("896"));
         assertEquals("15.1", Calculator.calculateVO2MaxEstimate("1179"));
         assertEquals("20.0", Calculator.calculateVO2MaxEstimate("1400"));
-        assertEquals("25.1", Calculator.calculateVO2MaxEstimate("1629.78"));
+        assertEquals("25.1", Calculator.calculateVO2MaxEstimate("1629"));
         assertEquals("32.8", Calculator.calculateVO2MaxEstimate("1971"));
         assertEquals("42.2", Calculator.calculateVO2MaxEstimate("2394"));
-        assertEquals("46.0", Calculator.calculateVO2MaxEstimate("2563.9"));
+        assertEquals("46.0", Calculator.calculateVO2MaxEstimate("2563"));
         assertEquals("53.5", Calculator.calculateVO2MaxEstimate("2900"));
-        assertEquals("54.8", Calculator.calculateVO2MaxEstimate("2956.26"));
+        assertEquals("54.8", Calculator.calculateVO2MaxEstimate("2956"));
         assertEquals("59.8", Calculator.calculateVO2MaxEstimate("3178"));
         assertEquals("66.8", Calculator.calculateVO2MaxEstimate("3492"));
         assertEquals("73.4", Calculator.calculateVO2MaxEstimate("3789"));

@@ -48,7 +48,7 @@ public class DualInputInteractionContainer implements InteractionContainer {
                 setResult(context.getString(R.string.default_time));
                 break;
             case CALCULATE_DISTANCE:
-                setResult(context.getString(R.string.default_speed_distance));
+                setResult(context.getString(R.string.default_speed_distance_km));
         }
     }
 

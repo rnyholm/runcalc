@@ -38,7 +38,7 @@ public class SingleInputInteractionContainer implements InteractionContainer {
     public void setDefaultResults() {
         switch (property) {
             case CONVERT_PACE_TO_SPEED:
-                setResult(context.getString(R.string.default_speed_distance));
+                setResult(context.getString(R.string.default_speed_distance_km));
                 break;
             case CONVERT_SPEED_TO_PACE:
                 setResult(context.getString(R.string.default_pace));
