@@ -52,7 +52,7 @@ public class KeyboardlessEditText extends AppCompatEditText {
 
     private void initialize() {
         synchronized (this) {
-            setInputType(getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+            setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
             setFocusableInTouchMode(true);
         }
 

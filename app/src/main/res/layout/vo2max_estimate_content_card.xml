@@ -73,7 +73,6 @@
             android:fontFamily="@font/open_sans"
             android:gravity="center_horizontal"
             android:hint="@string/default_distance_m"
-            android:inputType="text"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:textColor="@color/colorInputText"
