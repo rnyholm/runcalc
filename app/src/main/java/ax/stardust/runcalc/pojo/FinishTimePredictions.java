@@ -3,14 +3,13 @@ package ax.stardust.runcalc.pojo;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import ax.stardust.runcalc.function.PredictionDistance;
 
 public class FinishTimePredictions {
-    private List<FinishTimePrediction> finishTimePredictions = new ArrayList<>();
+    private final List<FinishTimePrediction> finishTimePredictions = new ArrayList<>();
 
     public void addPrediction(FinishTimePrediction finishTimePrediction) {
         finishTimePredictions.add(finishTimePrediction);

@@ -369,10 +369,32 @@ public class CalculatorUnitTest {
 
     @Test
     public void testCalculateFinishTimePredictions() {
-        String s = Calculator.calculateFinishTimePredictions("10|45:43");
+        String s = Calculator.calculateFinishTimePredictions("10k|45:43");
 
         FinishTimePredictions finishTimePredictions = new GsonBuilder().create().fromJson(s, FinishTimePredictions.class);
-        System.out.println(finishTimePredictions);
+        sysOutPredictions(finishTimePredictions);
+    }
+
+    private void sysOutPredictions(FinishTimePredictions predictions) {
+        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_100_M));
+        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_200_M));
+        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_400_M));
+        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_800_M));
+        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_1500_M));
+        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_1_MI));
+        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_2_MI));
+        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_5_K));
+        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_5_MI));
+        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_10_K));
+        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_10_MI));
+        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_HALF_MARATHON));
+        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_MARATHON));
+        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_50_K));
+        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_50_MI));
+    }
+
+    private void sysOutPrediction(FinishTimePredictions.FinishTimePrediction prediction) {
+        System.out.println("Distance: " + prediction.getDistance() + "\ttime: " + prediction.getTime() + "\tpace: " + prediction.getPace());
     }
 
     @Test
@@ -382,8 +404,8 @@ public class CalculatorUnitTest {
         heartRateZones.addZone(heartRateZone);
 
         try {
-           heartRateZones.getZone("z10");
-           fail();
+            heartRateZones.getZone("z10");
+            fail();
         } catch (Exception e) {
             exceptionCounter++;
         }

@@ -1,7 +1,5 @@
 package ax.stardust.runcalc.function;
 
-import java.util.Arrays;
-
 /**
  * Representation of the different distances used while making finish time predictions.
  * NOTE! All lengths are in meters in decimal format!
@@ -29,7 +27,11 @@ public enum PredictionDistance {
         this.distance = distance;
     }
 
-    public double getDistance() {
+    private double getDistanceInMeters() {
         return distance;
+    }
+
+    public double getDistanceInKilometers() {
+        return getDistanceInMeters() * 0.001;
     }
 }

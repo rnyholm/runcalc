@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Locale;
 
 import ax.stardust.runcalc.pojo.FinishTimePredictions;
+import ax.stardust.runcalc.pojo.FinishTimePredictions.FinishTimePrediction;
 import ax.stardust.runcalc.pojo.HeartRateZones;
 
 import static ax.stardust.runcalc.pojo.HeartRateZones.*;
@@ -21,6 +22,7 @@ public class Calculator {
     private static final String SIMPLE_COMBINED_STRING_PATTERN = "^[^|]+\\|[^|]+$";
     private static final String TRAINING_EXPERIENCE_HRREST_HRMAX_PATTERN = "^[B|E]\\|[0-9]{2,3}\\|HR-[0-9]{3}$";
     private static final String TRAINING_EXPERIENCE_HRREST_AGE_PATTERN = "^[B|E]\\|[0-9]{2,3}\\|A-[0-9]{2}$";
+    private static final String FINISH_TIME_PREDICTION_DISTANCE_PATTERN = "5k|10k";
 
     public static String convertPaceToSpeed(String pace) {
         return Pace.parse(pace).asSpeed();
@@ -154,8 +156,8 @@ public class Calculator {
 
     /**
      * To calculate finish time predictions(incl. paces) from given distance and finish time for
-     * that distance, which are combined in the string parameter in following pattern: <br />
-     * 10|45:34
+     * that distance, which are combined in the string parameter in following pattern: 5k/10k|finish-time<br />
+     * Example: 10k|45:34
      * Formula in use to calculate these predictions are the Peter Riegel formula which seems to be
      * widely used and accepted.
      *
@@ -165,20 +167,22 @@ public class Calculator {
     public static String calculateFinishTimePredictions(String distanceAndFinishTime) {
         throwExceptionIfMalformedStringPattern(distanceAndFinishTime);
         String[] split = distanceAndFinishTime.split("\\|");
+        if (split[0].matches(FINISH_TIME_PREDICTION_DISTANCE_PATTERN)) {
+            int distance = "10k".equals(split[0]) ? 10 : 5;
+            Time time = Time.parse(split[1]);
 
-        Distance distance = Distance.parse(split[0]);
-        Time time = Time.parse(split[1]);
+            FinishTimePredictions predictions = new FinishTimePredictions();
+            Arrays.stream(PredictionDistance.values()).forEach(predictionDistance -> {
+                int predictedFinishTimeInSeconds = (int) Math.round(time.inSeconds() * Math.pow(predictionDistance.getDistanceInKilometers() / distance, 1.06)); // riegel formula
+                String predictedFinishTime = Time.parseSeconds(predictedFinishTimeInSeconds);
+                String predictedPace = calculatePace(predictionDistance.getDistanceInKilometers() + "|" + predictedFinishTime);
+                predictions.addPrediction(FinishTimePrediction.create(predictionDistance, predictedFinishTime, predictedPace));
+            });
 
-        FinishTimePredictions predictions = new FinishTimePredictions();
+            return new GsonBuilder().create().toJson(predictions);
+        }
 
-        Arrays.stream(PredictionDistance.values()).forEach(pd -> {
-            int result = (int) Math.round(time.inSeconds() * Math.pow(pd.getDistance() / 10000, 1.06));
-            String predictedFinishTime = Time.parseSeconds(result);
-            String predictedPace = calculatePace(pd.getDistance() + "|" + predictedFinishTime);
-            predictions.addPrediction(FinishTimePredictions.FinishTimePrediction.create(pd, predictedFinishTime, predictedPace));
-        });
-
-        return new GsonBuilder().create().toJson(predictions);
+        throw new IllegalArgumentException();
     }
 
     static class HeartRateCalculationData {
