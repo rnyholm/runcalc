@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
+import ax.stardust.runcalc.function.PredictionDistance;
+import ax.stardust.runcalc.pojo.FinishTimePredictions;
 import ax.stardust.runcalc.pojo.HeartRateZones;
 import ax.stardust.runcalc.pojo.HeartRateZones.HeartRateZone;
 import ax.stardust.runcalc.function.Calculator;
@@ -363,6 +365,14 @@ public class CalculatorUnitTest {
         validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_3), 151, 163, 70, 80);
         validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_2), 138, 150, 60, 70);
         validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_1), 125, 137, 50, 60);
+    }
+
+    @Test
+    public void testCalculateFinishTimePredictions() {
+        String s = Calculator.calculateFinishTimePredictions("10|45:43");
+
+        FinishTimePredictions finishTimePredictions = new GsonBuilder().create().fromJson(s, FinishTimePredictions.class);
+        System.out.println(finishTimePredictions);
     }
 
     @Test

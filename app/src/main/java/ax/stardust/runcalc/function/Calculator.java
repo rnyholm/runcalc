@@ -2,8 +2,10 @@ package ax.stardust.runcalc.function;
 
 import com.google.gson.GsonBuilder;
 
+import java.util.Arrays;
 import java.util.Locale;
 
+import ax.stardust.runcalc.pojo.FinishTimePredictions;
 import ax.stardust.runcalc.pojo.HeartRateZones;
 
 import static ax.stardust.runcalc.pojo.HeartRateZones.*;
@@ -144,10 +146,39 @@ public class Calculator {
      * The returned string is Json formatted and contains the different training heart zones with it's corresponding
      *
      * @param heartRateCalculationData Combined value of data needed for calculation
-     * @return Json formatted string with the different training heart zones
+     * @return Json formatted string with the different heart rate zones
      */
     public static String calculateHeartRateZones(String heartRateCalculationData) {
         return HeartRateCalculationData.parse(heartRateCalculationData).getHeartRateZones();
+    }
+
+    /**
+     * To calculate finish time predictions(incl. paces) from given distance and finish time for
+     * that distance, which are combined in the string parameter in following pattern: <br />
+     * 10|45:34
+     * Formula in use to calculate these predictions are the Peter Riegel formula which seems to be
+     * widely used and accepted.
+     *
+     * @param distanceAndFinishTime Combined value of distance and finish time for that distance
+     * @return Json formatted string with the different finish time predictions, incl. paces
+     */
+    public static String calculateFinishTimePredictions(String distanceAndFinishTime) {
+        throwExceptionIfMalformedStringPattern(distanceAndFinishTime);
+        String[] split = distanceAndFinishTime.split("\\|");
+
+        Distance distance = Distance.parse(split[0]);
+        Time time = Time.parse(split[1]);
+
+        FinishTimePredictions predictions = new FinishTimePredictions();
+
+        Arrays.stream(PredictionDistance.values()).forEach(pd -> {
+            int result = (int) Math.round(time.inSeconds() * Math.pow(pd.getDistance() / 10000, 1.06));
+            String predictedFinishTime = Time.parseSeconds(result);
+            String predictedPace = calculatePace(pd.getDistance() + "|" + predictedFinishTime);
+            predictions.addPrediction(FinishTimePredictions.FinishTimePrediction.create(pd, predictedFinishTime, predictedPace));
+        });
+
+        return new GsonBuilder().create().toJson(predictions);
     }
 
     static class HeartRateCalculationData {
