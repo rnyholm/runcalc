@@ -27,11 +27,11 @@ public enum PredictionDistance {
         this.distance = distance;
     }
 
-    private double getDistanceInMeters() {
+    private double inMeters() {
         return distance;
     }
 
-    public double getDistanceInKilometers() {
-        return getDistanceInMeters() * 0.001;
+    public double inKilometers() {
+        return inMeters() * 0.001;
     }
 }

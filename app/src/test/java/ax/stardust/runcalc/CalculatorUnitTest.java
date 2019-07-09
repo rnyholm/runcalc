@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import ax.stardust.runcalc.function.PredictionDistance;
 import ax.stardust.runcalc.pojo.FinishTimePredictions;
+import ax.stardust.runcalc.pojo.FinishTimePredictions.FinishTimePrediction;
 import ax.stardust.runcalc.pojo.HeartRateZones;
 import ax.stardust.runcalc.pojo.HeartRateZones.HeartRateZone;
 import ax.stardust.runcalc.function.Calculator;
@@ -368,36 +369,6 @@ public class CalculatorUnitTest {
     }
 
     @Test
-    public void testCalculateFinishTimePredictions() {
-        String s = Calculator.calculateFinishTimePredictions("10k|45:43");
-
-        FinishTimePredictions finishTimePredictions = new GsonBuilder().create().fromJson(s, FinishTimePredictions.class);
-        sysOutPredictions(finishTimePredictions);
-    }
-
-    private void sysOutPredictions(FinishTimePredictions predictions) {
-        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_100_M));
-        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_200_M));
-        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_400_M));
-        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_800_M));
-        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_1500_M));
-        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_1_MI));
-        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_2_MI));
-        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_5_K));
-        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_5_MI));
-        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_10_K));
-        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_10_MI));
-        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_HALF_MARATHON));
-        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_MARATHON));
-        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_50_K));
-        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_50_MI));
-    }
-
-    private void sysOutPrediction(FinishTimePredictions.FinishTimePrediction prediction) {
-        System.out.println("Distance: " + prediction.getDistance() + "\ttime: " + prediction.getTime() + "\tpace: " + prediction.getPace());
-    }
-
-    @Test
     public void testHeartRateZones() {
         HeartRateZones heartRateZones = new HeartRateZones();
         HeartRateZone heartRateZone = HeartRateZone.create(HeartRateZones.ZONE_3, 151, 163, 70, 80);
@@ -419,6 +390,111 @@ public class CalculatorUnitTest {
 
         assertEquals(heartRateZone, heartRateZones.getZone(HeartRateZones.ZONE_3));
         assertEquals(2, exceptionCounter);
+    }
+
+    @Test
+    public void testCalculateFinishTimePredictions() {
+        FinishTimePredictions finishTimePredictions = validateFinishTimePredictions(Calculator.calculateFinishTimePredictions("10k|45:43"));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_100_M), "00:21", "3:30");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_200_M), "00:43", "3:35");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_400_M), "01:30", "3:45");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_800_M), "03:09", "3:56");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_1500_M), "06:07", "4:05");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_1_MI), "06:36", "4:06");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_2_MI), "13:45", "4:16");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_5_K), "21:56", "4:23");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_5_MI), "36:19", "4:31");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_10_K), "45:43", "4:34");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_10_MI), "01:15:42", "4:42");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_HALF_MARATHON), "01:40:52", "4:47");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_MARATHON), "03:30:18", "4:59");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_50_K), "04:11:45", "5:02");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_50_MI), "06:56:54", "5:11");
+
+        finishTimePredictions = validateFinishTimePredictions(Calculator.calculateFinishTimePredictions("5k|23:12"));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_100_M), "00:22", "3:40");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_200_M), "00:46", "3:50");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_400_M), "01:36", "4:00");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_800_M), "03:20", "4:10");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_1500_M), "06:28", "4:19");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_1_MI), "06:59", "4:20");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_2_MI), "14:33", "4:31");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_5_K), "23:12", "4:38");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_5_MI), "38:25", "4:46");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_10_K), "48:22", "4:50");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_10_MI), "01:20:06", "4:59");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_HALF_MARATHON), "01:46:43", "5:03");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_MARATHON), "03:42:31", "5:16");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_50_K), "04:26:22", "5:20");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_50_MI), "07:21:06", "5:29");
+
+        finishTimePredictions = validateFinishTimePredictions(Calculator.calculateFinishTimePredictions("10k|32:59"));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_100_M), "00:15", "2:30");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_200_M), "00:31", "2:35");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_400_M), "01:05", "2:43");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_800_M), "02:16", "2:50");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_1500_M), "04:25", "2:57");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_1_MI), "04:45", "2:57");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_2_MI), "09:55", "3:05");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_5_K), "15:49", "3:10");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_5_MI), "26:12", "3:15");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_10_K), "32:59", "3:18");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_10_MI), "54:37", "3:24");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_HALF_MARATHON), "01:12:46", "3:27");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_MARATHON), "02:31:44", "3:36");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_50_K), "03:01:38", "3:38");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_50_MI), "05:00:47", "3:44");
+
+        finishTimePredictions = validateFinishTimePredictions(Calculator.calculateFinishTimePredictions("10k|2:13:58"));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_100_M), "01:01", "10:10");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_200_M), "02:07", "10:35");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_400_M), "04:25", "11:03");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_800_M), "09:13", "11:31");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_1500_M), "17:56", "11:57");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_1_MI), "19:19", "12:00");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_2_MI), "40:17", "12:31");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_5_K), "01:04:15", "12:51");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_5_MI), "01:46:24", "13:13");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_10_K), "02:13:58", "13:24");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_10_MI), "03:41:51", "13:47");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_HALF_MARATHON), "04:55:35", "14:01");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_MARATHON), "10:16:16", "14:36");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_50_K), "12:17:45", "14:45");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_50_MI), "20:21:40", "15:11");
+
+        finishTimePredictions = validateFinishTimePredictions(Calculator.calculateFinishTimePredictions("5k|09:14"));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_100_M), "00:09", "1:30");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_200_M), "00:18", "1:30");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_400_M), "00:38", "1:35");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_800_M), "01:19", "1:39");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_1500_M), "02:35", "1:43");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_1_MI), "02:47", "1:44");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_2_MI), "05:47", "1:48");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_5_K), "09:14", "1:51");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_5_MI), "15:17", "1:54");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_10_K), "19:15", "1:56");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_10_MI), "31:53", "1:59");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_HALF_MARATHON), "42:29", "2:01");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_MARATHON), "01:28:33", "2:06");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_50_K), "01:46:01", "2:07");
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_50_MI), "02:55:33", "2:11");
+    }
+
+    @Test
+    public void testFinishTimePredictions() {
+        FinishTimePredictions finishTimePredictions = new FinishTimePredictions();
+        FinishTimePrediction finishTimePrediction = FinishTimePrediction.create(PredictionDistance.D_10_K, "45:43", "4:43");
+        finishTimePredictions.addPrediction(finishTimePrediction);
+
+        try {
+            finishTimePredictions.getPrediction(PredictionDistance.D_2_MI);
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        assertEquals(finishTimePrediction, finishTimePredictions.getPrediction(PredictionDistance.D_10_K));
+        assertEquals(1, exceptionCounter);
     }
 
     @Test
@@ -797,7 +873,7 @@ public class CalculatorUnitTest {
     }
 
     @Test
-    public void testCalculateHeartRateZonesEstimateExceptions() {
+    public void testCalculateHeartRateZonesExceptions() {
         try {
             Calculator.calculateHeartRateZones("B|56|121");
             fail();
@@ -1007,13 +1083,88 @@ public class CalculatorUnitTest {
         assertEquals(10, exceptionCounter);
     }
 
+    @Test
+    public void testCalculateFinishTimePredictionsExceptions() {
+        try {
+            Calculator.calculateFinishTimePredictions("8k");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateFinishTimePredictions("8k|40:36");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateFinishTimePredictions("10|43:43");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateFinishTimePredictions("10k|60:43");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateFinishTimePredictions("5k|60:60");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateFinishTimePredictions("kk|34:59");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateFinishTimePredictions("-1");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateFinishTimePredictions("10k|34:59:00:00");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateFinishTimePredictions("10k|2567");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        try {
+            Calculator.calculateFinishTimePredictions("10k|:00:87");
+            fail();
+        } catch (Exception e) {
+            exceptionCounter++;
+        }
+
+        assertEquals(10, exceptionCounter);
+    }
+
     private String combineStrings(String s1, String s2) {
         return s1 + "|" + s2;
     }
 
     private HeartRateZones validateHeartRateZones(String heartRateZonesJson) {
         if (heartRateZonesJson == null || heartRateZonesJson.isEmpty()) {
-            fail("Heart rate zone json is null or empty");
+            fail("Heart rate zones json is null or empty");
         }
         HeartRateZones heartRateZones = new GsonBuilder().create().fromJson(heartRateZonesJson, HeartRateZones.class);
         validateHeartRateZone(heartRateZones.getZone(HeartRateZones.ZONE_5));
@@ -1040,4 +1191,64 @@ public class CalculatorUnitTest {
         assertTrue(heartRateZone.getPercentageMin() > 49);
         assertTrue(heartRateZone.getPercentageMax() < 101);
     }
+
+    private FinishTimePredictions validateFinishTimePredictions(String finishTimePredictionsJson) {
+        if (finishTimePredictionsJson == null || finishTimePredictionsJson.isEmpty()) {
+            fail("Finish time predictions json null or empty");
+        }
+
+        FinishTimePredictions finishTimePredictions = new GsonBuilder().create().fromJson(finishTimePredictionsJson, FinishTimePredictions.class);
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_100_M));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_200_M));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_400_M));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_800_M));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_1500_M));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_1_MI));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_2_MI));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_5_K));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_5_MI));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_10_K));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_10_MI));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_HALF_MARATHON));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_MARATHON));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_50_K));
+        validateFinishTimePrediction(finishTimePredictions.getPrediction(PredictionDistance.D_50_MI));
+
+        return finishTimePredictions;
+    }
+
+    private void validateFinishTimePrediction(FinishTimePrediction finishTimePrediction, String expectedTime, String expectedPace) {
+        assertEquals(expectedTime, finishTimePrediction.getTime());
+        assertEquals(expectedPace, finishTimePrediction.getPace());
+    }
+
+    private void validateFinishTimePrediction(FinishTimePrediction finishTimePrediction) {
+        assertNotNull(finishTimePrediction);
+        assertNotNull(finishTimePrediction.getDistance());
+        assertNotNull(finishTimePrediction.getTime());
+        assertNotNull(finishTimePrediction.getPace());
+    }
+
+//    private void sysOutPredictions(FinishTimePredictions predictions) {
+//        System.out.println("-------");
+//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_100_M));
+//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_200_M));
+//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_400_M));
+//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_800_M));
+//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_1500_M));
+//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_1_MI));
+//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_2_MI));
+//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_5_K));
+//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_5_MI));
+//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_10_K));
+//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_10_MI));
+//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_HALF_MARATHON));
+//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_MARATHON));
+//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_50_K));
+//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_50_MI));
+//    }
+//
+//    private void sysOutPrediction(FinishTimePrediction prediction) {
+//        System.out.println("Distance: " + prediction.getDistance() + "\ttime: " + prediction.getTime() + "\tpace: " + prediction.getPace());
+//    }
 }

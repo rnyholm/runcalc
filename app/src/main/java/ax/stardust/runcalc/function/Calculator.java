@@ -2,14 +2,18 @@ package ax.stardust.runcalc.function;
 
 import com.google.gson.GsonBuilder;
 
-import java.util.Arrays;
 import java.util.Locale;
 
 import ax.stardust.runcalc.pojo.FinishTimePredictions;
 import ax.stardust.runcalc.pojo.FinishTimePredictions.FinishTimePrediction;
 import ax.stardust.runcalc.pojo.HeartRateZones;
 
-import static ax.stardust.runcalc.pojo.HeartRateZones.*;
+import static ax.stardust.runcalc.pojo.HeartRateZones.HeartRateZone;
+import static ax.stardust.runcalc.pojo.HeartRateZones.ZONE_1;
+import static ax.stardust.runcalc.pojo.HeartRateZones.ZONE_2;
+import static ax.stardust.runcalc.pojo.HeartRateZones.ZONE_3;
+import static ax.stardust.runcalc.pojo.HeartRateZones.ZONE_4;
+import static ax.stardust.runcalc.pojo.HeartRateZones.ZONE_5;
 
 public class Calculator {
     private static final int SECONDS_IN_HOUR = 3600;
@@ -172,12 +176,12 @@ public class Calculator {
             Time time = Time.parse(split[1]);
 
             FinishTimePredictions predictions = new FinishTimePredictions();
-            Arrays.stream(PredictionDistance.values()).forEach(predictionDistance -> {
-                int predictedFinishTimeInSeconds = (int) Math.round(time.inSeconds() * Math.pow(predictionDistance.getDistanceInKilometers() / distance, 1.06)); // riegel formula
-                String predictedFinishTime = Time.parseSeconds(predictedFinishTimeInSeconds);
-                String predictedPace = calculatePace(predictionDistance.getDistanceInKilometers() + "|" + predictedFinishTime);
+            for (PredictionDistance predictionDistance : PredictionDistance.values()) {
+                int predictedFinishTimeInSeconds = (int) Math.round(time.inSeconds() * Math.pow(predictionDistance.inKilometers() / distance, 1.06)); // riegel formula
+                String predictedFinishTime = Time.parseSecondsShort(predictedFinishTimeInSeconds);
+                String predictedPace = calculatePace(predictionDistance.inKilometers() + "|" + predictedFinishTime);
                 predictions.addPrediction(FinishTimePrediction.create(predictionDistance, predictedFinishTime, predictedPace));
-            });
+            }
 
             return new GsonBuilder().create().toJson(predictions);
         }
@@ -479,6 +483,14 @@ public class Calculator {
         }
 
         static String parseSeconds(int seconds) {
+            return parseSeconds(seconds, false);
+        }
+
+        static String parseSecondsShort(int seconds) {
+            return parseSeconds(seconds, true);
+        }
+
+        private static String parseSeconds(int seconds, boolean onlyMMSSIfPossible) {
             int hours = 0;
             int minutes = 0;
 
@@ -488,6 +500,12 @@ public class Calculator {
                 seconds = Math.round((seconds - hours * SECONDS_IN_HOUR) - minutes * 60);
             } else {
                 seconds = 0;
+            }
+
+            if (onlyMMSSIfPossible) {
+                if (hours < 1) { // no hours, possible to short return string to mm:ss
+                    return String.format(Locale.ENGLISH, "%02d:%02d", minutes, seconds);
+                }
             }
 
             return String.format(Locale.ENGLISH, "%02d:%02d:%02d", hours, minutes, seconds);
