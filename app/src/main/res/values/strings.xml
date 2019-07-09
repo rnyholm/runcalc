@@ -35,6 +35,7 @@
     <!-- descriptions -->
     <string name="heart_rate_zones_description">Calculate your heart rate zones from your maximum heart rate or age combined with your resting heart rate and training experience. If age is used the maximum heart rate will be calculated as 220 - your age, which is a less accurate alternative. The resting heart rate is needed because the Karvonen method is used to calculate the different heart rate zones.</string>
     <string name="vo2max_estimate_description">Calculate an estimated VO2max by giving a cooper test result in meters.</string>
+    <string name="finish_time_predictions_description">Calculate estimated finish times for several common running distances from a known finish time for either 5 or 10km. These calculations are done using the Peter Riegel formula, which is widely used and accepted. However the estimates tends to fall away towards the extremes so the results for the shorter and longer distances may be somewhat unreliable.</string>
 
     <!-- hints -->
     <string name="hint_distance">Distance(%s)</string>
@@ -53,6 +54,7 @@
     <string name="pace">Pace</string>
     <string name="resting_heart_rate">Resting heart rate</string>
     <string name="time">Time</string>
+    <string name="finish_time">Finish time</string>
     <string name="vo2max" translatable="false">VO2max</string>
 
     <!-- keyboard -->
