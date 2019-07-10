@@ -92,6 +92,7 @@
     <!-- links -->
     <string name="url_cooper_test" translatable="false">https://en.wikipedia.org/wiki/Cooper_test</string>
     <string name="url_karvonen_method" translatable="false">https://en.wikipedia.org/wiki/Heart_rate#Karvonen_method</string>
+    <string name="url_peter_riegel_method" translatable="false">https://en.wikipedia.org/wiki/Peter_Riegel#Race_time_prediction</string>
 
     <!-- other -->
     <string name="filter_view_runners_calculator" translatable="false">View Runners Calculator</string>

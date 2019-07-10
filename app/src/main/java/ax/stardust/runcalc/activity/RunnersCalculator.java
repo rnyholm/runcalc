@@ -47,6 +47,7 @@ public class RunnersCalculator extends AppCompatActivity {
 
     private ImageView vo2maxEstimateCooperTestLinkImageView;
     private ImageView heartRateZonesKarvonenLinkImageView;
+    private ImageView finishTimePredictionsPeterRiegelLinkImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,6 +197,7 @@ public class RunnersCalculator extends AppCompatActivity {
 
         vo2maxEstimateCooperTestLinkImageView = findViewById(R.id.vo2max_estimate_cooper_test_link_iv);
         heartRateZonesKarvonenLinkImageView = findViewById(R.id.heart_rate_zones_karvonen_link_iv);
+        finishTimePredictionsPeterRiegelLinkImageView = findViewById(R.id.finish_time_predictions_peter_riegel_link_iv);
     }
 
     private void setGlobalTexts() {
@@ -231,6 +233,11 @@ public class RunnersCalculator extends AppCompatActivity {
 
         heartRateZonesKarvonenLinkImageView.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_karvonen_method)));
+            startActivity(intent);
+        });
+
+        finishTimePredictionsPeterRiegelLinkImageView.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_peter_riegel_method)));
             startActivity(intent);
         });
     }
