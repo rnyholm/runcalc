@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- units -->
+    <string name="unit_kilometres">Kilometres</string>
+    <string name="unit_meters">Metres</string>
+
     <!-- titles -->
     <string name="calculate_xx">Calculate %s</string>
     <string name="convert_xx_to_xx">Convert %s to %s</string>
@@ -28,5 +32,7 @@
     <string name="pace">Pace</string>
     <string name="resting_heart_rate">Resting heart rate</string>
     <string name="time">Time</string>
-    <string name="finish_time">Finish time</string>
+    <string name="finish_times">Finish times</string>
+    <string name="distance_marathon">Marathon</string>
+    <string name="distance_half_marathon">Half Marathon</string>
 </resources>

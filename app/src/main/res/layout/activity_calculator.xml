@@ -42,6 +42,12 @@
                 android:layout_marginTop="10dp" />
 
             <include
+                layout="@layout/finish_time_predictions_content_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+
+            <include
                 layout="@layout/vo2max_estimate_content_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

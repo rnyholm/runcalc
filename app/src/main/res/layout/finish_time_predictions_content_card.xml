@@ -62,7 +62,42 @@
         android:layout_marginTop="5dp"
         android:orientation="vertical">
 
-        <LinearLayout
+    <LinearLayout
+        android:id="@+id/finish_time_predictions_finish_time_input_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/finish_time_predictions_finish_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/time"
+            android:textColor="@color/colorText"
+            android:textSize="16sp" />
+
+        <ax.stardust.runcalc.component.widget.KeyboardlessEditText
+            android:id="@+id/finish_time_predictions_finish_time_et"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_default"
+            android:layout_marginStart="110dp"
+            android:ems="10"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center_horizontal"
+            android:hint="@string/default_time"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textColor="@color/colorInputText"
+            android:textAlignment="center"
+            android:textCursorDrawable="@drawable/input_cursor_default" />
+
+    </LinearLayout>
+
+    <LinearLayout
             android:id="@+id/finish_time_predictions_distance_input_ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -81,232 +116,662 @@
                 android:textSize="16sp" />
 
             <RadioGroup
-                android:id="@+id/radio_group"
+                android:id="@+id/finish_time_predictions_distance_rg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/radio1"
+                    android:id="@+id/finish_time_predictions_distance_5km_rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="First"
+                    android:text="@string/distance_5_unit"
                     android:fontFamily="@font/open_sans"
                     android:textColor="@color/colorText"
                     android:textSize="16sp" />
 
                 <RadioButton
-                    android:id="@+id/radio2"
+                    android:id="@+id/finish_time_predictions_distance_10km_rb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Second"
+                    android:layout_marginStart="15dp"
+                    android:text="@string/distance_10_unit"
+                    android:checked="true"
                     android:fontFamily="@font/open_sans"
                     android:textColor="@color/colorText"
                     android:textSize="16sp" />
             </RadioGroup>
 
-            <ax.stardust.runcalc.component.widget.KeyboardlessEditText
-                android:id="@+id/heart_rate_zones_maximum_heart_rate_et"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:background="@drawable/input_default"
-                android:ems="10"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center_horizontal"
-                android:hint="@string/default_heart_rate"
-                android:selectAllOnFocus="true"
-                android:singleLine="true"
-                android:textColor="@color/colorInputText"
-                android:textCursorDrawable="@drawable/input_cursor_default" />
-
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/heart_rate_zones_age_input_ll"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/heart_rate_zones_age_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/open_sans"
-                android:text="@string/age"
-                android:textColor="@color/colorText"
-                android:textSize="16sp" />
-
-            <ax.stardust.runcalc.component.widget.KeyboardlessEditText
-                android:id="@+id/heart_rate_zones_age_et"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/input_default"
-                android:ems="10"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center_horizontal"
-                android:hint="@string/default_age"
-                android:selectAllOnFocus="true"
-                android:singleLine="true"
-                android:textColor="@color/colorInputText"
-                android:textCursorDrawable="@drawable/input_cursor_default" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/heart_rate_zones_resting_heart_rate_input_ll"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/heart_rate_zones_resting_heart_rate_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="7dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/open_sans"
-                android:text="@string/resting_heart_rate"
-                android:textColor="@color/colorText"
-                android:textSize="16sp" />
-
-            <ax.stardust.runcalc.component.widget.KeyboardlessEditText
-                android:id="@+id/heart_rate_zones_resting_heart_rate_et"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:background="@drawable/input_default"
-                android:ems="10"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center_horizontal"
-                android:hint="@string/default_heart_rate"
-                android:selectAllOnFocus="true"
-                android:singleLine="true"
-                android:textColor="@color/colorInputText"
-                android:textCursorDrawable="@drawable/input_cursor_default" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/heart_rate_zones_training_experience_input_ll"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <Switch
-                android:id="@+id/heart_rate_zones_training_experience_sw"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/open_sans"
-                android:text="@string/experienced_runner"
-                android:textColor="@color/colorText"
-                android:textSize="16sp" />
-        </LinearLayout>
     </LinearLayout>
 
     <TableLayout
-        android:id="@+id/heart_rate_zones_training_zones_tl"
+        android:id="@+id/finish_time_predictions_tl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
 
         <TableRow
-            android:id="@+id/heart_rate_zones_zone5_tr"
+            android:id="@+id/finish_time_predictions_heading_tr"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:background="@color/colorHRZone5">
+            android:background="@color/colorFinishTimePredictionsTableHeading">
 
             <TextView
-                android:id="@+id/heart_rate_zones_zone5_results_tv"
+                android:id="@+id/finish_time_predictions_heading_distance_tv"
                 android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/heart_rate_zone_5"
-                android:textColor="@color/colorHRZonesText"
+                android:text="@string/distance"
+                android:textColor="@color/colorHeadingText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_heading_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/time"
+                android:textColor="@color/colorHeadingText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_heading_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/pace"
+                android:textColor="@color/colorHeadingText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/heart_rate_zones_zone4_tr"
+            android:id="@+id/finish_time_predictions_100m_tr"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:background="@color/colorHRZone4">
+            android:background="@color/colorFinishTimePredictionsTableRow">
 
             <TextView
-                android:id="@+id/heart_rate_zones_zone4_results_tv"
+                android:id="@+id/finish_time_predictions_100m_heading_tv"
                 android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/heart_rate_zone_4"
-                android:textColor="@color/colorHRZonesText"
+                android:text="@string/distance_100_unit"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_100m_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_100m_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/heart_rate_zones_zone3_tr"
+            android:id="@+id/finish_time_predictions_200m_tr"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:background="@color/colorHRZone3">
+            android:background="@color/colorFinishTimePredictionsTableRowDark">
 
             <TextView
-                android:id="@+id/heart_rate_zones_zone3_results_tv"
+                android:id="@+id/finish_time_predictions_200m_heading_tv"
                 android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/heart_rate_zone_3"
-                android:textColor="@color/colorHRZonesText"
+                android:text="@string/distance_200_unit"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_200m_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_200m_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/heart_rate_zones_zone2_tr"
+            android:id="@+id/finish_time_predictions_400m_tr"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:background="@color/colorHRZone2">
+            android:background="@color/colorFinishTimePredictionsTableRow">
 
             <TextView
-                android:id="@+id/heart_rate_zones_zone2_results_tv"
+                android:id="@+id/finish_time_predictions_400m_heading_tv"
                 android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/heart_rate_zone_2"
-                android:textColor="@color/colorHRZonesText"
+                android:text="@string/distance_400_unit"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_400m_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_400m_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/heart_rate_zones_zone1_tr"
+            android:id="@+id/finish_time_predictions_800m_tr"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:background="@color/colorHRZone1">
+            android:background="@color/colorFinishTimePredictionsTableRowDark">
 
             <TextView
-                android:id="@+id/heart_rate_zones_zone1_results_tv"
+                android:id="@+id/finish_time_predictions_800m_heading_tv"
                 android:layout_width="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
-                android:text="@string/heart_rate_zone_1"
-                android:textColor="@color/colorHRZonesText"
+                android:text="@string/distance_800_unit"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_800m_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_800m_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/finish_time_predictions_1500m_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorFinishTimePredictionsTableRow">
+
+            <TextView
+                android:id="@+id/finish_time_predictions_1500m_heading_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/distance_1500_unit"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_1500m_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_1500m_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/finish_time_predictions_1mi_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorFinishTimePredictionsTableRowDark">
+
+            <TextView
+                android:id="@+id/finish_time_predictions_1mi_heading_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/distance_1_unit"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_1mi_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_1mi_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/finish_time_predictions_2mi_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorFinishTimePredictionsTableRow">
+
+            <TextView
+                android:id="@+id/finish_time_predictions_2mi_heading_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/distance_2_unit"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_2mi_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_2mi_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/finish_time_predictions_5km_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorFinishTimePredictionsTableRowDark">
+
+            <TextView
+                android:id="@+id/finish_time_predictions_5km_heading_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/distance_5_unit"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_5km_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_5km_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/finish_time_predictions_5mi_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorFinishTimePredictionsTableRow">
+
+            <TextView
+                android:id="@+id/finish_time_predictions_5mi_heading_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/distance_5_unit"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_5mi_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_5mi_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/finish_time_predictions_10km_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorFinishTimePredictionsTableRowDark">
+
+            <TextView
+                android:id="@+id/finish_time_predictions_10km_heading_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/distance_10_unit"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_10km_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_10km_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/finish_time_predictions_10mi_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorFinishTimePredictionsTableRow">
+
+            <TextView
+                android:id="@+id/finish_time_predictions_10mi_heading_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/distance_10_unit"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_10mi_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_10mi_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/finish_time_predictions_half_marathon_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorFinishTimePredictionsTableRowDark">
+
+            <TextView
+                android:id="@+id/finish_time_predictions_half_marathon_heading_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/distance_half_marathon"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_half_marathon_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_half_marathon_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/finish_time_predictions_marathon_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorFinishTimePredictionsTableRow">
+
+            <TextView
+                android:id="@+id/finish_time_predictions_marathon_heading_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/distance_marathon"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_marathon_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_marathon_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/finish_time_predictions_50km_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorFinishTimePredictionsTableRowDark">
+
+            <TextView
+                android:id="@+id/finish_time_predictions_50km_heading_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/distance_50_unit"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_50km_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_50km_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/finish_time_predictions_50mi_tr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorFinishTimePredictionsTableRowDark">
+
+            <TextView
+                android:id="@+id/finish_time_predictions_50mi_heading_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/distance_50_unit"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_50mi_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/finish_time_predictions_50mi_pace_tv"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/default_distance_pace"
+                android:textColor="@color/colorText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </TableRow>

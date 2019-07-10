@@ -6,6 +6,7 @@
     <!-- defaults -->
     <string name="default_age" translatable="false">0</string>
     <string name="default_distance_m" translatable="false">0</string>
+    <string name="default_distance_pace" translatable="false">-</string>
     <string name="default_heart_rate" translatable="false">0</string>
     <string name="default_pace" translatable="false">0:00</string>
     <string name="default_speed_distance_km" translatable="false">0.0</string>
@@ -14,6 +15,10 @@
 
     <!-- units -->
     <string name="unit_distance" translatable="false">km</string>
+    <string name="unit_kilometres">Kilometres</string>
+    <string name="unit_meters">Metres</string>
+    <string name="unit_mile" translatable="false">Mile</string>
+    <string name="unit_miles" translatable="false">Miles</string>
     <string name="unit_pace" translatable="false">min/km</string>
     <string name="unit_speed" translatable="false">km/h</string>
 
@@ -54,8 +59,22 @@
     <string name="pace">Pace</string>
     <string name="resting_heart_rate">Resting heart rate</string>
     <string name="time">Time</string>
-    <string name="finish_time">Finish time</string>
+    <string name="finish_times">Finish times</string>
     <string name="vo2max" translatable="false">VO2max</string>
+
+    <!-- distance -->
+    <string name="distance_100_unit" translatable="false">100 {unit}</string>
+    <string name="distance_200_unit" translatable="false">200 {unit}</string>
+    <string name="distance_400_unit" translatable="false">400 {unit}</string>
+    <string name="distance_800_unit" translatable="false">800 {unit}</string>
+    <string name="distance_1500_unit" translatable="false">1500 {unit}</string>
+    <string name="distance_1_unit" translatable="false">1 {unit}</string>
+    <string name="distance_2_unit" translatable="false">2 {unit}</string>
+    <string name="distance_5_unit" translatable="false">5 {unit}</string>
+    <string name="distance_10_unit" translatable="false">10 {unit}</string>
+    <string name="distance_half_marathon">Half Marathon</string>
+    <string name="distance_marathon">Marathon</string>
+    <string name="distance_50_unit" translatable="false">50 {unit}</string>
 
     <!-- keyboard -->
     <string name="keyboard_0" translatable="false">0</string>
