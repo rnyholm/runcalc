@@ -15,10 +15,10 @@
 
     <!-- units -->
     <string name="unit_distance" translatable="false">km</string>
-    <string name="unit_kilometres">Kilometres</string>
-    <string name="unit_meters">Metres</string>
-    <string name="unit_mile" translatable="false">Mile</string>
-    <string name="unit_miles" translatable="false">Miles</string>
+    <string name="unit_kilometres">kilometres</string>
+    <string name="unit_meters">metres</string>
+    <string name="unit_mile" translatable="false">mile</string>
+    <string name="unit_miles" translatable="false">miles</string>
     <string name="unit_pace" translatable="false">min/km</string>
     <string name="unit_speed" translatable="false">km/h</string>
 

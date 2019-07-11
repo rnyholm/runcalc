@@ -19,7 +19,8 @@
     <color name="colorHRZone3">#82F28D</color>
     <color name="colorHRZone2">#4FB2FF</color>
     <color name="colorHRZone1">#E2E2E2</color>
-    <color name="colorFinishTimePredictionsTableHeading">#E2E2E2</color>
-    <color name="colorFinishTimePredictionsTableRowDark">#F9F9F9</color>
+    <color name="colorFinishTimePredictionsTableHeadingText">#FFFFFF</color>
+    <color name="colorFinishTimePredictionsTableHeading">#A8DB92</color>
+    <color name="colorFinishTimePredictionsTableRowDark">#E7F5E1</color>
     <color name="colorFinishTimePredictionsTableRow">#FFFFFF</color>
 </resources>

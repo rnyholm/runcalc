@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- units -->
-    <string name="unit_kilometres">Kilometres</string>
-    <string name="unit_meters">Metres</string>
+    <string name="unit_kilometres">kilometres</string>
+    <string name="unit_meters">metres</string>
 
     <!-- titles -->
     <string name="calculate_xx">Calculate %s</string>

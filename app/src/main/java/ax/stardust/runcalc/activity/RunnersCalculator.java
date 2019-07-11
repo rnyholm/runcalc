@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -43,7 +44,24 @@ public class RunnersCalculator extends AppCompatActivity {
     private TextView calculateDistanceTimeHintTextView;
     private TextView calculateDistancePaceHintTextView;
     private TextView vo2maxEstimateTextView;
+    private TextView finishTimePredictionsTextView;
+    private TextView finishTimePredictions100mHeadingTextView;
+    private TextView finishTimePredictions200mHeadingTextView;
+    private TextView finishTimePredictions400mHeadingTextView;
+    private TextView finishTimePredictions800mHeadingTextView;
+    private TextView finishTimePredictions1500mHeadingTextView;
+    private TextView finishTimePredictions1miHeadingTextView;
+    private TextView finishTimePredictions2miHeadingTextView;
+    private TextView finishTimePredictions5kmHeadingTextView;
+    private TextView finishTimePredictions5miHeadingTextView;
+    private TextView finishTimePredictions10kmHeadingTextView;
+    private TextView finishTimePredictions10miHeadingTextView;
+    private TextView finishTimePredictions50kmHeadingTextView;
+    private TextView finishTimePredictions50miHeadingTextView;
     private TextView versionNameTextView;
+
+    private RadioButton finishTimePredictionsDistance5kmRadioButton;
+    private RadioButton finishTimePredictionsDistance10kmRadioButton;
 
     private ImageView vo2maxEstimateCooperTestLinkImageView;
     private ImageView heartRateZonesKarvonenLinkImageView;
@@ -84,6 +102,20 @@ public class RunnersCalculator extends AppCompatActivity {
         calculateDistanceTimeHintTextView = findViewById(R.id.calculate_distance_time_hint_tv);
         calculateDistancePaceHintTextView = findViewById(R.id.calculate_distance_pace_hint_tv);
         vo2maxEstimateTextView = findViewById(R.id.vo2max_estimate_tv);
+        finishTimePredictionsTextView = findViewById(R.id.finish_time_predictions_tv);
+        finishTimePredictions100mHeadingTextView = findViewById(R.id.finish_time_predictions_100m_heading_tv);
+        finishTimePredictions200mHeadingTextView = findViewById(R.id.finish_time_predictions_200m_heading_tv);
+        finishTimePredictions400mHeadingTextView = findViewById(R.id.finish_time_predictions_400m_heading_tv);
+        finishTimePredictions800mHeadingTextView = findViewById(R.id.finish_time_predictions_800m_heading_tv);
+        finishTimePredictions1500mHeadingTextView = findViewById(R.id.finish_time_predictions_1500m_heading_tv);
+        finishTimePredictions1miHeadingTextView = findViewById(R.id.finish_time_predictions_1mi_heading_tv);
+        finishTimePredictions2miHeadingTextView = findViewById(R.id.finish_time_predictions_2mi_heading_tv);
+        finishTimePredictions5kmHeadingTextView = findViewById(R.id.finish_time_predictions_5km_heading_tv);
+        finishTimePredictions5miHeadingTextView = findViewById(R.id.finish_time_predictions_5mi_heading_tv);
+        finishTimePredictions10kmHeadingTextView = findViewById(R.id.finish_time_predictions_10km_heading_tv);
+        finishTimePredictions10miHeadingTextView = findViewById(R.id.finish_time_predictions_10mi_heading_tv);
+        finishTimePredictions50kmHeadingTextView = findViewById(R.id.finish_time_predictions_50km_heading_tv);
+        finishTimePredictions50miHeadingTextView = findViewById(R.id.finish_time_predictions_50mi_heading_tv);
         versionNameTextView = findViewById(R.id.version_name_tv);
 
         KeyboardlessEditText paceToSpeedEditText = findViewById(R.id.pace_to_speed_et);
@@ -195,6 +227,9 @@ public class RunnersCalculator extends AppCompatActivity {
                 .build();
         interactionContainers.add(heartRateZonesContainer);
 
+        finishTimePredictionsDistance5kmRadioButton = findViewById(R.id.finish_time_predictions_distance_5km_rb);
+        finishTimePredictionsDistance10kmRadioButton = findViewById(R.id.finish_time_predictions_distance_10km_rb);
+
         vo2maxEstimateCooperTestLinkImageView = findViewById(R.id.vo2max_estimate_cooper_test_link_iv);
         heartRateZonesKarvonenLinkImageView = findViewById(R.id.heart_rate_zones_karvonen_link_iv);
         finishTimePredictionsPeterRiegelLinkImageView = findViewById(R.id.finish_time_predictions_peter_riegel_link_iv);
@@ -221,6 +256,22 @@ public class RunnersCalculator extends AppCompatActivity {
         calculateDistanceTimeHintTextView.setText(String.format(getString(R.string.hint_time), getString(R.string.default_time)));
         calculateDistancePaceHintTextView.setText(String.format(getString(R.string.hint_pace), RunnersCalculator.pace));
         vo2maxEstimateTextView.setText(String.format(getString(R.string.estimate_xx), getString(R.string.vo2max)));
+        finishTimePredictionsTextView.setText(String.format(getString(R.string.estimate_xx), getString(R.string.finish_times).toLowerCase()));
+        finishTimePredictionsDistance5kmRadioButton.setText(getString(R.string.distance_5_unit).replace("{unit}", RunnersCalculator.distance));
+        finishTimePredictionsDistance10kmRadioButton.setText(getString(R.string.distance_10_unit).replace("{unit}", RunnersCalculator.distance));
+        finishTimePredictions100mHeadingTextView.setText(getString(R.string.distance_100_unit).replace("{unit}", getString(R.string.unit_meters)));
+        finishTimePredictions200mHeadingTextView.setText(getString(R.string.distance_200_unit).replace("{unit}", getString(R.string.unit_meters)));
+        finishTimePredictions400mHeadingTextView.setText(getString(R.string.distance_400_unit).replace("{unit}", getString(R.string.unit_meters)));
+        finishTimePredictions800mHeadingTextView.setText(getString(R.string.distance_800_unit).replace("{unit}", getString(R.string.unit_meters)));
+        finishTimePredictions1500mHeadingTextView.setText(getString(R.string.distance_1500_unit).replace("{unit}", getString(R.string.unit_meters)));
+        finishTimePredictions1miHeadingTextView.setText(getString(R.string.distance_1_unit).replace("{unit}", getString(R.string.unit_mile)));
+        finishTimePredictions2miHeadingTextView.setText(getString(R.string.distance_2_unit).replace("{unit}", getString(R.string.unit_miles)));
+        finishTimePredictions5kmHeadingTextView.setText(getString(R.string.distance_5_unit).replace("{unit}", getString(R.string.unit_kilometres)));
+        finishTimePredictions5miHeadingTextView.setText(getString(R.string.distance_5_unit).replace("{unit}", getString(R.string.unit_miles)));
+        finishTimePredictions10kmHeadingTextView.setText(getString(R.string.distance_10_unit).replace("{unit}", getString(R.string.unit_kilometres)));
+        finishTimePredictions10miHeadingTextView.setText(getString(R.string.distance_10_unit).replace("{unit}", getString(R.string.unit_miles)));
+        finishTimePredictions50kmHeadingTextView.setText(getString(R.string.distance_50_unit).replace("{unit}", getString(R.string.unit_kilometres)));
+        finishTimePredictions50miHeadingTextView.setText(getString(R.string.distance_50_unit).replace("{unit}", getString(R.string.unit_miles)));
     }
 
     private void setListeners() {

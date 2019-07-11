@@ -83,7 +83,7 @@
                 android:id="@+id/finish_time_predictions_finish_time_et"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="110dp"
+                android:layout_marginStart="150dp"
                 android:background="@drawable/input_default"
                 android:ems="10"
                 android:fontFamily="@font/open_sans"
@@ -166,7 +166,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance"
-                android:textColor="@color/colorHeadingText"
+                android:textColor="@color/colorFinishTimePredictionsTableHeadingText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -176,7 +176,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/open_sans"
                 android:text="@string/time"
-                android:textColor="@color/colorHeadingText"
+                android:textColor="@color/colorFinishTimePredictionsTableHeadingText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -186,7 +186,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/open_sans"
                 android:text="@string/pace"
-                android:textColor="@color/colorHeadingText"
+                android:textColor="@color/colorFinishTimePredictionsTableHeadingText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </TableRow>
@@ -206,8 +206,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance_100_unit"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_100m_time_tv"
@@ -216,8 +215,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_100m_pace_tv"
@@ -226,8 +224,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -245,8 +242,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance_200_unit"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_200m_time_tv"
@@ -255,8 +251,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_200m_pace_tv"
@@ -265,8 +260,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -284,8 +278,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance_400_unit"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_400m_time_tv"
@@ -294,8 +287,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_400m_pace_tv"
@@ -304,8 +296,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -323,8 +314,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance_800_unit"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_800m_time_tv"
@@ -333,8 +323,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_800m_pace_tv"
@@ -343,8 +332,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -362,8 +350,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance_1500_unit"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_1500m_time_tv"
@@ -372,8 +359,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_1500m_pace_tv"
@@ -382,8 +368,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -401,8 +386,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance_1_unit"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_1mi_time_tv"
@@ -411,8 +395,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_1mi_pace_tv"
@@ -421,8 +404,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -440,8 +422,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance_2_unit"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_2mi_time_tv"
@@ -450,8 +431,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_2mi_pace_tv"
@@ -460,8 +440,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -479,8 +458,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance_5_unit"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_5km_time_tv"
@@ -489,8 +467,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_5km_pace_tv"
@@ -499,8 +476,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -518,8 +494,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance_5_unit"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_5mi_time_tv"
@@ -528,8 +503,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_5mi_pace_tv"
@@ -538,8 +512,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -557,8 +530,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance_10_unit"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_10km_time_tv"
@@ -567,8 +539,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_10km_pace_tv"
@@ -577,8 +548,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -596,8 +566,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance_10_unit"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_10mi_time_tv"
@@ -606,8 +575,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_10mi_pace_tv"
@@ -616,8 +584,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -635,8 +602,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance_half_marathon"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_half_marathon_time_tv"
@@ -645,8 +611,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_half_marathon_pace_tv"
@@ -655,8 +620,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -674,8 +638,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance_marathon"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_marathon_time_tv"
@@ -684,8 +647,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_marathon_pace_tv"
@@ -694,8 +656,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -713,8 +674,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance_50_unit"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_50km_time_tv"
@@ -723,8 +683,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_50km_pace_tv"
@@ -733,8 +692,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -742,7 +700,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:background="@color/colorFinishTimePredictionsTableRowDark">
+            android:background="@color/colorFinishTimePredictionsTableRow">
 
             <TextView
                 android:id="@+id/finish_time_predictions_50mi_heading_tv"
@@ -752,8 +710,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/distance_50_unit"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_50mi_time_tv"
@@ -762,8 +719,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/finish_time_predictions_50mi_pace_tv"
@@ -772,8 +728,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/default_distance_pace"
                 android:textColor="@color/colorText"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
         </TableRow>
     </TableLayout>
 

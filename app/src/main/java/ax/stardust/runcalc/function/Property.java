@@ -9,7 +9,8 @@ public enum Property {
     CALCULATE_TIME(Calculator::calculateTime),
     CALCULATE_DISTANCE(Calculator::calculateDistance),
     CALCULATE_VO2MAX_ESTIMATE(Calculator::calculateVO2MaxEstimate),
-    CALCULATE_HEART_RATE_ZONES(Calculator::calculateHeartRateZones);
+    CALCULATE_HEART_RATE_ZONES(Calculator::calculateHeartRateZones),
+    CALCULATE_FINISH_TIME_PREDICTIONS(Calculator::calculateFinishTimePredictions);
 
     private final Function<String, String> calculatorFunction;
 
