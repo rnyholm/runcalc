@@ -1228,27 +1228,4 @@ public class CalculatorUnitTest {
         assertNotNull(finishTimePrediction.getTime());
         assertNotNull(finishTimePrediction.getPace());
     }
-
-//    private void sysOutPredictions(FinishTimePredictions predictions) {
-//        System.out.println("-------");
-//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_100_M));
-//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_200_M));
-//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_400_M));
-//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_800_M));
-//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_1500_M));
-//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_1_MI));
-//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_2_MI));
-//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_5_K));
-//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_5_MI));
-//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_10_K));
-//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_10_MI));
-//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_HALF_MARATHON));
-//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_MARATHON));
-//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_50_K));
-//        sysOutPrediction(predictions.getPrediction(PredictionDistance.D_50_MI));
-//    }
-//
-//    private void sysOutPrediction(FinishTimePrediction prediction) {
-//        System.out.println("Distance: " + prediction.getDistance() + "\ttime: " + prediction.getTime() + "\tpace: " + prediction.getPace());
-//    }
 }
