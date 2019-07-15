@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import ax.stardust.runcalc.component.keyboard.RunnersKeyboard;
 import ax.stardust.runcalc.interaction.Input;
 import ax.stardust.runcalc.function.Property;
 import ax.stardust.runcalc.interaction.container.DualInputInteractionContainer;
+import ax.stardust.runcalc.interaction.container.FinishTimePredictionsInteractionContainer;
 import ax.stardust.runcalc.interaction.container.HeartRateZonesInteractionContainer;
 import ax.stardust.runcalc.interaction.container.InteractionContainer;
 import ax.stardust.runcalc.interaction.container.SingleInputInteractionContainer;
@@ -229,6 +231,48 @@ public class RunnersCalculator extends AppCompatActivity {
 
         finishTimePredictionsDistance5kmRadioButton = findViewById(R.id.finish_time_predictions_distance_5km_rb);
         finishTimePredictionsDistance10kmRadioButton = findViewById(R.id.finish_time_predictions_distance_10km_rb);
+        KeyboardlessEditText finishTimeEditText = findViewById(R.id.finish_time_predictions_finish_time_et);
+        finishTimeEditText.setInput(Input.TIME);
+        finishTimeEditText.setValidatorFunction(Calculator.Time::parse);
+        RadioGroup distanceRadioGroup  = findViewById(R.id.finish_time_predictions_distance_rg);
+        FinishTimePredictionsInteractionContainer finishTimePredictionsContainer = new FinishTimePredictionsInteractionContainer.Builder(this)
+                .setProperty(Property.CALCULATE_FINISH_TIME_PREDICTIONS)
+                .setKeyboard(runnersKeyboard)
+                .setFinishTimeInput(finishTimeEditText)
+                .setDistanceInputGroup(distanceRadioGroup)
+                .setDistance5kmInput(finishTimePredictionsDistance5kmRadioButton)
+                .setResults100mTimeTextView(findViewById(R.id.finish_time_predictions_100m_time_tv))
+                .setResults100mPaceTextView(findViewById(R.id.finish_time_predictions_100m_pace_tv))
+                .setResults200mTimeTextView(findViewById(R.id.finish_time_predictions_200m_time_tv))
+                .setResults200mPaceTextView(findViewById(R.id.finish_time_predictions_200m_pace_tv))
+                .setResults400mTimeTextView(findViewById(R.id.finish_time_predictions_400m_time_tv))
+                .setResults400mPaceTextView(findViewById(R.id.finish_time_predictions_400m_pace_tv))
+                .setResults800mTimeTextView(findViewById(R.id.finish_time_predictions_800m_time_tv))
+                .setResults800mPaceTextView(findViewById(R.id.finish_time_predictions_800m_pace_tv))
+                .setResults1500mTimeTextView(findViewById(R.id.finish_time_predictions_1500m_time_tv))
+                .setResults1500mPaceTextView(findViewById(R.id.finish_time_predictions_1500m_pace_tv))
+                .setResults1miTimeTextView(findViewById(R.id.finish_time_predictions_1mi_time_tv))
+                .setResults1miPaceTextView(findViewById(R.id.finish_time_predictions_1mi_pace_tv))
+                .setResults2miTimeTextView(findViewById(R.id.finish_time_predictions_2mi_time_tv))
+                .setResults2miPaceTextView(findViewById(R.id.finish_time_predictions_2mi_pace_tv))
+                .setResults5kmTimeTextView(findViewById(R.id.finish_time_predictions_5km_time_tv))
+                .setResults5kmPaceTextView(findViewById(R.id.finish_time_predictions_5km_pace_tv))
+                .setResults5miTimeTextView(findViewById(R.id.finish_time_predictions_5mi_time_tv))
+                .setResults5miPaceTextView(findViewById(R.id.finish_time_predictions_5mi_pace_tv))
+                .setResults10kmTimeTextView(findViewById(R.id.finish_time_predictions_10km_time_tv))
+                .setResults10kmPaceTextView(findViewById(R.id.finish_time_predictions_10km_pace_tv))
+                .setResults10miTimeTextView(findViewById(R.id.finish_time_predictions_10mi_time_tv))
+                .setResults10miPaceTextView(findViewById(R.id.finish_time_predictions_10mi_pace_tv))
+                .setResultsHalfMarathonTimeTextView(findViewById(R.id.finish_time_predictions_half_marathon_time_tv))
+                .setResultsHalfMarathonPaceTextView(findViewById(R.id.finish_time_predictions_half_marathon_pace_tv))
+                .setResultsMarathonTimeTextView(findViewById(R.id.finish_time_predictions_marathon_time_tv))
+                .setResultsMarathonPaceTextView(findViewById(R.id.finish_time_predictions_marathon_pace_tv))
+                .setResults50kmTimeTextView(findViewById(R.id.finish_time_predictions_50km_time_tv))
+                .setResults50kmPaceTextView(findViewById(R.id.finish_time_predictions_50km_pace_tv))
+                .setResults50miTimeTextView(findViewById(R.id.finish_time_predictions_50mi_time_tv))
+                .setResults50miPaceTextView(findViewById(R.id.finish_time_predictions_50mi_pace_tv))
+                .build();
+        interactionContainers.add(finishTimePredictionsContainer);
 
         vo2maxEstimateCooperTestLinkImageView = findViewById(R.id.vo2max_estimate_cooper_test_link_iv);
         heartRateZonesKarvonenLinkImageView = findViewById(R.id.heart_rate_zones_karvonen_link_iv);
