@@ -3,7 +3,7 @@
 Branch | Travis opinion
 -------|-------
 Master | [![Build Status](https://travis-ci.com/rnyholm/runcalc.svg?branch=master)](https://travis-ci.com/rnyholm/runcalc)
-Develop | [![Build Status](https://travis-ci.com/rnyholm/runcalc.svg?branch=dev-v1.6)](https://travis-ci.com/rnyholm/runcalc)
+Develop | [![Build Status](https://travis-ci.com/rnyholm/runcalc.svg?branch=dev-v1.7)](https://travis-ci.com/rnyholm/runcalc)
 
 ## Introduction
 Runners Calculator is a minimalistic utility application for Android made by a runner for runners. The purpose of the app is to make a few of the most common runner related conversions and calculations a bit easier. This includes conversions between pace and speed and vice versa as well as different calculations of distance, time and pace. Another important goal of the app is that it should be foolproof and easy to use, so you can focus more on the stuff that matters - running🏃‍♂️
@@ -36,7 +36,7 @@ One last thing, if you don't know your maximum heart rate and uses your age as i
 See more information about the [Karvonen method on wikipedia](https://en.wikipedia.org/wiki/Heart_rate#Karvonen_method).
 
 ### Finish time predictions
-Wonder how long it may take for you to run a half marathon but you've only run 5km as longest? With the finish time predictions in the app ypu can figure this out. Give your finish time for either 5 or 10km and the app will calculate finish time predictions for several common running distances. The app uses the Peter Riegel formula to calculate these predictions, which is widely used and supported. However the estimates tends to fall away towards the extremes so the results for the shorter and longer distances may be somewhat unreliable.
+Wonder how long it may take for you to run a half marathon but you've only run 5km as longest? With the finish time predictions in the app you can figure this out. Give your finish time for either 5 or 10km and the app will calculate finish time predictions for several common running distances. The app uses the Peter Riegel formula to calculate these predictions, which is widely used and supported. However the estimates tends to fall away towards the extremes so the results for the shorter and longer distances may be somewhat unreliable.
 
 See more information about the [Peter Riegel formula on wikipedia](https://en.wikipedia.org/wiki/Peter_Riegel#Race_time_prediction).
 
