@@ -159,7 +159,7 @@ public class Calculator {
     }
 
     /**
-     * To calculate finish time predictions(incl. paces) from given distance and finish time for
+     * To calculate finish time predictions(including paces) from given distance and finish time for
      * that distance, which are combined in the string parameter in following pattern: 5k/10k|finish-time<br />
      * Example: 10k|45:34
      * Formula in use to calculate these predictions are the Peter Riegel formula which seems to be
