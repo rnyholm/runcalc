@@ -5,4 +5,10 @@
         <item name="colorAccent">@color/colorPrimaryAccent</item>
         <item name="android:windowBackground">@color/colorBackground</item>
     </style>
+
+    <style name="EasterEggDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+    </style>
 </resources>

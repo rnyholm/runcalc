@@ -9,6 +9,7 @@
     <string name="convert_xx_to_xx">Convert %s to %s</string>
     <string name="estimate_xx">Estimate %s</string>
     <string name="heart_rate_zones">Heart rate zones</string>
+    <string name="developers_achievements">Developers achievements</string>
 
     <!-- descriptions -->
     <string name="heart_rate_zones_description">Calculate your heart rate zones from your maximum heart rate or age combined with your resting heart rate and training experience. If age is used the maximum heart rate will be calculated as 220 - your age, which is a less accurate alternative. The resting heart rate is needed because the Karvonen method is used to calculate the different heart rate zones.</string>
@@ -19,6 +20,14 @@
     <string name="hint_distance">Distance(%s)</string>
     <string name="hint_pace">Pace(%s)</string>
     <string name="hint_time">Time(%s)</string>
+
+    <!-- achievements -->
+    <string name="pr_cooper_test_title">Cooper test:</string>
+    <string name="pr_half_marathon_title">Half marathon:</string>
+    <string name="pr_marathon_title">Marathon:</string>
+
+    <!-- results -->
+    <string name="result_backyard_ultra">9 laps</string>
 
     <string name="age">Age</string>
     <string name="distance">Distance</string>
