@@ -26,8 +26,8 @@
     <string name="pr_half_marathon_title">Halvmaraton:</string>
     <string name="pr_marathon_title">Maraton:</string>
 
-    <!-- results -->
-    <string name="result_backyard_ultra">9 varv</string>
+    <!-- pr's -->
+    <string name="pr_backyard_ultra">9 varv</string>
 
     <string name="age">Ålder</string>
     <string name="distance">Distans</string>

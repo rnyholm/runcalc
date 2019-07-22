@@ -28,6 +28,7 @@ public class EasterEgg {
         easterEggDialog.setOnKeyListener((dialogInterface, keyCode, keyEvent) -> {
             if (keyCode == KeyEvent.KEYCODE_BACK) {
                 revealShow(context, dialogView, false, easterEggDialog);
+                return true; // consider back key pressed handled
             }
             return false;
         });

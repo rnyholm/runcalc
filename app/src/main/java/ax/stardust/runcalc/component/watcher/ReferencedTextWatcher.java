@@ -41,7 +41,7 @@ public class ReferencedTextWatcher implements TextWatcher {
 
             if (input.getInput() == Input.TIME) {
                 if (EasterEgg.TRIGGER_TEXT.equals(inputText)) {
-                    runnersKeyboard.hide(); // hide immediately without delay
+                    runnersKeyboard.delayedHide();
                     EasterEgg.show(interactionContainer.getContext());
                 }
             }

@@ -168,7 +168,7 @@ public class RunnersKeyboard extends LinearLayout implements View.OnClickListene
         hideDelayHandler.postDelayed(this::hide, HIDE_DELAY);
     }
 
-    public void hide() {
+    private void hide() {
         setVisibility(View.GONE);
     }
 

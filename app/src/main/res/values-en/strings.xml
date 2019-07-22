@@ -23,11 +23,11 @@
 
     <!-- achievements -->
     <string name="pr_cooper_test_title">Cooper test:</string>
-    <string name="pr_half_marathon_title">Half marathon:</string>
+    <string name="pr_half_marathon_title">Half Marathon:</string>
     <string name="pr_marathon_title">Marathon:</string>
 
-    <!-- results -->
-    <string name="result_backyard_ultra">9 laps</string>
+    <!-- pr's -->
+    <string name="pr_backyard_ultra">9 laps</string>
 
     <string name="age">Age</string>
     <string name="distance">Distance</string>
