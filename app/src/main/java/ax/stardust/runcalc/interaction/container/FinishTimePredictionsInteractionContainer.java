@@ -67,6 +67,11 @@ public class FinishTimePredictionsInteractionContainer implements InteractionCon
     }
 
     @Override
+    public Context getContext() {
+        return context;
+    }
+
+    @Override
     public void calculateIfPossible() {
         if (hasValidCalculationInput(finishTimeInput)) {
             String distanceAndTime = distance5kmInput.isChecked() ? "5k|" : "10k|";

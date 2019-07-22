@@ -40,6 +40,11 @@ public class HeartRateZonesInteractionContainer implements InteractionContainer 
     }
 
     @Override
+    public Context getContext() {
+        return context;
+    }
+
+    @Override
     public void calculateIfPossible() {
         if ((hasValidCalculationInput(maximumHeartRateInput) || hasValidCalculationInput(ageInput))
                 && hasValidCalculationInput(restingHeartRateInput)) {

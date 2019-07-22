@@ -29,6 +29,11 @@ public class SingleInputInteractionContainer implements InteractionContainer {
     }
 
     @Override
+    public Context getContext() {
+        return context;
+    }
+
+    @Override
     public void calculateIfPossible() {
         String result = property.getCalculatorFunction().apply(getTextOfInput(input));
         setResult(result);

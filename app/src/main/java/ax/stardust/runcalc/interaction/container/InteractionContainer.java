@@ -1,5 +1,6 @@
 package ax.stardust.runcalc.interaction.container;
 
+import android.content.Context;
 import android.text.Editable;
 
 import ax.stardust.runcalc.component.widget.KeyboardlessEditText;
@@ -12,6 +13,13 @@ public interface InteractionContainer extends Comparable {
      * @return Property of this interaction container.
      */
     Property getProperty();
+
+    /**
+     * To get {@link android.content.Context} of this interaction container.
+     *
+     * @return Context of this interaction container.
+     */
+    Context getContext();
 
     /**
      * To make calculations, if possible, depending on components and data within this

@@ -1,40 +1,30 @@
 package ax.stardust.runcalc.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
 import ax.stardust.runcalc.R;
-import ax.stardust.runcalc.component.widget.KeyboardlessEditText;
 import ax.stardust.runcalc.component.keyboard.RunnersKeyboard;
-import ax.stardust.runcalc.interaction.Input;
+import ax.stardust.runcalc.component.widget.KeyboardlessEditText;
+import ax.stardust.runcalc.function.Calculator;
 import ax.stardust.runcalc.function.Property;
+import ax.stardust.runcalc.interaction.Input;
 import ax.stardust.runcalc.interaction.container.DualInputInteractionContainer;
 import ax.stardust.runcalc.interaction.container.FinishTimePredictionsInteractionContainer;
 import ax.stardust.runcalc.interaction.container.HeartRateZonesInteractionContainer;
 import ax.stardust.runcalc.interaction.container.InteractionContainer;
 import ax.stardust.runcalc.interaction.container.SingleInputInteractionContainer;
-import ax.stardust.runcalc.function.Calculator;
 
 public class RunnersCalculator extends AppCompatActivity {
     public static String pace;
@@ -345,54 +335,5 @@ public class RunnersCalculator extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_peter_riegel_method)));
             startActivity(intent);
         });
-    }
-
-    private void showEasterEggDialog() {
-        View dialogView = View.inflate(this, R.layout.easter_egg_dialog, null);
-        Dialog easterEggDialog = new Dialog(this, R.style.EasterEggDialogStyle);
-        easterEggDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        easterEggDialog.setContentView(dialogView);
-
-        ImageView imageView = easterEggDialog.findViewById(R.id.close_easter_egg_dialog_iv);
-        imageView.setOnClickListener(view -> revealShow(dialogView, false, easterEggDialog));
-
-        easterEggDialog.setOnShowListener(dialogInterface -> revealShow(dialogView, true, null));
-
-        easterEggDialog.setOnKeyListener((dialogInterface, keyCode, keyEvent) -> {
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                revealShow(dialogView, false, easterEggDialog);
-            }
-            return false;
-        });
-
-        Objects.requireNonNull(easterEggDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        easterEggDialog.show();
-    }
-
-    private void revealShow(View dialogView, boolean showDialog, final Dialog dialog) {
-        final View view = dialogView.findViewById(R.id.easter_egg_dialog_rl);
-
-        int endRadius = (int) Math.hypot(view.getWidth(), view.getHeight());
-        int cx = this.getResources().getDisplayMetrics().widthPixels / 2;
-        int cy = this.getResources().getDisplayMetrics().heightPixels / 2;
-
-        if (showDialog) {
-            Animator revealAnimator = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0, endRadius);
-            view.setVisibility(View.VISIBLE);
-            revealAnimator.setDuration(700);
-            revealAnimator.start();
-        } else {
-            Animator animator = ViewAnimationUtils.createCircularReveal(view, cx, cy, endRadius, 0);
-            animator.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    super.onAnimationEnd(animation);
-                    dialog.dismiss();
-                    view.setVisibility(View.INVISIBLE);
-                }
-            });
-            animator.setDuration(700);
-            animator.start();
-        }
     }
 }
