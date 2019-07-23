@@ -44,16 +44,16 @@ public class EasterEgg {
         final View view = dialogView.findViewById(R.id.easter_egg_dialog_rl);
 
         int endRadius = (int) Math.hypot(view.getWidth(), view.getHeight());
-        int cx = context.getResources().getDisplayMetrics().widthPixels / 2;
-        int cy = context.getResources().getDisplayMetrics().heightPixels / 2;
+        int centerX = context.getResources().getDisplayMetrics().widthPixels / 2;
+        int centerY = context.getResources().getDisplayMetrics().heightPixels / 2;
 
         if (showDialog) {
-            Animator revealAnimator = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0, endRadius);
+            Animator revealAnimator = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, 0, endRadius);
             view.setVisibility(View.VISIBLE);
             revealAnimator.setDuration(700);
             revealAnimator.start();
         } else {
-            Animator animator = ViewAnimationUtils.createCircularReveal(view, cx, cy, endRadius, 0);
+            Animator animator = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, endRadius, 0);
             animator.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
