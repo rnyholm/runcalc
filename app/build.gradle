@@ -7,8 +7,8 @@ android {
         applicationId "ax.stardust.runnerscalculator"
         minSdkVersion 24
         targetSdkVersion 28
-        versionCode 7
-        versionName "v1.7beta"
+        versionCode 8
+        versionName "v1.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "$applicationId-$versionName")
     }
