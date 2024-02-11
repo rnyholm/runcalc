@@ -24,7 +24,7 @@ import ax.stardust.runcalc.interaction.Input;
  * This is the same as an native EditText, except that no soft keyboard
  * will appear when user clicks on widget. This is modeled after the keyboard
  * in the default Android KitKat dialer app.
- * Proudly snatched from: https://github.com/danialgoodwin/android-simply-tone-generator/blob/master/app/src/main/java/net/simplyadvanced/simplytonegenerator/widget/KeyboardlessEditText.java
+ * Proudly snatched from: <a href="https://github.com/danialgoodwin/android-simply-tone-generator/blob/master/app/src/main/java/net/simplyadvanced/simplytonegenerator/widget/KeyboardlessEditText.java">...</a>
  * <p>
  * As this stuff is copied and pasted(it was a pain to find any good stuff about this on stack overflow) I'm not 100%
  * sure of what every little code snippet are doing. Therefore this is to be used with a bit caution.
