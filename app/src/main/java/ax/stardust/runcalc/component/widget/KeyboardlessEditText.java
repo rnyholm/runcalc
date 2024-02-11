@@ -3,7 +3,7 @@ package ax.stardust.runcalc.component.widget;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.v7.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatEditText;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.Log;
