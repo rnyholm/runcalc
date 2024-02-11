@@ -6,7 +6,7 @@ import android.text.Editable;
 import ax.stardust.runcalc.component.widget.KeyboardlessEditText;
 import ax.stardust.runcalc.function.Property;
 
-public interface InteractionContainer extends Comparable {
+public interface InteractionContainer extends Comparable<InteractionContainer> {
     /**
      * To get the {@link Property} of this interaction container.
      *

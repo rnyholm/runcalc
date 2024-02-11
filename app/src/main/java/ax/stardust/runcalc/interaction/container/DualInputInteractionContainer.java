@@ -95,8 +95,8 @@ public class DualInputInteractionContainer implements InteractionContainer {
     }
 
     @Override
-    public int compareTo(@NonNull Object that) {
-        return this.property.compareTo(((InteractionContainer) that).getProperty());
+    public int compareTo(@NonNull InteractionContainer that) {
+        return this.property.compareTo(that.getProperty());
     }
 
     public static class Builder {
