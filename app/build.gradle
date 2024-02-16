@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdk 34
+    namespace 'ax.stardust.runcalc'
 
     defaultConfig {
         applicationId "ax.stardust.runnerscalculator"
@@ -22,6 +23,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            buildConfigField 'boolean', 'DEBUG', 'true'
+        }
         release {
             debuggable false
             minifyEnabled true
@@ -31,12 +37,12 @@ android {
         }
     }
 
-    // configure keystore if travis is running the build
+    // configure keystore if git action is running the build
     if (System.getenv("CI") == "true") {
-        signingConfigs.release.storeFile = file("../keystore.jks")
-        signingConfigs.release.storePassword = System.getenv("keystore_password")
-        signingConfigs.release.keyAlias = System.getenv("keystore_alias")
-        signingConfigs.release.keyPassword = System.getenv("keystore_alias_password")
+        signingConfigs.release.storeFile file(System.getenv("RUNNER_TEMP") + "/keystore/runcalc.jks")
+        signingConfigs.release.storePassword System.getenv("SIGNING_STORE_PASSWORD")
+        signingConfigs.release.keyAlias System.getenv("SIGNING_KEY_ALIAS")
+        signingConfigs.release.keyPassword System.getenv("SIGNING_KEY_PASSWORD")
     }
 
     compileOptions {
@@ -53,13 +59,11 @@ android {
             }
         }
     }
-    namespace 'ax.stardust.runcalc'
+
     lint {
         abortOnError true
         ignoreWarnings false
     }
-
-
 }
 
 dependencies {
