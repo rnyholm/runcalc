@@ -1,8 +1,9 @@
-name: Runners Calculator build
+name: Develop build
 
 on:
   push:
     branches-ignore:
+      - master
       - gh-pages
 
 jobs:
@@ -38,19 +39,7 @@ jobs:
         SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4.3.1
       with:
         name: Build Artifacts
         path: app/build/outputs/
-
-    - name: Upload apk to release
-      if: github.ref == 'refs/heads/master' && github.event_name == 'release'
-      uses: svenstaro/upload-release-action@2.7.0
-
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: app/build/outputs/apk/release/*release.apk
-        tag: ${{ github.ref }}
-        body: ""
-        overwrite: true
-        file_glob: true
