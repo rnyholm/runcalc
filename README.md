@@ -1,9 +1,4 @@
-# Runners Calculator [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/rnyholm/runcalc/master/LICENSE)
-
-Branch | Travis opinion
--------|-------
-Master | [![Build Status](https://travis-ci.com/rnyholm/runcalc.svg?branch=master)](https://travis-ci.com/rnyholm/runcalc)
-Develop | [![Build Status](https://travis-ci.com/rnyholm/runcalc.svg?branch=dev-v1.8)](https://travis-ci.com/rnyholm/runcalc)
+# Runners Calculator [![Develop build](https://github.com/rnyholm/runcalc/actions/workflows/dev-build.yml/badge.svg)](https://github.com/rnyholm/runcalc/actions/workflows/dev-build.yml) [![Release build](https://github.com/rnyholm/runcalc/actions/workflows/release-build.yml/badge.svg)](https://github.com/rnyholm/runcalc/actions/workflows/release-build.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://raw.githubusercontent.com/rnyholm/runcalc/master/LICENSE)
 
 ## Introduction
 Runners Calculator is a minimalistic utility application for Android made by a runner for runners. The purpose of the app is to make a few of the most common runner related conversions and calculations a bit easier. This includes conversions between pace and speed and vice versa as well as different calculations of distance, time and pace. Another important goal of the app is that it should be foolproof and easy to use, so you can focus more on the stuff that matters - running🏃‍♂️
