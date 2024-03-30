@@ -2,6 +2,8 @@ package ax.stardust.runcalc.pojo;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +17,7 @@ public class HeartRateZones {
     public static final String ZONE_2 = "z2";
     public static final String ZONE_1 = "z1";
 
+    @SerializedName("heartRateZones")
     private final List<HeartRateZone> heartRateZones = new ArrayList<>();
 
     public void addZone(HeartRateZone heartRateZone) {

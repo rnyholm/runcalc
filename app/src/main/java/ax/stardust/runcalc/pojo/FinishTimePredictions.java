@@ -2,6 +2,8 @@ package ax.stardust.runcalc.pojo;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +11,7 @@ import java.util.Optional;
 import ax.stardust.runcalc.function.PredictionDistance;
 
 public class FinishTimePredictions {
+    @SerializedName("finishTimePredictions")
     private final List<FinishTimePrediction> finishTimePredictions = new ArrayList<>();
 
     public void addPrediction(FinishTimePrediction finishTimePrediction) {
