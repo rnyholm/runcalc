@@ -2,7 +2,7 @@ package ax.stardust.runcalc.interaction.container;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
-import android.widget.Switch;
+import androidx.appcompat.widget.SwitchCompat;
 import android.widget.TextView;
 
 import com.google.gson.GsonBuilder;
@@ -23,7 +23,7 @@ public class HeartRateZonesInteractionContainer implements InteractionContainer 
     private KeyboardlessEditText maximumHeartRateInput;
     private KeyboardlessEditText restingHeartRateInput;
     private KeyboardlessEditText ageInput;
-    private Switch experiencedRunnerInput;
+    private SwitchCompat experiencedRunnerInput;
 
     private TextView heartRateZone1ResultsTextView;
     private TextView heartRateZone2ResultsTextView;
@@ -129,7 +129,7 @@ public class HeartRateZonesInteractionContainer implements InteractionContainer 
         private KeyboardlessEditText maximumHeartRateInput;
         private KeyboardlessEditText restingHeartRateInput;
         private KeyboardlessEditText ageInput;
-        private Switch experiencedRunnerInput;
+        private SwitchCompat experiencedRunnerInput;
 
         private TextView heartRateZone1ResultsTextView;
         private TextView heartRateZone2ResultsTextView;
@@ -166,7 +166,7 @@ public class HeartRateZonesInteractionContainer implements InteractionContainer 
             return this;
         }
 
-        public Builder setExperiencedRunnerInput(Switch experiencedRunnerInput) {
+        public Builder setExperiencedRunnerInput(SwitchCompat experiencedRunnerInput) {
             this.experiencedRunnerInput = experiencedRunnerInput;
             return this;
         }

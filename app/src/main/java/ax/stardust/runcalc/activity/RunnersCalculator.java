@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.Set;
@@ -213,7 +213,7 @@ public class RunnersCalculator extends AppCompatActivity {
         KeyboardlessEditText ageEditText = findViewById(R.id.heart_rate_zones_age_et);
         ageEditText.setInput(Input.AGE);
         ageEditText.setValidatorFunction(Calculator.Age::parse);
-        Switch trainingExperienceSwitch = findViewById(R.id.heart_rate_zones_training_experience_sw);
+        SwitchCompat trainingExperienceSwitch = findViewById(R.id.heart_rate_zones_training_experience_sw);
         HeartRateZonesInteractionContainer heartRateZonesContainer = new HeartRateZonesInteractionContainer.Builder(this)
                 .setProperty(Property.CALCULATE_HEART_RATE_ZONES)
                 .setKeyboard(runnersKeyboard)
