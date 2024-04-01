@@ -490,7 +490,6 @@ public class Calculator {
             return parseSeconds(seconds, true);
         }
 
-        /** @noinspection MathRoundingWithIntArgument*/
         private static String parseSeconds(int seconds, boolean onlyMMSSIfPossible) {
             int hours = 0;
             int minutes = 0;
