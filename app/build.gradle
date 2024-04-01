@@ -18,7 +18,7 @@ android {
         release
     }
 
-    applicationVariants.all { variant ->
+    applicationVariants.configureEach { variant ->
         variant.resValue "string", "version_name", variant.versionName
     }
 
