@@ -65,13 +65,13 @@
 
     <!-- pr's -->
     <string name="pr_1km" translatable="false">3:52</string>
-    <string name="pr_1mi" translatable="false">6:35</string>
-    <string name="pr_5km" translatable="false">22:41</string>
-    <string name="pr_10km" translatable="false">46:46</string>
-    <string name="pr_backyard_ultra">9 laps</string>
+    <string name="pr_1mi" translatable="false">6:31</string>
+    <string name="pr_5km" translatable="false">21:34</string>
+    <string name="pr_10km" translatable="false">46:22</string>
+    <string name="pr_backyard_ultra">12 laps</string>
     <string name="pr_cooper_test" translatable="false">2900m</string>
     <string name="pr_cykelvasan_os" translatable="false">4:43:28</string>
-    <string name="pr_half_marathon" translatable="false">1:48:07</string>
+    <string name="pr_half_marathon" translatable="false">1:45:32</string>
     <string name="pr_kanonloppet" translatable="false">1:57:40</string>
     <string name="pr_marathon" translatable="false">4:17:32</string>
     <string name="pr_ultravasan" translatable="false">11:53:41</string>
